@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An unofficial playable index of public Mr Sark material, including archived streams, games, shows, VODs and archive tools.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#18181b">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Sarkive">
+  <meta property="og:title" content="The Sarkive">
+  <meta property="og:description" content="An unofficial playable index of public Mr Sark material.">
+  <meta property="og:url" content="https://thesarkive.com/">
+  <meta property="og:image" content="https://thesarkive.com/assets/sarkive-social-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Sarkive - unofficial playable Mr Sark archive">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Sarkive">
+  <meta name="twitter:description" content="An unofficial playable index of public Mr Sark material.">
+  <meta name="twitter:image" content="https://thesarkive.com/assets/sarkive-social-preview.png">
+  <meta name="twitter:image:alt" content="The Sarkive - unofficial playable Mr Sark archive">
+
+  <link rel="canonical" href="https://thesarkive.com/">
+  <title>The Sarkive</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css?v=v70">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Collapse navigation" aria-controls="site-sidebar" aria-expanded="true">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+      <button id="brand-home" class="brand-button" type="button" aria-label="Open home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220.96 29.55"><defs><style>.cls-1{fill:red;}</style></defs><path class="cls-1" d="M97.79,19.72c3.17,3.19,6.3,6.33,9.43,9.47-.02.07-.05.14-.07.2-.24.01-.48.03-.72.04-3.01.01-6.01.04-9.02.01-.33,0-.75-.23-.99-.49-2.58-2.76-5.14-5.54-7.68-8.34-.37-.41-.76-.57-1.31-.56-1.72.03-3.45.01-5.29.01v9.34h-8.69V.02c.41,0,.82,0,1.24,0,6.92,0,13.84-.02,20.75.01,2.01,0,3.97.4,5.79,1.29,2.13,1.03,3.66,2.62,4.43,4.89.79,2.33.83,4.69.21,7.06-.88,3.39-3.21,5.27-6.5,6.11-.51.13-1.04.22-1.6.34ZM82.2,13.32c.58,0,1.08,0,1.58,0,3.51,0,7.03.01,10.54,0,1.72,0,2.77-.79,3.08-2.21.53-2.37-.78-3.97-3.3-3.99-3.41-.02-6.81,0-10.22-.01-.55,0-1.1,0-1.68,0v6.21ZM.84,29.46c8.3,0,16.61,0,24.91,0,1.81,0,3.54-.4,5.19-1.12,1.82-.79,3.2-2.05,4.05-3.89.8-1.74.79-3.56.7-5.4-.06-1.33-.47-2.56-1.21-3.66-1.37-2.04-3.35-3.2-5.69-3.64-1.74-.32-3.53-.43-5.3-.47-3.22-.07-6.44-.01-9.66-.03-1.34-.01-2.19-.78-2.23-1.9-.05-1.19.75-2.02,2.09-2.15.45-.04.9-.04,1.36-.04,5.64,0,11.28-.02,16.92,0,.66,0,.98-.19,1.2-.82.53-1.47,1.16-2.91,1.75-4.36.25-.61.49-1.21.78-1.94-.46,0-.77,0-1.09,0C27.97,0,21.31,0,14.66,0c-1.09,0-2.19.03-3.26.17C7.17.72,3.16,3.2,2.81,8.31c-.23,3.37.61,6.31,3.69,8.17,1.73,1.04,3.67,1.59,5.69,1.62,3.75.06,7.5.03,11.26.05.64,0,1.28.03,1.9.14,1.48.25,2.24,1.59,1.64,2.91-.41.91-1.21,1.23-2.15,1.24-1.54.02-3.09.01-4.63.01-5.19,0-10.38,0-15.57.01-.3,0-.75.12-.87.33-1.26,2.15-2.48,4.33-3.77,6.62.37.02.6.05.84.05ZM220.47.02c-9.18,0-18.36.01-27.54,0-.66,0-.71.28-.71.82.04,9.24.05,18.47.08,27.71,0,.28.03.56.06.91,1.25,0,2.41,0,3.58,0,7.16,0,14.32-.01,21.47,0,.57,0,.85-.16,1.04-.7.45-1.25.95-2.48,1.43-3.72.32-.83.63-1.67.98-2.62h-19.85v-4.29c.47,0,.89,0,1.31,0,3.99,0,7.98-.01,11.97.02.67,0,.98-.22,1.19-.84.4-1.18.89-2.33,1.34-3.5.32-.83.63-1.66.99-2.62h-16.81v-4.08c1.85,0,3.65,0,5.45,0,3.73,0,7.45.01,11.18,0,.26,0,.67-.15.75-.34.88-2.19,1.7-4.4,2.58-6.7-.24-.03-.37-.07-.5-.07ZM125.65,13.6c5.27-4.47,10.5-8.92,15.77-13.4-.19-.11-.23-.16-.27-.16-3.73,0-7.45-.01-11.18.01-.25,0-.54.19-.74.37-3.57,3.24-7.12,6.49-10.69,9.73-.65.59-1.36,1.13-2.21,1.84V.02c-2.74,0-5.38.02-8.01-.01-.65,0-.79.19-.79.82.04,8.25.05,16.51.07,24.76,0,1.27,0,2.53,0,3.82h8.72c0-.47,0-.88,0-1.3,0-2.21.01-4.42.04-6.63,0-.25.04-.58.2-.72.96-.83,1.96-1.62,2.97-2.44.27.24.49.43.7.64,3.38,3.35,6.76,6.72,10.16,10.05.25.24.67.43,1.02.44,2.77.03,5.54.02,8.3.01.81,0,1.63,0,2.69,0-5.7-5.4-11.21-10.62-16.75-15.87ZM182.24.06c-.25,0-.61.31-.72.56-2.9,6.22-5.77,12.45-8.65,18.68-.28.6-.56,1.21-.88,1.91-.12-.25-.19-.36-.24-.48-3.03-6.65-6.07-13.29-9.09-19.95-.25-.54-.54-.8-1.19-.78-1.86.05-3.72.02-5.59.01-1.03,0-2.06,0-3.22,0,.16.35.25.59.37.81.8,1.59,1.6,3.18,2.39,4.77,3.89,7.77,7.77,15.54,11.64,23.32.2.4.41.54.85.54,2.71-.01,5.43-.01,8.14,0,.47,0,.69-.17.88-.59.85-1.81,1.72-3.6,2.62-5.38,3.47-6.91,6.95-13.81,10.43-20.72.44-.87.87-1.74,1.37-2.74-3.15,0-6.13-.01-9.11.02ZM72.55,29c-.91-1.77-1.82-3.55-2.74-5.32-4.04-7.7-8.09-15.4-12.12-23.1-.22-.41-.46-.57-.92-.56-2.58.02-5.16.03-7.74,0-.6,0-.9.24-1.16.74-4.84,9.33-9.7,18.64-14.55,27.96-.1.2-.19.41-.33.73.38,0,.64,0,.9,0,2.5,0,5-.02,7.5,0,.56,0,.84-.17,1.09-.67,2.76-5.61,5.54-11.2,8.33-16.79.63-1.27,1.3-2.52,2.04-3.95.43.87.76,1.55,1.11,2.23,2.8,5.56,5.6,11.11,8.4,16.67.42.83.66,1.97,1.34,2.37.72.42,1.86.14,2.81.15,2.04,0,4.08,0,6.21,0-.08-.23-.11-.35-.17-.46ZM151.78.09h-8.77v29.34h8.77V.09Z"/></svg>
+        </span>
+        <span class="brand-name"></span>
+      </button>
+    </div>
+
+    <form id="site-search" class="topbar-search" role="search">
+      <input id="site-search-input" type="search" placeholder="Search" aria-label="Search the Sarkive" autocomplete="off" spellcheck="false">
+      <button id="site-search-submit" type="submit" aria-label="Search">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+      </button>
+    </form>
+
+    <div class="live-indicator" aria-label="Live" hidden>
+      <span class="live-dot" aria-hidden="true"></span>
+      <span>LIVE</span>
+    </div>
+  </header>
+
+  <div id="nav-scrim" class="nav-scrim" hidden></div>
+
+  <div class="site-shell">
+    <aside id="site-sidebar" class="sidebar">
+      <nav id="site-menu" aria-label="The Sarkive"></nav>
+    </aside>
+
+    <main class="content">
+      <section id="home-page" class="home-page" aria-labelledby="home-page-title" hidden>
+        <h1 id="home-page-title" class="visually-hidden">The Sarkive</h1>
+        <div id="home-shelves" class="home-shelves" aria-label="Browse the Sarkive"></div>
+      </section>
+
+      <section id="category-page" class="category-page" aria-labelledby="category-page-title" hidden>
+        <header class="discovery-page-header">
+          <div class="discovery-page-kicker-row">
+            <button id="category-back" class="discovery-back-button" type="button">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg>
+              <span>BACK</span>
+            </button>
+          </div>
+          <h1 id="category-page-title" class="discovery-page-title"></h1>
+          <p id="category-page-description" class="discovery-page-description"></p>
+        </header>
+        <div id="category-grid" class="archive-category-grid" aria-label="Category items"></div>
+      </section>
+
+      <section id="categories-page" class="categories-page" aria-labelledby="categories-page-title" hidden>
+        <header class="discovery-page-header">
+          <h1 id="categories-page-title" class="discovery-page-title">CATAGORIES</h1>
+        </header>
+        <nav id="categories-list" class="categories-directory" aria-label="Browse game tags"></nav>
+      </section>
+
+      <section id="about-page" class="about-page" aria-labelledby="about-page-title" hidden>
+        <article class="about-copy">
+          <header class="about-header">
+            <h1 id="about-page-title" class="discovery-page-title">ABOUT THE SARKIVE</h1>
+            <p class="about-lede">The Sarkive is an unofficial playable index of public Mr Sark material.</p>
+            <p>It is built to find, browse and play material spread across stream archives, YouTube uploads and other surviving sources.</p>
+          </header>
+
+          <section class="about-section" aria-labelledby="about-archive">
+            <h2 id="about-archive">THE ARCHIVE</h2>
+            <p><strong>GAME ARCHIVE</strong> - Game footage is mapped into content-based chapters. A chapter can use one or more source VOD segments, so the archive follows the game rather than VOD boundaries.</p>
+            <p><strong>SHOWS + PODCASTS</strong> - Respawn Inbox, Radio Respawn, Nerd Poker, X-Play and podcast appearances are indexed as playable collections and episodes.</p>
+            <p><strong>HOME</strong> - Browse the archive through shelves built from the site data.</p>
+            <p><strong>SEARCH</strong> - Searches titles, chapters, episodes, people, tags, descriptions and dates across the archive.</p>
+          </section>
+
+          <section class="about-section" aria-labelledby="about-tools">
+            <h2 id="about-tools">TOOLS</h2>
+            <p><strong>SARK TV</strong> - Plays random Twitch clips non-stop.</p>
+            <p><strong>SARK RADIO</strong> - White Bat tracks YouTube identified on archived Mr Sark streams.</p>
+            <p><strong>MARBLES SCORES</strong> - Scores, race results and player standings for archived Marbles on Stream races.</p>
+            <p><strong>VOD INDEX</strong> - Browse preserved full stream VODs by date or search. Duplicate uploads of the same stream are grouped as alternate copies.</p>
+            <p><strong>CATAGORIES</strong> - Browse games by archive tags.</p>
+            <p><strong>SHOP</strong> - Links to Sark's official Spring merch. The Sarkive does not process sales or receive money from purchases.</p>
+            <p><strong>SARK LINKS</strong> - Direct links to Sark's main public accounts, channels and communities.</p>
+            <p><strong>PALS</strong> - Twitch and social links for friends and collaborators found around the archive.</p>
+          </section>
+
+          <section class="about-section" aria-labelledby="about-how">
+            <h2 id="about-how">HOW IT WORKS</h2>
+            <p>The Sarkive stores the index, not the video files. Its data records source links and IDs, titles, dates, tags, people, chapters, timestamps, scores and other archive metadata. Playback uses the original YouTube, Archive.org or Twitch source where available.</p>
+            <p>The index is assembled from surviving public uploads and VODs, stream metadata, transcripts and subtitles, with manual review used to identify content and map useful timestamps.</p>
+          </section>
+
+          <section class="about-section" aria-labelledby="about-unofficial">
+            <h2 id="about-unofficial">UNOFFICIAL</h2>
+            <p>The Sarkive is not operated by or affiliated with Mr Sark. It covers public work and public-facing links.</p>
+          </section>
+        </article>
+      </section>
+
+      <section id="search-page" class="search-page" aria-labelledby="search-page-title" hidden>
+        <header class="discovery-page-header search-page-header">
+          <div class="search-page-heading-row">
+            <div class="search-page-heading-copy">
+              <h1 id="search-page-title" class="discovery-page-title">Search</h1>
+              <p id="search-summary" class="discovery-page-description"></p>
+            </div>
+            <div id="search-filter-shell" class="search-filter-shell">
+              <button id="search-filter-button" class="search-filter-button" type="button" aria-expanded="false" aria-controls="search-filter-panel">
+                <span>FILTERS</span>
+                <span id="search-filter-badge" class="search-filter-badge" hidden></span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M8 14v6"/>
+                </svg>
+              </button>
+              <div id="search-filter-panel" class="search-filter-panel" hidden>
+                <div class="search-filter-panel-head">
+                  <strong>FILTER RESULTS</strong>
+                  <button id="search-filter-reset" class="search-filter-reset" type="button">RESET</button>
+                </div>
+                <div id="search-filter-types" class="search-filter-group" aria-label="Filter by result type"></div>
+                <div id="search-filter-sources" class="search-filter-group" aria-label="Filter by source"></div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div id="search-results" class="search-results" aria-live="polite"></div>
+      </section>
+
+      <section id="games-page" class="games-page" aria-labelledby="games-page-title" hidden>
+        <h1 id="games-page-title" class="games-page-title">All the Games</h1>
+        <div id="game-grid" class="game-grid" aria-label="Game library"></div>
+      </section>
+
+      <section id="game-page" class="game-page" aria-labelledby="game-detail-title" hidden>
+        <div class="game-hero">
+          <div class="game-hero-art" aria-hidden="true">
+            <img id="game-hero-image" class="game-hero-image" alt="">
+          </div>
+
+          <div class="game-hero-copy">
+            <p class="game-hero-kicker">THE SARKIVE</p>
+            <h1 id="game-detail-title" class="game-hero-title"></h1>
+            <p id="game-detail-tags" class="game-hero-tags"></p>
+            <p id="game-detail-description" class="game-hero-description"></p>
+            <button id="game-play" class="game-play-button" type="button">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
+              Play
+            </button>
+          </div>
+        </div>
+
+        <section class="game-episodes-section" aria-labelledby="game-episodes-title">
+          <div class="game-episodes-header">
+            <h2 id="game-episodes-title">Episodes</h2>
+            <label class="season-selector">
+              <span class="visually-hidden">Select group</span>
+              <select id="game-group-select" aria-label="Select group"></select>
+            </label>
+          </div>
+          <div id="game-detail-chapter-list" class="chapter-list game-episode-list"></div>
+        </section>
+      </section>
+
+      <section id="nerd-poker-page" class="nerd-poker-page" aria-labelledby="nerd-poker-title" hidden>
+        <div class="nerd-poker-hero">
+          <div class="nerd-poker-video-frame" aria-label="Current Nerd Poker episode">
+            <div id="nerd-poker-youtube"></div>
+            <div id="nerd-poker-placeholder" class="nerd-poker-placeholder" hidden>
+              <strong>Nerd Poker</strong>
+              <span>Select an archived episode to play it.</span>
+            </div>
+          </div>
+
+          <div class="nerd-poker-hero-copy">
+            <h1 id="nerd-poker-title" class="nerd-poker-title">Loading…</h1>
+            <p id="nerd-poker-date" class="nerd-poker-date"></p>
+            <p id="nerd-poker-description" class="nerd-poker-description"></p>
+          </div>
+        </div>
+
+        <section class="nerd-poker-library" aria-labelledby="nerd-poker-library-title">
+          <div class="nerd-poker-library-header">
+            <h2 id="nerd-poker-library-title">Episodes</h2>
+            <span id="nerd-poker-library-count">Loading episodes…</span>
+          </div>
+
+          <div class="nerd-poker-table-wrap">
+            <table class="nerd-poker-table">
+              <thead>
+                <tr>
+                  <th scope="col" class="nerd-poker-number-col">#</th>
+                  <th scope="col">Title</th>
+                  <th scope="col" class="nerd-poker-date-col">Date</th>
+                  <th scope="col" class="nerd-poker-duration-col">Duration</th>
+                </tr>
+              </thead>
+              <tbody id="nerd-poker-episode-list"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="nerd-poker-control-dock" role="region" aria-label="Nerd Poker controls">
+          <div class="nerd-poker-dock-track">
+            <img id="nerd-poker-dock-artwork" class="nerd-poker-dock-artwork" alt="" hidden>
+            <div class="nerd-poker-dock-copy">
+              <strong id="nerd-poker-dock-title">Nerd Poker</strong>
+              <span id="nerd-poker-dock-meta">Episode 01</span>
+            </div>
+          </div>
+
+          <div class="nerd-poker-dock-controls">
+            <button id="nerd-poker-previous" class="nerd-poker-control-button nerd-poker-skip-button" type="button" aria-label="Previous episode" disabled>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 5h2v14H7zm3 7 9-7v14z"/></svg>
+            </button>
+            <button id="nerd-poker-play" class="nerd-poker-control-button nerd-poker-main-control" type="button" aria-label="Play" disabled>
+              <svg class="nerd-poker-play-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
+              <svg class="nerd-poker-pause-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+              <span id="nerd-poker-play-label" class="visually-hidden">Play</span>
+            </button>
+            <button id="nerd-poker-next" class="nerd-poker-control-button nerd-poker-skip-button" type="button" aria-label="Next episode" disabled>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 5h2v14h-2zM5 5l9 7-9 7z"/></svg>
+            </button>
+          </div>
+
+          <div id="nerd-poker-dock-context" class="nerd-poker-dock-context">Nerd Poker</div>
+        </div>
+      </section>
+
+      <section id="podcast-page" class="game-page podcast-page" aria-labelledby="podcast-detail-title" hidden>
+        <div class="game-hero podcast-hero">
+          <div class="game-hero-art" aria-hidden="true">
+            <img id="podcast-hero-image" class="game-hero-image" alt="">
+          </div>
+
+          <div class="game-hero-copy">
+            <p id="podcast-hero-kicker" class="game-hero-kicker">NERD POKER</p>
+            <h1 id="podcast-detail-title" class="game-hero-title"></h1>
+            <p id="podcast-detail-tags" class="game-hero-tags"></p>
+            <p id="podcast-detail-description" class="game-hero-description"></p>
+            <button id="podcast-play" class="game-play-button" type="button">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
+              Play
+            </button>
+          </div>
+        </div>
+
+        <section class="game-episodes-section podcast-episodes-section" aria-labelledby="podcast-episodes-title">
+          <div class="game-episodes-header">
+            <h2 id="podcast-episodes-title">Episodes</h2>
+            <label class="season-selector">
+              <span class="visually-hidden">Select season</span>
+              <select id="podcast-group-select" aria-label="Select season"></select>
+            </label>
+          </div>
+          <div id="podcast-detail-chapter-list" class="chapter-list game-episode-list podcast-episode-list"></div>
+        </section>
+      </section>
+
+
+      <section id="marbles-scores-page" class="marbles-scores-page" aria-labelledby="marbles-scores-title" hidden>
+        <header class="marbles-scores-title-block">
+          <p class="game-hero-kicker">STREAM TRACKER</p>
+          <h1 id="marbles-scores-title" class="marbles-scores-title">Marbles Scores</h1>
+          <p class="marbles-scores-intro">All recorded Marbles on Stream races, scored across the archive.</p>
+
+          <form id="marbles-player-search" class="marbles-player-search" role="search">
+            <div class="marbles-player-search-box">
+              <input id="marbles-player-search-input" type="search" placeholder="Search player name" aria-label="Search Marbles player names" autocomplete="off" spellcheck="false">
+              <button type="submit" aria-label="Search players">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+              </button>
+            </div>
+            <div id="marbles-player-search-results" class="marbles-player-search-results" role="listbox" aria-label="Matching Marbles players" hidden></div>
+          </form>
+        </header>
+
+        <section class="marbles-scores-section" aria-labelledby="marbles-score-heading">
+          <div class="game-episodes-header marbles-scores-header">
+            <div>
+              <h2 id="marbles-score-heading">TOP TEN</h2>
+              <p id="marbles-score-context" class="marbles-score-context"></p>
+            </div>
+            <div class="marbles-score-controls">
+              <button id="marbles-back-scorecard" class="game-play-button marbles-score-action-button" type="button" hidden>
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg>
+                BACK
+              </button>
+              <button id="marbles-watch-race" class="game-play-button marbles-score-action-button" type="button" hidden>
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
+                WATCH
+              </button>
+              <label class="season-selector marbles-race-selector">
+                <span class="visually-hidden">Select leaderboard or race</span>
+                <select id="marbles-race-select" aria-label="Select leaderboard or race"></select>
+              </label>
+            </div>
+          </div>
+
+          <div class="marbles-score-table-wrap">
+            <table id="marbles-score-table" class="marbles-score-table" aria-describedby="marbles-score-context">
+              <thead>
+                <tr id="marbles-score-header-row"></tr>
+              </thead>
+              <tbody id="marbles-score-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section id="sark-radio-page" class="sark-radio-page" aria-labelledby="sark-radio-track-title" hidden>
+        <div class="sark-radio-hero">
+          <div class="sark-radio-video-frame" aria-label="Current White Bat track video">
+            <div id="sark-radio-youtube"></div>
+            <div id="sark-radio-placeholder" class="sark-radio-placeholder">
+              <strong>Loading Sark Radio…</strong>
+              <span>Pulling the White Bat tracks detected across the archive.</span>
+            </div>
+          </div>
+
+          <div class="sark-radio-hero-copy">
+            <p class="sark-radio-eyebrow">SARK RADIO - White Bat tracks YouTube identified on archived Mr Sark streams</p>
+
+            <div class="sark-radio-now-playing">
+              <p class="sark-radio-now-label">NOW PLAYING</p>
+              <h1 id="sark-radio-track-title" class="sark-radio-track-title">Loading…</h1>
+              <p id="sark-radio-track-meta" class="sark-radio-track-meta"></p>
+
+              <div class="sark-radio-stream-context">
+                <p class="sark-radio-context-label">FEATURED ON STREAM</p>
+                <a id="sark-radio-featured-link" class="sark-radio-featured-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+                <p id="sark-radio-detection-count" class="sark-radio-detection-count"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="sark-radio-library" aria-labelledby="sark-radio-library-title">
+          <div class="sark-radio-library-header">
+            <h2 id="sark-radio-library-title">Tracks</h2>
+            <span><span id="sark-radio-library-count">Loading library…</span> · Click any track to play it</span>
+          </div>
+
+          <div class="sark-radio-table-wrap">
+            <table class="sark-radio-table">
+              <thead>
+                <tr>
+                  <th scope="col" class="sark-radio-number-col">#</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Album</th>
+                  <th scope="col" class="sark-radio-streams-col">Played on stream</th>
+                </tr>
+              </thead>
+              <tbody id="sark-radio-track-list"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="sark-radio-control-dock" role="region" aria-label="Sark Radio controls">
+          <div class="sark-radio-dock-track">
+            <img id="sark-radio-dock-artwork" class="sark-radio-dock-artwork" alt="" hidden>
+            <div class="sark-radio-dock-copy">
+              <strong id="sark-radio-dock-title">Sark Radio</strong>
+              <span id="sark-radio-dock-meta">White Bat Audio</span>
+            </div>
+          </div>
+
+          <div class="sark-radio-dock-controls">
+            <button id="sark-radio-previous" class="sark-radio-control-button sark-radio-skip-button" type="button" aria-label="Previous track" disabled>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 5h2v14H6zm3 7 10-7v14z"/></svg>
+            </button>
+            <button id="sark-radio-play" class="sark-radio-control-button sark-radio-main-control" type="button" aria-label="Play" disabled>
+              <svg class="sark-radio-play-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
+              <svg class="sark-radio-pause-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+              <span id="sark-radio-play-label" class="visually-hidden">Play</span>
+            </button>
+            <button id="sark-radio-next" class="sark-radio-control-button sark-radio-skip-button" type="button" aria-label="Next track" disabled>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 5 10 7-10 7zm11 0h2v14h-2z"/></svg>
+            </button>
+          </div>
+
+          <div id="sark-radio-dock-context" class="sark-radio-dock-context">Sark-used White Bat shuffle</div>
+        </div>
+      </section>
+
+      <section id="vod-index-page" class="vod-index-page" aria-labelledby="vod-index-page-title" hidden>
+        <header class="vod-index-hero">
+          <div class="vod-index-heading">
+            <p class="game-hero-kicker">THE SARKIVE · BROADCAST ARCHIVE</p>
+            <h1 id="vod-index-page-title" class="vod-index-page-title">VOD INDEX</h1>
+            <p class="vod-index-intro">Browse the preserved stream archive by date. Duplicate captures stay attached as alternate copies instead of cluttering the shelf.</p>
+            <div class="vod-index-stats" aria-label="VOD archive totals">
+              <span><strong id="vod-index-logical-count">0</strong> preserved VODs</span>
+              <span><strong id="vod-index-upload-count">0</strong> archive uploads</span>
+              <span><strong id="vod-index-date-count">0</strong> dates</span>
+            </div>
+          </div>
+          <button id="vod-random" class="vod-random-button" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h3c4.5 0 5.5 10 10 10h3M17 14l3 3-3 3M4 17h3c1.8 0 3-1.6 4.1-3.5M14 9.5C15 8 16 7 17 7h3M17 4l3 3-3 3"/></svg>
+            RANDOM VOD
+          </button>
+        </header>
+
+        <div class="vod-index-tools">
+          <label class="vod-search-field">
+            <span class="visually-hidden">Search VOD titles</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+            <input id="vod-search" type="search" placeholder="Search VOD titles, games, archive sources…" autocomplete="off" spellcheck="false">
+          </label>
+          <label class="vod-date-jump">
+            <span>JUMP TO DATE</span>
+            <input id="vod-date-jump" type="date">
+          </label>
+        </div>
+
+        <div class="vod-index-layout">
+          <aside class="vod-calendar-panel" aria-label="VOD date browser">
+            <div class="vod-calendar-head">
+              <button id="vod-calendar-previous" class="vod-calendar-nav" type="button" aria-label="Previous month"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg></button>
+              <strong id="vod-calendar-label">AUGUST 2026</strong>
+              <button id="vod-calendar-next" class="vod-calendar-nav" type="button" aria-label="Next month"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m10 6 6 6-6 6"/></svg></button>
+            </div>
+            <div id="vod-year-strip" class="vod-year-strip" aria-label="Choose year"></div>
+            <div class="vod-calendar-weekdays" aria-hidden="true"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span></div>
+            <div id="vod-calendar-grid" class="vod-calendar-grid"></div>
+            <button id="vod-clear-date" class="vod-clear-date" type="button">SHOW ALL VODS</button>
+          </aside>
+
+          <section class="vod-results-panel" aria-labelledby="vod-results-title">
+            <header class="vod-results-head">
+              <div>
+                <p class="vod-results-kicker">PRESERVED MATERIAL</p>
+                <h2 id="vod-results-title">LATEST VODS</h2>
+              </div>
+              <span id="vod-results-count"></span>
+            </header>
+            <div id="vod-results" class="vod-results" aria-live="polite"></div>
+            <button id="vod-load-more" class="vod-load-more" type="button" hidden>LOAD MORE</button>
+          </section>
+        </div>
+      </section>
+
+
+      <section id="backrooms-page" class="backrooms-page" aria-labelledby="backrooms-page-title" hidden>
+        <header class="backrooms-hero">
+          <div class="backrooms-heading">
+            <p class="game-hero-kicker">THE SARKIVE · TRAPPED IN...</p>
+            <div class="backrooms-title-row">
+              <h1 id="backrooms-page-title" class="backrooms-page-title">THE<br>BACKROOMS</h1>
+            </div>
+            <p class="backrooms-intro">The running archive for <strong>Playing All The Backrooms</strong>. Browse the production by day, or search the notebook by game, developer, publisher, player, status and notes.</p>
+          </div>
+
+          <div class="backrooms-trackers" aria-label="Playing All The Backrooms live trackers">
+            <section class="backrooms-tracker backrooms-tracker--time">
+              <span class="backrooms-tracker-label">SARK HAS BEEN TRAPPED IN THE BACKROOMS FOR</span>
+              <div id="backrooms-timer" class="backrooms-timer" aria-live="off">
+                <span><strong data-backrooms-timer="months">00</strong><small>MONTHS</small></span>
+                <span><strong data-backrooms-timer="days">00</strong><small>DAYS</small></span>
+                <span><strong data-backrooms-timer="hours">00</strong><small>HOURS</small></span>
+                <span><strong data-backrooms-timer="minutes">00</strong><small>MINUTES</small></span>
+                <span><strong data-backrooms-timer="seconds">00</strong><small>SECONDS</small></span>
+              </div>
+            </section>
+            <section class="backrooms-tracker backrooms-tracker--games">
+              <span class="backrooms-tracker-label">GAMES PLAYED</span>
+              <div class="backrooms-game-count"><strong id="backrooms-games-played">0</strong><span>/</span><strong id="backrooms-games-total">0</strong></div>
+              <div class="backrooms-progress" aria-hidden="true"><span id="backrooms-progress-fill"></span></div>
+              <div class="backrooms-tracker-foot">
+                <span id="backrooms-progress-label">0% OF THE LIST</span>
+                <button id="backrooms-teaser-open" class="backrooms-teaser-button" type="button">WATCH TEASER</button>
+              </div>
+            </section>
+          </div>
+
+          <button id="backrooms-random" class="vod-random-button backrooms-random-button" type="button" hidden>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h3c4.5 0 5.5 10 10 10h3M17 14l3 3-3 3M4 17h3c1.8 0 3-1.6 4.1-3.5M14 9.5C15 8 16 7 17 7h3M17 4l3 3-3 3"/></svg>
+            RANDOM GAME
+          </button>
+        </header>
+
+
+        <div class="backrooms-layout">
+          <div class="backrooms-browser-column">
+            <label class="backrooms-search-field">
+              <span class="visually-hidden">Search the Backrooms archive</span>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+              <input id="backrooms-search" type="search" placeholder="Search the database" autocomplete="off" spellcheck="false">
+            </label>
+
+            <div class="backrooms-browser-actions">
+              <button id="backrooms-view-toggle" class="backrooms-view-toggle" type="button">LIST VIEW</button>
+              <button id="backrooms-latest" class="backrooms-latest-button" type="button">LATEST DAY</button>
+            </div>
+
+            <aside class="backrooms-calendar-panel" aria-label="Backrooms day browser">
+              <div class="backrooms-calendar-head">
+                <button id="backrooms-calendar-previous" class="backrooms-calendar-nav" type="button" aria-label="Previous month"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg></button>
+                <strong id="backrooms-calendar-label">AUGUST 2026</strong>
+                <button id="backrooms-calendar-next" class="backrooms-calendar-nav" type="button" aria-label="Next month"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m10 6 6 6-6 6"/></svg></button>
+              </div>
+              <div id="backrooms-calendar-view" class="backrooms-browser-view backrooms-calendar-view">
+                <div class="backrooms-calendar-weekdays" aria-hidden="true"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span></div>
+                <div id="backrooms-calendar-grid" class="backrooms-calendar-grid"></div>
+              </div>
+              <div id="backrooms-list-view" class="backrooms-browser-view backrooms-list-view" hidden>
+                <div id="backrooms-day-list" class="backrooms-day-list"></div>
+              </div>
+              <button id="backrooms-show-index" class="backrooms-show-index" type="button">SHOW GAME INDEX</button>
+            </aside>
+          </div>
+
+          <section class="backrooms-results-panel" aria-labelledby="backrooms-results-title">
+            <header class="backrooms-results-head">
+              <div>
+                <p id="backrooms-results-kicker" class="backrooms-results-kicker">DAILY LOG</p>
+                <h2 id="backrooms-results-title">LATEST DAY</h2>
+              </div>
+              <span id="backrooms-results-count"></span>
+            </header>
+            <div id="backrooms-results" class="backrooms-results" aria-live="polite"></div>
+          </section>
+        </div>
+
+        <div id="backrooms-teaser-modal" class="backrooms-teaser-modal" hidden>
+          <button id="backrooms-teaser-backdrop" class="backrooms-teaser-backdrop" type="button" aria-label="Close teaser"></button>
+          <div class="backrooms-teaser-dialog" role="dialog" aria-modal="true" aria-label="Playing All The Backrooms teaser">
+            <div class="backrooms-teaser-head"><strong>PLAYING ALL THE BACKROOMS</strong><button id="backrooms-teaser-close" type="button" aria-label="Close teaser">×</button></div>
+            <video id="backrooms-teaser-video" class="backrooms-teaser-video" controls preload="metadata"></video>
+          </div>
+        </div>
+      </section>
+
+      <section id="shop-page" class="shop-page" aria-labelledby="shop-page-title" hidden>
+        <header class="shop-title-block">
+          <p class="game-hero-kicker">OFFICIAL MR SARK MERCH</p>
+          <h1 id="shop-page-title" class="shop-page-title">Shop</h1>
+          <p class="shop-page-intro">A clean link hub for Sark's current merch. Purchases and product options are handled over at Spring.</p>
+          <p class="shop-page-notice">TheSarkive does not collect or receive any money from these links. Any merch proceeds go to Sark through his official Spring store.</p>
+        </header>
+
+        <div class="shop-groups">
+      <section class="shop-group" aria-labelledby="shop-tees-title">
+        <h2 id="shop-tees-title" class="shop-group-title">TEES</h2>
+        <div class="shop-grid">
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=2&amp;variation=2397&amp;size=280" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Classic Crew Neck T-Shirt in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRbtP84P_HxKDj0HXImkJQT48KI1_F2e1YGyfMUi5SNPMjMRLgxE2UMI1ZBTriIKgC-utMxlvo" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Classic Crew Neck T-Shirt</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=369&amp;variation=6513&amp;size=1909" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Comfort Tee in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSoO4PNv9dE9-YhQ6r8QnEzqhUk34sPFXib4_9C1zxcLyKj79b6Rcs8hIM19KM-osBJO0Vpzbw" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Comfort Tee</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=211&amp;variation=5288&amp;size=1164" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Triblend Tee in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ6rm1MM_64rOCoR4gp05Z3zOau5Y_Z5M4dnMZ3HBiKWCO6JOSCcOhZFfRNaPS5nniyjDCNY5ry" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Triblend Tee</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=87&amp;variation=2325&amp;size=528" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Women&#x27;s Classic Tee in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRgjM_MjYLwA-ukZAunXIgYXiXfmz0of5BfYVyPUyBkwOgiUfx8vqAOjbY2gK_LV-9y1zX6OLc" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Women&#x27;s Classic Tee</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=370&amp;variation=6531&amp;size=1919" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Women&#x27;s Comfort Tee in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSvTmIUg_6oP5nvZGIDd7yNyzZOhTZI_ZsNvC7mLCKEg-F24yjMQDzXOJB9nRxofbvN0LqqnhE" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Women&#x27;s Comfort Tee</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=371&amp;variation=6548&amp;size=1924" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Kids Premium Tee in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSEoeQYj98OKDWQt7FW0vk2Iui0aTkNGbJP0MbiwtwDaKZpdIQbBus_3vgh_X0BrHfxDGqydqc" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Kids Premium Tee</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+        </div>
+      </section>
+      <section class="shop-group" aria-labelledby="shop-long-sleeves-sweatshirts-title">
+        <h2 id="shop-long-sleeves-sweatshirts-title" class="shop-group-title">LONG SLEEVES + SWEATSHIRTS</h2>
+        <div class="shop-grid">
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=11&amp;variation=360&amp;size=326" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Classic Long Sleeve Tee in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcR3PLAwPQ5OCkXoz9Tn5xg7tkPUdjohCb8vAicTaT37rIypyDuzV0Y2wkYggMAZF7PNTBf_DV29" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Classic Long Sleeve Tee</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=328&amp;variation=6276&amp;size=1741" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Premium Long Sleeve Tee in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQmsJVd-Xu_Nc11Kby3LMOxRehRO7e6kC1aJirRz1rSObDK2rinJy0Lkxs3g7jh_bYJNWwVEeA" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Premium Long Sleeve Tee</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=345&amp;variation=6354&amp;size=1810" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Unisex Classic Crewneck Sweatshirt in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcT0LJbVnmwWDQfuzzxG9sSQB4d0Ffl3NXzNxDP8JVIomnFajRt41CmxOYHYIEpzROFMeI9XjcY" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Unisex Classic Crewneck Sweatshirt</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+        </div>
+      </section>
+      <section class="shop-group" aria-labelledby="shop-hoodies-title">
+        <h2 id="shop-hoodies-title" class="shop-group-title">HOODIES</h2>
+        <div class="shop-grid">
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=212&amp;variation=5819&amp;size=1857" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Unisex Classic Pullover Hoodie in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTM3T8yzGgW1eAeMZAc29zTW4K5cjUU07_5jgJrnZVUkXCFkz_6QNZHG15kS85RlOUOlgBkN9h8" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Unisex Classic Pullover Hoodie</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=227&amp;variation=2664&amp;size=1248" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Unisex Premium Pullover Hoodie in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT35k5cKqyglSWuxlCtEQkMUZKzYN4okh2vPwVF2bIHpMI-PoEe_04GQBm2VoRhcziirYJADjc" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Unisex Premium Pullover Hoodie</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=175&amp;variation=4789&amp;size=995" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Kids Classic Pullover Hoodie in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTf1Euc-ZeA5d7H5UKn_JgBvaklbfn3OM-B18Rxdo0ONH5WSp6z6XbHAfl673e-8SGZ3wQVCLA" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Kids Classic Pullover Hoodie</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+        </div>
+      </section>
+      <section class="shop-group" aria-labelledby="shop-drinkware-title">
+        <h2 id="shop-drinkware-title" class="shop-group-title">DRINKWARE</h2>
+        <div class="shop-grid">
+          <a class="shop-product-card" href="https://my-store-ac3c7.creator-spring.com/listing/new-mr-sark-s-og-tee-2-0?product=658&amp;variation=102950&amp;size=4207" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark&#x27;s OG Tee 2.0 Mug in Mr Sark's Spring shop">
+            <span class="shop-product-image-shell">
+              <img class="shop-product-image" src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS7PjJ9BN3HPVMAiq4kShVg8jHN3jmqav4jrJYFdJr0QZRJiL26GXrdgnmpbR8atio6Hj6gCTM" alt="" loading="lazy" decoding="async">
+              <span class="shop-product-image-fallback" aria-hidden="true">OG TEE 2.0</span>
+            </span>
+            <span class="shop-product-copy">
+              <strong>Mug</strong>
+              <span class="shop-product-link-label">OPEN IN SHOP
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 14v5H5V5h5"/></svg>
+              </span>
+            </span>
+          </a>
+        </div>
+      </section>
+        </div>
+      </section>
+
+      <section id="sark-tv-page" class="sark-tv-page" aria-label="SarkTV" hidden>
+        <div class="sark-tv-player-shell">
+          <div class="sark-tv-frame">
+            <video
+              id="sark-tv-player"
+              class="sark-tv-video"
+              preload="metadata"
+              playsinline
+              controls
+              hidden></video>
+            <div id="sark-tv-placeholder" class="sark-tv-placeholder">
+              <strong>SARK TV</strong>
+              <span>Press Play to tune in.</span>
+            </div>
+          </div>
+
+          <div class="sark-tv-control-row">
+            <div class="video-actions" aria-label="SarkTV playback controls">
+              <button id="sark-tv-play-pause" class="action-button" type="button">
+                <svg class="play-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
+                <svg class="pause-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+                <span id="sark-tv-play-pause-label">Play</span>
+              </button>
+              <button id="sark-tv-next" class="action-button" type="button">Next</button>
+            </div>
+
+            <div class="sark-tv-bezel-brand" aria-hidden="true">SarkTV</div>
+
+            <div class="sark-tv-status-block">
+              <strong id="sark-tv-status">Clip archive ready</strong>
+              <span id="sark-tv-count"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section id="sark-links-page" class="sark-links-page" aria-labelledby="sark-links-page-title" hidden>
+        <header class="sark-links-hero">
+          <a class="sark-links-avatar-link" href="https://steamcommunity.com/id/mrsark/" target="_blank" rel="noopener noreferrer" aria-label="Open Mr Sark on Steam">
+            <img class="sark-links-avatar" src="https://unavatar.io/steam/mrsark" alt="Mr Sark's current Steam profile image" loading="eager" decoding="async">
+            <span class="sark-links-avatar-source">STEAM PROFILE</span>
+          </a>
+          <div class="sark-links-hero-copy">
+            <p class="game-hero-kicker">MR SARK AROUND THE INTERNET</p>
+            <h1 id="sark-links-page-title" class="sark-links-page-title">Sark Links</h1>
+            <blockquote class="sark-links-bio">“If Mac &amp; Cheese were a videogame I'd be at the top of the leaderboards.”</blockquote>
+            <p class="sark-links-bio-source">CURRENT TWITCH BIO</p>
+          </div>
+        </header>
+
+        <div class="sark-links-grid" aria-label="Mr Sark links">
+          <a class="sark-link-card sark-link-card--twitch" href="https://www.twitch.tv/themrsark" target="_blank" rel="noopener noreferrer">
+            <span class="sark-link-rank">01</span>
+            <span class="sark-link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 3h16v11l-5 5h-4l-3 3v-3H5z"/><path d="M10 7v6M15 7v6"/></svg>
+            </span>
+            <span class="sark-link-copy">
+              <strong>TWITCH</strong>
+              <span>TheMrSark</span>
+              <small>LIVE STREAMS · PRIMARY CHANNEL</small>
+            </span>
+            <span class="sark-link-open" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="sark-link-card sark-link-card--discord" href="https://discord.com/invite/themrsark" target="_blank" rel="noopener noreferrer">
+            <span class="sark-link-rank">02</span>
+            <span class="sark-link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 7.5A13 13 0 0 1 12 6a13 13 0 0 1 5 1.5c1.3 2 2 4.3 2 6.8-1.7 1.7-3.5 2.7-5.4 3l-.8-1.2a8 8 0 0 0 2.4-1.2A7.8 7.8 0 0 1 12 16a7.8 7.8 0 0 1-3.2-1.1 8 8 0 0 0 2.4 1.2l-.8 1.2c-1.9-.3-3.7-1.3-5.4-3 0-2.5.7-4.8 2-6.8Z"/><circle cx="9.5" cy="12" r="1"/><circle cx="14.5" cy="12" r="1"/></svg>
+            </span>
+            <span class="sark-link-copy">
+              <strong>DISCORD</strong>
+              <span>Sark's Barracks</span>
+              <small>THE MAIN HUB FOR THE PRIVATES</small>
+            </span>
+            <span class="sark-link-open" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="sark-link-card sark-link-card--standard" href="https://www.youtube.com/@TheMrSark" target="_blank" rel="noopener noreferrer">
+            <span class="sark-link-rank">03</span>
+            <span class="sark-link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="m10 9 6 3-6 3z"/></svg>
+            </span>
+            <span class="sark-link-copy"><strong>YOUTUBE</strong><span>@TheMrSark</span><small>MAIN VIDEO CHANNEL</small></span>
+            <span class="sark-link-open" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="sark-link-card sark-link-card--standard" href="https://www.youtube.com/channel/UCHRx9wnh34YWyzbS6mGLOaQ" target="_blank" rel="noopener noreferrer">
+            <span class="sark-link-rank">04</span>
+            <span class="sark-link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="m10 9 6 3-6 3z"/><path d="M6 3h12"/></svg>
+            </span>
+            <span class="sark-link-copy"><strong>THE SARK VAULT</strong><span>YouTube archive channel</span><small>EXTENDED + ARCHIVE MATERIAL</small></span>
+            <span class="sark-link-open" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="sark-link-card sark-link-card--standard" href="https://x.com/sark" target="_blank" rel="noopener noreferrer">
+            <span class="sark-link-rank">05</span>
+            <span class="sark-link-icon sark-link-icon--letter" aria-hidden="true">X</span>
+            <span class="sark-link-copy"><strong>X</strong><span>@sark</span><small>UPDATES + POSTS</small></span>
+            <span class="sark-link-open" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="sark-link-card sark-link-card--standard" href="https://www.instagram.com/master_sark/" target="_blank" rel="noopener noreferrer">
+            <span class="sark-link-rank">06</span>
+            <span class="sark-link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r=".8"/></svg>
+            </span>
+            <span class="sark-link-copy"><strong>INSTAGRAM</strong><span>@master_sark</span><small>PHOTOS + POSTS</small></span>
+            <span class="sark-link-open" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="sark-link-card sark-link-card--minor" href="https://steamcommunity.com/id/mrsark/" target="_blank" rel="noopener noreferrer">
+            <span class="sark-link-rank">07</span>
+            <span class="sark-link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="15.5" cy="8.5" r="3.5"/><circle cx="7.5" cy="16.5" r="2.5"/><path d="m9.7 15.3 4.1-4.2M10 18l-2.5 1.2-4.5-2.5"/></svg>
+            </span>
+            <span class="sark-link-copy"><strong>STEAM</strong><span>Mr Sark</span><small>PROFILE · REVIEWS · GAMES</small></span>
+            <span class="sark-link-open" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="sark-link-card sark-link-card--minor" href="https://steamcommunity.com/id/mrsark/recommended" target="_blank" rel="noopener noreferrer">
+            <span class="sark-link-rank">08</span>
+            <span class="sark-link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 4h12v16H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+            </span>
+            <span class="sark-link-copy"><strong>STEAM REVIEWS</strong><span>Sark's game reviews</span><small>DIRECT REVIEW INDEX</small></span>
+            <span class="sark-link-open" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="sark-link-card sark-link-card--minor" href="https://www.facebook.com/MisterSark" target="_blank" rel="noopener noreferrer">
+            <span class="sark-link-rank">09</span>
+            <span class="sark-link-icon sark-link-icon--letter" aria-hidden="true">f</span>
+            <span class="sark-link-copy"><strong>FACEBOOK</strong><span>MisterSark</span><small>LEGACY OFFICIAL ACCOUNT</small></span>
+            <span class="sark-link-open" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="sark-link-card sark-link-card--minor" href="https://www.reddit.com/r/Sark/" target="_blank" rel="noopener noreferrer">
+            <span class="sark-link-rank">10</span>
+            <span class="sark-link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="7"/><circle cx="9.5" cy="12.5" r="1"/><circle cx="14.5" cy="12.5" r="1"/><path d="M9 16c1.7 1 4.3 1 6 0M13.5 6l1-3 3 1"/></svg>
+            </span>
+            <span class="sark-link-copy"><strong>r/SARK</strong><span>Reddit community</span><small>COMMUNITY · UNOFFICIAL</small></span>
+            <span class="sark-link-open" aria-hidden="true">↗</span>
+          </a>
+
+        </div>
+      </section>
+
+      <section id="pals-page" class="pals-page" aria-labelledby="pals-page-title" hidden>
+        <header class="pals-title-block">
+          <p class="game-hero-kicker">THE SARKIVE</p>
+          <h1 id="pals-page-title" class="pals-page-title">Pals</h1>
+          <p class="pals-page-intro">Friends, collaborators, and familiar voices from around the archive.</p>
+        </header>
+        <div id="pals-grid" class="pals-grid" aria-label="Pals directory"></div>
+      </section>
+
+      <section id="coming-soon-page" class="coming-soon-page" aria-labelledby="coming-soon-title" hidden>
+        <h1 id="coming-soon-title" class="coming-soon-title">Coming Soon</h1>
+        <p class="coming-soon-text">Coming soon.</p>
+      </section>
+
+      <section id="vod-watch-page" class="watch-page vod-watch-page" aria-label="VOD watch page" hidden>
+        <div class="video-frame">
+          <div id="vod-youtube-player-shell" class="player-source"><div id="vod-youtube-player"></div></div>
+          <div id="vod-player-placeholder" class="player-placeholder">
+            <strong>Loading YouTube player…</strong>
+            <span>The archived VOD will play here inside The Sarkive.</span>
+          </div>
+        </div>
+
+        <div class="video-info-row vod-player-info-row">
+          <div class="video-actions" aria-label="VOD playback controls">
+            <button id="vod-back" class="action-button vod-back-button" type="button">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7M8 12h12"/></svg>
+              <span>Back to VOD Index</span>
+            </button>
+            <button id="vod-play-pause" class="action-button" type="button" disabled>
+              <svg class="play-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
+              <svg class="pause-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+              <span id="vod-play-pause-label">Play</span>
+            </button>
+          </div>
+
+          <div class="runtime-block">
+            <strong id="vod-runtime">00:00:00</strong>
+            <span>VOD runtime</span>
+          </div>
+        </div>
+
+        <div class="video-heading vod-player-heading">
+          <p class="game-hero-kicker">THE SARKIVE · VOD ARCHIVE</p>
+          <h1 id="vod-player-title" class="video-title">Archived VOD</h1>
+          <p id="vod-player-meta" class="segment-label"></p>
+        </div>
+
+        <div id="vod-copy-selector" class="vod-player-copy-selector" hidden>
+          <label class="season-selector watch-group-selector">
+            <span class="visually-hidden">Select archive copy</span>
+            <select id="vod-copy-select" aria-label="Select archive copy"></select>
+          </label>
+        </div>
+      </section>
+
+      <section id="watch-page" class="watch-page" aria-label="Game watch page" hidden>
+        <div class="video-frame">
+          <div id="youtube-player-shell" class="player-source"><div id="youtube-player"></div></div>
+          <iframe id="archive-player" class="archive-player player-source" title="Internet Archive video player" allow="fullscreen" allowfullscreen hidden></iframe>
+          <div id="player-placeholder" class="player-placeholder">
+            <strong>Loading YouTube player…</strong>
+            <span>The selected chapter will begin at its mapped timestamp.</span>
+          </div>
+        </div>
+
+        <div class="video-info-row">
+          <div class="video-actions" aria-label="Playback and chapter controls">
+            <button id="backrooms-watch-back" class="action-button" type="button" hidden>Back to Backrooms</button>
+            <button id="play-pause" class="action-button" type="button" disabled>
+              <svg class="play-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
+              <svg class="pause-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+              <span id="play-pause-label">Play</span>
+            </button>
+            <button id="previous-chapter" class="action-button" type="button">Previous</button>
+            <button id="next-chapter" class="action-button" type="button">Next</button>
+          </div>
+
+          <div class="runtime-block">
+            <strong id="chapter-runtime">00:00:00</strong>
+            <span>chapter runtime</span>
+          </div>
+        </div>
+
+        <div class="video-heading">
+          <h1 class="video-title"><span id="game-title"></span><span id="video-title-separator"> - </span><span id="chapter-title"></span></h1>
+          <p id="segment-label" class="segment-label" hidden></p>
+        </div>
+
+        <section id="chapter-panel" class="watch-chapters-section" aria-labelledby="watch-chapters-title">
+          <div class="watch-chapters-header">
+            <h2 id="watch-chapters-title">Chapters</h2>
+            <label class="season-selector watch-group-selector">
+              <span class="visually-hidden">Select chapter group</span>
+              <select id="watch-group-select" aria-label="Select chapter group"></select>
+            </label>
+          </div>
+          <div id="chapter-list" class="chapter-list watch-chapter-list"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <noscript>This page needs JavaScript to load the game data and YouTube player.</noscript>
+  <script src="data.js"></script>
+  <script src="nerd-poker-data.js"></script>
+  <script src="radio-respawn-data.js"></script>
+  <script src="respawn-inbox-data.js"></script>
+  <script src="xplay-data.js"></script>
+  <script src="podcasts.js?v=v70"></script>
+  <script src="marbles-scores-data.js"></script>
+  <script src="sark-tv-data.js"></script>
+  <script src="pals-data.js"></script>
+  <script src="archive-discovery-data.js?v=v70"></script>
+  <script src="vod-index-data.js"></script>
+  <script src="backrooms-data.js"></script>
+  <script src="backrooms.js?v=v70"></script>
+  <script src="app.js?v=v70"></script>
+</body>
+</html>

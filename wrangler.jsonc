@@ -1,0 +1,21 @@
+{
+  "name": "thesarkive",
+  "compatibility_date": "2026-07-09",
+  "main": "./worker.js",
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "thesarkive.com",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ],
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  }
+}
