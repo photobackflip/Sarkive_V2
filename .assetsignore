@@ -1,0 +1,9 @@
+.git
+.git/**
+.wrangler
+.wrangler/**
+wrangler.jsonc
+worker.js
+.assetsignore
+README.md
+*.log
