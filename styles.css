@@ -6572,3 +6572,7 @@ body.backrooms-teaser-open {
   display: flex;
   align-items: flex-end;
 }
+
+#backrooms-watch-back[hidden] {
+  display: none !important;
+}
