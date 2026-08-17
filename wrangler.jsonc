@@ -3,6 +3,7 @@
   "compatibility_date": "2026-07-09",
   "main": "./worker.js",
   "workers_dev": true,
+  "preview_urls": false,
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
