@@ -7,7 +7,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
     "gamesPlayed": 265,
-    "totalGames": 311,
+    "totalGames": 316,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
   "games": [
