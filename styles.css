@@ -5583,6 +5583,26 @@ button.backrooms-calendar-day {
   color: var(--muted-faint);
   font-size: 0.72rem;
 }
+.backrooms-steam-link {
+  display: block;
+  width: max-content;
+  margin-top: 6px;
+  padding: 5px 7px;
+  border: 1px solid var(--button-hover);
+  border-radius: 2px;
+  background: var(--sidebar-background);
+  color: var(--text-soft);
+  font-size: 0.68rem;
+  font-weight: 750;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.backrooms-steam-link:hover,
+.backrooms-steam-link:focus-visible {
+  border-color: var(--warning);
+  color: var(--warning);
+  outline: 0;
+}
 .backrooms-notes-section {
   margin: 0 14px 14px;
 }
@@ -6567,12 +6587,197 @@ body.backrooms-teaser-open {
   }
 }
 
-/* Backrooms card footage action uses the existing appearance-chip treatment. */
+/* Backrooms footage links stay explicit: every logged VOD is visible at once. */
 .backrooms-watch-cell {
+  min-width: 0;
+}
+.backrooms-watch-list {
   display: flex;
-  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.backrooms-watch-button {
+  border-color: var(--warning);
+  background: var(--warning);
+  color: var(--background-deep);
+}
+.backrooms-watch-button span {
+  color: var(--background-deep);
+}
+.backrooms-watch-button:hover,
+.backrooms-watch-button:focus-visible {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--background-deep);
+}
+.backrooms-watch-button:hover span,
+.backrooms-watch-button:focus-visible span {
+  color: var(--background-deep);
 }
 
-#backrooms-watch-back[hidden] {
+/* V70 synchronized multi-POV player */
+.multicam-player-shell {
+  position: absolute;
+  inset: 0;
+  background: var(--black);
+}
+.multicam-player-shell[hidden],
+.multicam-controls[hidden] {
+  display: none !important;
+}
+.multicam-grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 2px;
+  background: var(--background-deep);
+}
+.multicam-grid.is-quad {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+.multicam-feed {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--black);
+}
+.multicam-feed.is-hidden {
+  display: none;
+}
+.multicam-feed > div:first-child,
+.multicam-feed iframe {
+  width: 100% !important;
+  height: 100% !important;
+}
+.multicam-feed-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  background: var(--background-deep);
+  color: var(--text);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+}
+.multicam-feed-unavailable {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  gap: 6px;
+  padding: 20px;
+  text-align: center;
+  background: var(--background-deep);
+  color: var(--muted);
+}
+.multicam-feed-unavailable[hidden] {
+  display: none;
+}
+.multicam-feed-unavailable strong {
+  color: var(--text);
+  letter-spacing: 0.08em;
+}
+.multicam-controls {
+  display: grid;
+  gap: 8px;
+  padding: 10px 0 2px;
+}
+.multicam-control-row,
+.multicam-timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.multicam-control-label {
+  width: 62px;
+  flex: 0 0 62px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+}
+.multicam-button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.multicam-button {
+  min-height: 30px;
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--button);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.multicam-button:hover:not(:disabled),
+.multicam-button:focus-visible:not(:disabled),
+.multicam-button.is-active {
+  background: var(--button-hover);
+  outline: none;
+}
+.multicam-button.is-active {
+  border-color: var(--text);
+}
+.multicam-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.multicam-timeline-row {
+  padding-top: 2px;
+}
+.multicam-seek {
+  min-width: 120px;
+  flex: 1 1 auto;
+}
+.multicam-time,
+.multicam-status {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+.multicam-status {
+  min-width: 120px;
+  text-align: right;
+}
+@media (max-width: 650px) {
+  .multicam-control-row,
+  .multicam-timeline-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .multicam-control-label {
+    width: 52px;
+    flex-basis: 52px;
+  }
+  .multicam-timeline-row .multicam-seek {
+    flex-basis: 100%;
+  }
+  .multicam-time,
+  .multicam-status {
+    flex: 1 1 auto;
+  }
+  .multicam-status {
+    text-align: right;
+  }
+}
+
+/* Keep conditional action buttons out of layout when their hidden state is set. */
+.action-button[hidden] {
   display: none !important;
 }
