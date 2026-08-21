@@ -239,7 +239,16 @@
   }
 
   function youtubeSources(game) {
-    return (game.sources || []).map(youtubeSourceInfo).filter(Boolean);
+    return (game.sources || []).map((source, sourceIndex) => {
+      const info = youtubeSourceInfo(source);
+      if (!info) return null;
+      return {
+        ...info,
+        sourceIndex,
+        sourceId: String(source.id || ''),
+        legacyField: String(source.legacyField || '')
+      };
+    }).filter(Boolean).map((source, sourcePosition) => ({ ...source, sourcePosition }));
   }
 
   function backroomsWatchNavigation(gameId) {
@@ -267,6 +276,59 @@
     return hints;
   })();
 
+  const dominantDayVideo = (() => {
+    const videos = new Map();
+    dayVideoHints.forEach((counts, dayId) => {
+      const videoId = [...counts.entries()]
+        .filter(([id]) => id)
+        .sort((a, b) => b[1] - a[1])[0]?.[0] || '';
+      if (videoId) videos.set(dayId, videoId);
+    });
+    return videos;
+  })();
+
+  function appearanceCode(appearance) {
+    if (!appearance) return '';
+    const day = dayById.get(appearance.dayId);
+    if (!day) return '';
+    return `D${String(day.dayNumber).padStart(3, '0')}.G${String(appearance.order).padStart(2, '0')}`;
+  }
+
+  function vodNumber(source, fallbackIndex = 0) {
+    const match = String(source?.legacyField || '').match(/vodLink(\d+)?/i);
+    if (match) return Number(match[1] || 1);
+    return fallbackIndex + 1;
+  }
+
+  function watchEntriesFor(game) {
+    const sources = youtubeSources(game);
+    const gameAps = gameAppearances(game);
+    if (!sources.length) return [];
+
+    const dayUseCounts = new Map();
+    return sources.map((source, sourcePosition) => {
+      const hintedAppearances = gameAps.filter(ap => dominantDayVideo.get(ap.dayId) === source.videoId);
+      let appearance = null;
+
+      if (hintedAppearances.length) {
+        const dayId = hintedAppearances[0].dayId;
+        const sameDayAppearances = hintedAppearances.filter(ap => ap.dayId === dayId);
+        const used = dayUseCounts.get(dayId) || 0;
+        appearance = sameDayAppearances[Math.min(used, sameDayAppearances.length - 1)] || null;
+        dayUseCounts.set(dayId, used + 1);
+      } else if (gameAps.length) {
+        appearance = gameAps[Math.min(sourcePosition, gameAps.length - 1)] || null;
+      }
+
+      return {
+        source,
+        sourcePosition,
+        appearance,
+        vodNumber: vodNumber(source, sourcePosition)
+      };
+    });
+  }
+
   function watchSourceFor(game, activeAppearance = null) {
     const sources = youtubeSources(game);
     if (!sources.length) return null;
@@ -291,40 +353,52 @@
     return sources[0];
   }
 
-  function watchPayload(gameId, appearanceId = '', returnHash = '') {
+  function watchPayload(gameId, appearanceId = '', returnHash = '', sourcePosition = null) {
     const game = gameById.get(gameId);
     if (!game) return null;
-    const appearance = appearanceId ? appearanceById.get(appearanceId) || null : null;
-    const source = watchSourceFor(game, appearance);
+
+    const entries = watchEntriesFor(game);
+    const requestedSourcePosition = sourcePosition === null || sourcePosition === '' ? null : Number(sourcePosition);
+    const requestedEntry = Number.isInteger(requestedSourcePosition)
+      ? entries.find(entry => entry.sourcePosition === requestedSourcePosition) || null
+      : null;
+    const requestedAppearance = appearanceId ? appearanceById.get(appearanceId) || null : null;
+    const displayAppearance = requestedAppearance || requestedEntry?.appearance || gameAppearances(game)[0] || null;
+    const source = requestedEntry?.source || watchSourceFor(game, requestedAppearance);
     if (!source) return null;
 
-    const day = appearance ? dayById.get(appearance.dayId) || null : null;
-    const displayAppearance = appearance || gameAppearances(game)[0] || null;
     const displayDay = displayAppearance ? dayById.get(displayAppearance.dayId) || null : null;
-    const appearanceCode = displayAppearance && displayDay
-      ? `D${String(displayDay.dayNumber).padStart(3, '0')}.G${String(displayAppearance.order).padStart(2, '0')}`
-      : '';
     const archiveLabel = game.archiveNumber === null || game.archiveNumber === undefined
       ? ''
       : `#${String(game.archiveNumber).padStart(3, '0')}`;
     const navigation = backroomsWatchNavigation(game.id);
     return {
       gameId: game.id,
-      appearanceId: appearance?.id || '',
+      appearanceId: displayAppearance?.id || '',
       title: game.title,
       videoId: source.videoId,
       startSeconds: source.startSeconds,
       previousGameId: navigation.previousGameId,
       nextGameId: navigation.nextGameId,
-      metaLabel: [archiveLabel, appearanceCode].filter(Boolean).join(' · '),
-      returnHash: String(returnHash || '').trim() || (day ? `#page=backrooms&date=${encodeURIComponent(day.date)}` : '#page=backrooms&index=1')
+      metaLabel: [archiveLabel, appearanceCode(displayAppearance)].filter(Boolean).join(' · '),
+      returnHash: String(returnHash || '').trim() || (displayDay ? `#page=backrooms&date=${encodeURIComponent(displayDay.date)}` : '#page=backrooms&index=1')
     };
   }
 
-  function watchButton(game, activeAppearance = null) {
-    const payload = watchPayload(game.id, activeAppearance?.id || '');
-    if (!payload) return '';
-    return `<button class="backrooms-appearance-chip active backrooms-watch-button" type="button" data-backrooms-watch="${escapeHtml(game.id)}" data-backrooms-watch-appearance="${escapeHtml(activeAppearance?.id || '')}">WATCH</button>`;
+  function renderWatchLinks(game) {
+    const entries = watchEntriesFor(game);
+    const multipleSources = entries.length > 1;
+    const buttons = entries.map(entry => {
+      const day = entry.appearance ? dayById.get(entry.appearance.dayId) || null : null;
+      const code = appearanceCode(entry.appearance) || `VOD ${entry.vodNumber}`;
+      const meta = [day ? compactDate(day.date) : '', multipleSources ? `VOD ${entry.vodNumber}` : ''].filter(Boolean).join(' · ');
+      return `<button class="backrooms-appearance-chip backrooms-watch-button" type="button" data-backrooms-watch="${escapeHtml(game.id)}" data-backrooms-watch-appearance="${escapeHtml(entry.appearance?.id || '')}" data-backrooms-watch-source="${entry.sourcePosition}">${escapeHtml(code)}${meta ? ` <span>${escapeHtml(meta)}</span>` : ''}</button>`;
+    }).join('');
+
+    return `<div class="backrooms-watch-cell">
+      <span class="backrooms-meta-label">WATCH</span>
+      <div class="backrooms-watch-list">${buttons || '<span class="backrooms-empty">—</span>'}</div>
+    </div>`;
   }
 
   function filterButton(value, type) {
@@ -389,11 +463,11 @@
           <p class="backrooms-description">${escapeHtml(game.description || 'No description logged.')}</p>
           <div class="backrooms-facts">
             <div><span class="backrooms-meta-label">RELEASE</span><strong>${escapeHtml(game.releaseDate || '-')}</strong></div>
-            <div><span class="backrooms-meta-label">STEAM APP ID</span><strong>${escapeHtml(appId)}</strong></div>
+            <div><span class="backrooms-meta-label">STEAM APP ID</span>${game.steam?.appId ? `<a class="backrooms-steam-link" href="https://store.steampowered.com/app/${encodeURIComponent(String(game.steam.appId))}/" target="_blank" rel="noopener noreferrer" title="Open ${escapeHtml(game.title)} on Steam">${escapeHtml(appId)}</a>` : `<strong>${escapeHtml(appId)}</strong>`}</div>
             <div><span class="backrooms-meta-label">DEVELOPER${(game.developers || []).length === 1 ? '' : 'S'}</span><div class="backrooms-chip-row">${developers || '<span class="backrooms-empty">—</span>'}</div></div>
             <div><span class="backrooms-meta-label">PUBLISHER${(game.publishers || []).length === 1 ? '' : 'S'}</span><div class="backrooms-chip-row">${publishers || '<span class="backrooms-empty">—</span>'}</div></div>
             <div><span class="backrooms-meta-label">PLAYED WITH</span><div class="backrooms-chip-row">${players || '<span class="backrooms-empty">—</span>'}</div></div>
-            <div class="backrooms-watch-cell">${watchButton(game, activeAppearance)}</div>
+            ${renderWatchLinks(game)}
           </div>
         </div>
       </div>
@@ -426,7 +500,8 @@
         const payload = watchPayload(
           button.dataset.backroomsWatch || '',
           button.dataset.backroomsWatchAppearance || '',
-          window.location.hash
+          window.location.hash,
+          button.dataset.backroomsWatchSource || ''
         );
         if (payload) window.SARKIVE_OPEN_BACKROOMS_WATCH?.(payload);
       });
@@ -590,7 +665,7 @@
     if (scroll) elements.resultsTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  function setQuery(query) {
+  function setQuery(query, updateInput = true) {
     const value = String(query || '').trim();
     if (!value) {
       selectDate(state.selectedDate || latestDay?.date || '', false);
@@ -598,7 +673,7 @@
     }
     state.mode = 'search';
     state.query = value;
-    elements.search.value = value;
+    if (updateInput) elements.search.value = value;
     renderBrowser();
     renderResults();
     syncUrl();
@@ -643,8 +718,8 @@
     elements.progressLabel.textContent = `${progress.toFixed(1)}% OF THE LIST`;
 
     elements.search?.addEventListener('input', () => {
-      const value = String(elements.search.value || '').trim();
-      if (value) setQuery(value);
+      const value = String(elements.search.value || '');
+      if (value.trim()) setQuery(value, false);
       else selectDate(state.selectedDate || latestDay?.date || '', false);
     });
     elements.latest?.addEventListener('click', () => latestDay && selectDate(latestDay.date));
