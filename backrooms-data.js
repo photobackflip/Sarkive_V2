@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 265,
+    "gamesPlayed": 268,
     "totalGames": 316,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -509,7 +509,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D004.G01 - 12.05.26"
+        "durationPlayed": "D004.G01 - 13.05.26"
       }
     },
     {
@@ -555,7 +555,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D004.G03 - 12.05.26"
+        "durationPlayed": "D004.G03 - 13.05.26"
       }
     },
     {
@@ -603,7 +603,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D004.G04 - 12.05.26"
+        "durationPlayed": "D004.G04 - 13.05.26"
       }
     },
     {
@@ -643,7 +643,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D005.G02 - 13.05.26"
+        "durationPlayed": "D005.G02 - 14.05.26"
       }
     },
     {
@@ -683,7 +683,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D005.G03 - 13.05.26"
+        "durationPlayed": "D005.G03 - 14.05.26"
       }
     },
     {
@@ -729,7 +729,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D005.G04 - 13.05.26"
+        "durationPlayed": "D005.G04 - 14.05.26"
       }
     },
     {
@@ -776,7 +776,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D005.G05 - 13.05.26"
+        "durationPlayed": "D005.G05 - 14.05.26"
       }
     },
     {
@@ -3900,7 +3900,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D016.G08 - 03.06.26"
+        "durationPlayed": "D016.G09 - 03.06.26"
       }
     },
     {
@@ -3940,7 +3940,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D016.G09 - 03.06.26"
+        "durationPlayed": "D016.G10 - 03.06.26"
       }
     },
     {
@@ -4095,7 +4095,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D017.G03 - 04.06.26"
+        "durationPlayed": "D016.G08 - 03.06.26"
       }
     },
     {
@@ -4592,7 +4592,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D018.G00 - 06.06.26"
+        "durationPlayed": "D018.G06 - 06.06.26"
       }
     },
     {
@@ -4632,7 +4632,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D018.G06 - 06.06.26"
+        "durationPlayed": "D018.G07 - 06.06.26"
       }
     },
     {
@@ -4673,7 +4673,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D018.G07 - 06.06.26"
+        "durationPlayed": "D018.G08 - 06.06.26"
       }
     },
     {
@@ -4714,7 +4714,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D018.G08 - 06.06.26"
+        "durationPlayed": "D018.G09 - 06.06.26"
       }
     },
     {
@@ -4760,7 +4760,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D018.G09 - 06.06.26"
+        "durationPlayed": "D018.G10 - 06.06.26"
       }
     },
     {
@@ -4800,7 +4800,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D018.G10 - 06.06.26"
+        "durationPlayed": "D018.G11 - 06.06.26"
       }
     },
     {
@@ -4853,7 +4853,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D018.G11 - 06.06.26"
+        "durationPlayed": "D018.G12 - 06.06.26"
       }
     },
     {
@@ -5700,7 +5700,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D021.G04 - 10.06.26"
+        "durationPlayed": "D021.G05 - 10.06.26"
       }
     },
     {
@@ -5746,7 +5746,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D021.G05 - 10.06.26"
+        "durationPlayed": "D021.G06 - 10.06.26"
       }
     },
     {
@@ -5786,7 +5786,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D021.G06 - 10.06.26"
+        "durationPlayed": "D021.G07 - 10.06.26"
       }
     },
     {
@@ -5832,7 +5832,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D021.G07 - 10.06.26"
+        "durationPlayed": "D021.G08 - 10.06.26"
       }
     },
     {
@@ -6938,7 +6938,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D023.G17 - 12.06.26"
+        "durationPlayed": "D023.G17 - 13.06.26"
       }
     },
     {
@@ -7254,6 +7254,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/z7ys0t_FhEY?t=1766",
           "legacyField": "vodLink3"
+        },
+        {
+          "id": "source-4",
+          "kind": "youtube",
+          "url": "https://youtu.be/yVy_7PQ-ZWk?t=10660",
+          "legacyField": "vodLink4"
         }
       ],
       "legacy": {
@@ -8269,6 +8275,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/X4EfWpg8cu4?t=21354",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/yVy_7PQ-ZWk?t=2281",
+          "legacyField": "vodLink2"
         }
       ],
       "legacy": {
@@ -8310,6 +8322,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/X4EfWpg8cu4?t=26735",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/yVy_7PQ-ZWk?t=1262",
+          "legacyField": "vodLink2"
         }
       ],
       "legacy": {
@@ -8365,7 +8383,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D030.G02 - 26.06.26"
+        "durationPlayed": "D030.G03 - 26.06.26"
       }
     },
     {
@@ -8411,7 +8429,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D030.G03 - 26.06.26"
+        "durationPlayed": "D030.G04 - 26.06.26"
       }
     },
     {
@@ -8451,7 +8469,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D030.G04 - 26.06.26"
+        "durationPlayed": "D030.G05 - 26.06.26"
       }
     },
     {
@@ -8504,7 +8522,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D030.G05 - 26.06.26"
+        "durationPlayed": "D030.G06 - 26.06.26"
       }
     },
     {
@@ -8854,6 +8872,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/QUiV5NFQLKw?t=35151",
           "legacyField": "vodLink2"
+        },
+        {
+          "id": "source-3",
+          "kind": "youtube",
+          "url": "https://youtu.be/yVy_7PQ-ZWk?t=16113",
+          "legacyField": "vodLink3"
         }
       ],
       "legacy": {
@@ -9500,9 +9524,16 @@ window.SARKIVE_BACKROOMS_DATA = {
       "appearanceIds": [
         "d034-g04-2950760"
       ],
-      "sources": [],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/yVy_7PQ-ZWk?t=14013",
+          "legacyField": "vodLink"
+        }
+      ],
       "legacy": {
-        "durationPlayed": "D034.G01 - 14.07.26"
+        "durationPlayed": "D034.G04 - 14.07.26"
       }
     },
     {
@@ -9596,7 +9627,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D035.G02 - 15.07.26"
+        "durationPlayed": "D035.G04 - 15.07.26"
       }
     },
     {
@@ -10100,7 +10131,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D039.G04 - 21.07.26"
+        "durationPlayed": "D039.G03 - 21.07.26"
       }
     },
     {
@@ -11637,7 +11668,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d052-g01-4247310"
+        "d052-g01-4247310",
+        "d053-g01-4247310"
       ],
       "sources": [
         {
@@ -11645,6 +11677,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/jVOoB2xfkGg?t=1841",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/bDXjFXs2pE0?t=1839",
+          "legacyField": "vodLink2"
         }
       ],
       "legacy": {
@@ -11677,7 +11715,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d052-g02-2523460"
+        "d052-g02-2523460",
+        "d053-g02-2523460"
       ],
       "sources": [
         {
@@ -11685,6 +11724,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/jVOoB2xfkGg?t=8264",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/bDXjFXs2pE0?t=7540",
+          "legacyField": "vodLink2"
         }
       ],
       "legacy": {
@@ -11842,6 +11887,126 @@ window.SARKIVE_BACKROOMS_DATA = {
       ],
       "legacy": {
         "durationPlayed": "D029.G01 - 25.06.26"
+      }
+    },
+    {
+      "id": "game-4370770",
+      "archiveNumber": 266,
+      "counted": true,
+      "title": "It's Locked",
+      "status": "UNRESOLVED",
+      "statusLabel": "-",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Mar 21, 2026",
+      "developers": [
+        "Radion Studios"
+      ],
+      "publishers": [
+        "Radion Studios"
+      ],
+      "description": "A first-person Backrooms game where you have to wait for PATROL to rescue you. In the meantime, you try to stay safe.",
+      "notes": [],
+      "steam": {
+        "appId": 4370770,
+        "assetHash": "c4b4f15241ad3f6b6c4384002ec0c967e19c793b",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d053-g03-4370770"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/bDXjFXs2pE0?t=19263",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D053.G03 - 21.08.26"
+      }
+    },
+    {
+      "id": "game-4450170",
+      "archiveNumber": 268,
+      "counted": true,
+      "title": "Liminal Underground: Creatures Beyond",
+      "status": "UNRESOLVED",
+      "statusLabel": "-",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Apr 1, 2026",
+      "developers": [
+        "Hybridwarrior7"
+      ],
+      "publishers": [
+        "Hybridwarrior7"
+      ],
+      "description": "Overview: Make way through levels full of danger. Creatures lurk and hunt you down throughout the levels. Design: A horror, adventure with Objectives, creatures chasing you, and secret exits to find. Finding each exit, gets you closer to escaping. Localization: Recommended language: English",
+      "notes": [],
+      "steam": {
+        "appId": 4450170,
+        "assetHash": "ed3763fa2a2cdb26ca1ae1800ed61f1207e5adec",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d053-g05-4450170"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/bDXjFXs2pE0?t=24423",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D053.G05 - 21.08.26"
+      }
+    },
+    {
+      "id": "game-3440140",
+      "archiveNumber": 267,
+      "counted": true,
+      "title": "Do Not Disturb",
+      "status": "UNRESOLVED",
+      "statusLabel": "-",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jun 1, 2026",
+      "developers": [
+        "BarVan Studios"
+      ],
+      "publishers": [
+        "BarVan Studios"
+      ],
+      "description": "The main character enters an abandoned hotel from the 1960s to solve the mystery of his parents' death. Facing dangers and solving puzzles, he must uncover the mystery and survive the hotel!",
+      "notes": [],
+      "steam": {
+        "appId": 3440140,
+        "assetHash": "",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d053-g04-3440140"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/bDXjFXs2pE0?t=23540",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D053.G04 - 21.08.26"
       }
     }
   ],
@@ -13711,6 +13876,36 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-3578460",
       "dayId": "day-052",
       "order": 3
+    },
+    {
+      "id": "d053-g01-4247310",
+      "gameId": "game-4247310",
+      "dayId": "day-053",
+      "order": 1
+    },
+    {
+      "id": "d053-g02-2523460",
+      "gameId": "game-2523460",
+      "dayId": "day-053",
+      "order": 2
+    },
+    {
+      "id": "d053-g03-4370770",
+      "gameId": "game-4370770",
+      "dayId": "day-053",
+      "order": 3
+    },
+    {
+      "id": "d053-g05-4450170",
+      "gameId": "game-4450170",
+      "dayId": "day-053",
+      "order": 5
+    },
+    {
+      "id": "d053-g04-3440140",
+      "gameId": "game-3440140",
+      "dayId": "day-053",
+      "order": 4
     }
   ],
   "days": [
@@ -14440,6 +14635,19 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d052-g03-3578460"
       ],
       "legacyKey": "DAY052_140826"
+    },
+    {
+      "id": "day-053",
+      "dayNumber": 53,
+      "date": "2026-08-21",
+      "appearanceIds": [
+        "d053-g01-4247310",
+        "d053-g02-2523460",
+        "d053-g03-4370770",
+        "d053-g04-3440140",
+        "d053-g05-4450170"
+      ],
+      "legacyKey": "DAY053_210826"
     }
   ]
 };
