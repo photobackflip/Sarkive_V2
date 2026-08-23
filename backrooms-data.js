@@ -11970,7 +11970,7 @@ window.SARKIVE_BACKROOMS_DATA = {
       }
     },
     {
-      "id": "game-3440140",
+      "id": "game-4310470",
       "archiveNumber": 267,
       "counted": true,
       "title": "Do Not Disturb",
@@ -11979,23 +11979,23 @@ window.SARKIVE_BACKROOMS_DATA = {
       "players": [
         "SARK"
       ],
-      "releaseDate": "Jun 1, 2026",
+      "releaseDate": "Mar 30, 2026",
       "developers": [
-        "BarVan Studios"
+        "UppercaseUnderscore"
       ],
       "publishers": [
-        "BarVan Studios"
+        "UppercaseUnderscore"
       ],
-      "description": "The main character enters an abandoned hotel from the 1960s to solve the mystery of his parents' death. Facing dangers and solving puzzles, he must uncover the mystery and survive the hotel!",
+      "description": "A short horror walking simulator where you traverse through the endless hallways of a strange hotel, searching for a way out.",
       "notes": [],
       "steam": {
-        "appId": 3440140,
-        "assetHash": "",
+        "appId": 4310470,
+        "assetHash": "3c756857cde97a534f1a9f0f369bde69245b736e",
         "useSteamArt": true
       },
       "localImage": "",
       "appearanceIds": [
-        "d053-g04-3440140"
+        "d053-g04-4310470"
       ],
       "sources": [
         {
@@ -13902,8 +13902,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "order": 5
     },
     {
-      "id": "d053-g04-3440140",
-      "gameId": "game-3440140",
+      "id": "d053-g04-4310470",
+      "gameId": "game-4310470",
       "dayId": "day-053",
       "order": 4
     }
@@ -14644,7 +14644,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d053-g01-4247310",
         "d053-g02-2523460",
         "d053-g03-4370770",
-        "d053-g04-3440140",
+        "d053-g04-4310470",
         "d053-g05-4450170"
       ],
       "legacyKey": "DAY053_210826"
