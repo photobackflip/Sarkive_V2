@@ -6,8 +6,8 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 268,
-    "totalGames": 318,
+    "gamesPlayed": 269,
+    "totalGames": 316,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
   "games": [
@@ -11716,7 +11716,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "localImage": "",
       "appearanceIds": [
         "d052-g02-2523460",
-        "d053-g02-2523460"
+        "d053-g02-2523460",
+        "d054-g01-2523460"
       ],
       "sources": [
         {
@@ -11730,6 +11731,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/bDXjFXs2pE0?t=7540",
           "legacyField": "vodLink2"
+        },
+        {
+          "id": "source-3",
+          "kind": "youtube",
+          "url": "https://youtu.be/OMnxaSEYte4?t=1059",
+          "legacyField": "vodLink3"
         }
       ],
       "legacy": {
@@ -12007,6 +12014,47 @@ window.SARKIVE_BACKROOMS_DATA = {
       ],
       "legacy": {
         "durationPlayed": "D053.G04 - 21.08.26"
+      }
+    },
+    {
+      "id": "game-2300840",
+      "archiveNumber": 269,
+      "counted": true,
+      "title": "Subliminal",
+      "status": "UNRESOLVED",
+      "statusLabel": "-",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Mar 31, 2026",
+      "developers": [
+        "Accidental Studios"
+      ],
+      "publishers": [
+        "Gone Shootin",
+        "Infini Fun"
+      ],
+      "description": "Subliminal is a psychological horror game inspired by the urban legend of The Backrooms. Bleeding edge lighting and rendering, handcrafted open-ended levels, light and perspective-based puzzles, nostalgic spaces, unfamiliar faces, and a rotting feeling that something is not quite right.",
+      "notes": [],
+      "steam": {
+        "appId": 2300840,
+        "assetHash": "",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d054-g02-2300840"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/OMnxaSEYte4?t=18291",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D054.G02 - 24.08.26"
       }
     }
   ],
@@ -13906,6 +13954,18 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-4310470",
       "dayId": "day-053",
       "order": 4
+    },
+    {
+      "id": "d054-g01-2523460",
+      "gameId": "game-2523460",
+      "dayId": "day-054",
+      "order": 1
+    },
+    {
+      "id": "d054-g02-2300840",
+      "gameId": "game-2300840",
+      "dayId": "day-054",
+      "order": 2
     }
   ],
   "days": [
@@ -14648,6 +14708,16 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d053-g05-4450170"
       ],
       "legacyKey": "DAY053_210826"
+    },
+    {
+      "id": "day-054",
+      "dayNumber": 54,
+      "date": "2026-08-24",
+      "appearanceIds": [
+        "d054-g01-2523460",
+        "d054-g02-2300840"
+      ],
+      "legacyKey": "DAY054_240826"
     }
   ]
 };
