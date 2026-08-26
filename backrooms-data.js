@@ -6,8 +6,8 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 269,
-    "totalGames": 316,
+    "gamesPlayed": 277,
+    "totalGames": 318,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
   "games": [
@@ -8956,7 +8956,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d033-g04-2702190"
+        "d033-g04-2702190",
+        "d055-g01-2702190"
       ],
       "sources": [
         {
@@ -8964,6 +8965,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/QUiV5NFQLKw?t=11041",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/q6lxIYIylng?t=2307",
+          "legacyField": "vodLink2"
         }
       ],
       "legacy": {
@@ -8999,7 +9006,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d033-g05-2835530"
+        "d033-g05-2835530",
+        "d055-g06-2835530"
       ],
       "sources": [
         {
@@ -9007,6 +9015,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/QUiV5NFQLKw?t=11594",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/q6lxIYIylng?t=15141",
+          "legacyField": "vodLink2"
         }
       ],
       "legacy": {
@@ -12043,7 +12057,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d054-g02-2300840"
+        "d054-g02-2300840",
+        "d055-g07-2300840"
       ],
       "sources": [
         {
@@ -12051,10 +12066,344 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/OMnxaSEYte4?t=18291",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/q6lxIYIylng?t=17700",
+          "legacyField": "vodLink2"
         }
       ],
       "legacy": {
         "durationPlayed": "D054.G02 - 24.08.26"
+      }
+    },
+    {
+      "id": "game-2234150",
+      "archiveNumber": 270,
+      "counted": true,
+      "title": "BACKROOMS: APPREHENSION",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK",
+        "APL",
+        "NFEN",
+        "STU"
+      ],
+      "releaseDate": "Aug 15, 2025",
+      "developers": [
+        "DMNT Interactive"
+      ],
+      "publishers": [
+        "DMNT Interactive"
+      ],
+      "description": "A terrifying multiplayer horror experience with social deduction elements. Trapped in the Backrooms, up to 12 players must try to work together to survive and expose the shapeshifting Skin Stealer hiding among them before it’s too late. Who will you trust?",
+      "notes": [],
+      "steam": {
+        "appId": 2234150,
+        "assetHash": "",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d055-g02-2234150"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/q6lxIYIylng?t=3513",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D055.G02 - 25.08.26"
+      }
+    },
+    {
+      "id": "game-4720830",
+      "archiveNumber": 271,
+      "counted": true,
+      "title": "Backrooms: The Incident",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK",
+        "APL",
+        "NFEN",
+        "STU"
+      ],
+      "releaseDate": "Aug 12, 2026",
+      "developers": [
+        "Skmaestro"
+      ],
+      "publishers": [
+        "Skmaestro"
+      ],
+      "description": "Backrooms: The Incident is a cooperative horror game for 1–4 players. On your own or with friends, you'll explore the game world, trying to figure out what's going on, where you are, how to get out of there, and whether it's even possible.",
+      "notes": [],
+      "steam": {
+        "appId": 4720830,
+        "assetHash": "cf93a893222b8695ee2e146ad49414d09e803a40",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d055-g03-4720830"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/q6lxIYIylng?t=6218",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D055.G03 - 25.08.26"
+      }
+    },
+    {
+      "id": "game-3010460",
+      "archiveNumber": 272,
+      "counted": true,
+      "title": "Backroom Company",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK",
+        "APL",
+        "NFEN",
+        "STU"
+      ],
+      "releaseDate": "Jul 30, 2025",
+      "developers": [
+        "Hypercent Inc."
+      ],
+      "publishers": [
+        "Hypercent Inc."
+      ],
+      "description": "Backroom Company (aka Axiom Corporation) is a mysterious group exploring “Noclip.” No one knows who created it. Follow the missing explorers' traces and find strange items deep in the Backrooms.",
+      "notes": [],
+      "steam": {
+        "appId": 3010460,
+        "assetHash": "",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d055-g04-3010460"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/q6lxIYIylng?t=7302",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D055.G04 - 25.08.26"
+      }
+    },
+    {
+      "id": "game-3583970",
+      "archiveNumber": 273,
+      "counted": true,
+      "title": "Mycelium: The Silent Contract",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK",
+        "APL",
+        "NFEN",
+        "STU"
+      ],
+      "releaseDate": "Apr 28, 2026",
+      "developers": [
+        "Po Kolu"
+      ],
+      "publishers": [
+        "Proteus Interactive"
+      ],
+      "description": "Mycelium: The Silent Contract is a co-op/single player extraction horror set in a haunted liminal forest. Your contract is simple: get mycelium and extract. But in this forest, nothing is what it seems. So what did you sign, exactly?",
+      "notes": [],
+      "steam": {
+        "appId": 3583970,
+        "assetHash": "44801d654407b79fdacc79b93279e4a425b6e09c",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d055-g05-3583970"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/q6lxIYIylng?t=12516",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D055.G05 - 25.08.26"
+      }
+    },
+    {
+      "id": "game-3673050",
+      "archiveNumber": 274,
+      "counted": true,
+      "title": "TAMAGORUDO - FLOOR O",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Apr 6, 2026",
+      "developers": [
+        "TamagorudoTeam"
+      ],
+      "publishers": [
+        "TamagorudoTeam"
+      ],
+      "description": "",
+      "notes": [],
+      "steam": {
+        "appId": 3673050,
+        "assetHash": "283d992eca03aab7da1cbbad91fbe0d8830a2a44",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d056-g01-3673050"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/zxeUmyxlcDQ?t=948",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D056.G01 - 26.08.26"
+      }
+    },
+    {
+      "id": "game-4149700",
+      "archiveNumber": 275,
+      "counted": true,
+      "title": "Dreamcore: Rabbit Hole",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Apr 25, 2026",
+      "developers": [
+        "Ankoku"
+      ],
+      "publishers": [
+        "Ankoku"
+      ],
+      "description": "Walking simulator. Explore cozy liminal spaces that feel unsettlingly familiar and spark your imagination, like a dream you’ve been in before.",
+      "notes": [],
+      "steam": {
+        "appId": 4149700,
+        "assetHash": "501e534949a1c5371b7e4ba5eaabd7349fcfeaf2",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d056-g02-4149700"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/zxeUmyxlcDQ?t=3132",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D056.G02 - 26.08.26"
+      }
+    },
+    {
+      "id": "game-4038550",
+      "archiveNumber": 276,
+      "counted": true,
+      "title": "Hamam: The Steaming Backrooms",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Apr 29, 2026",
+      "developers": [],
+      "publishers": [],
+      "description": "Step into HAMAM, a Backrooms-inspired psychological horror set in a cursed Turkish bathhouse. Find ritual seals, use your camera to reveal hidden horrors, survive cursed music boxes, and escape the presence waiting in the steam.",
+      "notes": [],
+      "steam": {
+        "appId": 4038550,
+        "assetHash": "ac4cef4612204f4558c9cedeb2256cfe106661ad",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d056-g03-4038550"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/zxeUmyxlcDQ?t=9887",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D056.G03 - 26.08.26"
+      }
+    },
+    {
+      "id": "game-4530880",
+      "archiveNumber": 277,
+      "counted": true,
+      "title": "BACK*SPACE",
+      "status": "UNRESOLVED",
+      "statusLabel": "-",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Apr 29, 2026",
+      "developers": [
+        "Mostly Farmless Games"
+      ],
+      "publishers": [
+        "Mostly Farmless Games"
+      ],
+      "description": "You have found yourself in a space that reminds you of nothing, and everything. A space of rooms, that are both comfortingly familiar, yet strangely unknown. A space of quiet and loneliness. You have found the BACK*SPACE. You aren't sure if you are alone. You aren't sure if you want to leave.",
+      "notes": [],
+      "steam": {
+        "appId": 4530880,
+        "assetHash": "1bab3ab37f29f3e96c868dd1de397f44dc65ee09",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d056-g04-4530880"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/zxeUmyxlcDQ?t=14379",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D056.G04 - 26.08.26"
       }
     }
   ],
@@ -13966,6 +14315,72 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-2300840",
       "dayId": "day-054",
       "order": 2
+    },
+    {
+      "id": "d055-g01-2702190",
+      "gameId": "game-2702190",
+      "dayId": "day-055",
+      "order": 1
+    },
+    {
+      "id": "d055-g02-2234150",
+      "gameId": "game-2234150",
+      "dayId": "day-055",
+      "order": 2
+    },
+    {
+      "id": "d055-g03-4720830",
+      "gameId": "game-4720830",
+      "dayId": "day-055",
+      "order": 3
+    },
+    {
+      "id": "d055-g04-3010460",
+      "gameId": "game-3010460",
+      "dayId": "day-055",
+      "order": 4
+    },
+    {
+      "id": "d055-g06-2835530",
+      "gameId": "game-2835530",
+      "dayId": "day-055",
+      "order": 6
+    },
+    {
+      "id": "d055-g05-3583970",
+      "gameId": "game-3583970",
+      "dayId": "day-055",
+      "order": 5
+    },
+    {
+      "id": "d055-g07-2300840",
+      "gameId": "game-2300840",
+      "dayId": "day-055",
+      "order": 7
+    },
+    {
+      "id": "d056-g01-3673050",
+      "gameId": "game-3673050",
+      "dayId": "day-056",
+      "order": 1
+    },
+    {
+      "id": "d056-g02-4149700",
+      "gameId": "game-4149700",
+      "dayId": "day-056",
+      "order": 2
+    },
+    {
+      "id": "d056-g03-4038550",
+      "gameId": "game-4038550",
+      "dayId": "day-056",
+      "order": 3
+    },
+    {
+      "id": "d056-g04-4530880",
+      "gameId": "game-4530880",
+      "dayId": "day-056",
+      "order": 4
     }
   ],
   "days": [
@@ -14718,6 +15133,33 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d054-g02-2300840"
       ],
       "legacyKey": "DAY054_240826"
+    },
+    {
+      "id": "day-055",
+      "dayNumber": 55,
+      "date": "2026-08-25",
+      "appearanceIds": [
+        "d055-g01-2702190",
+        "d055-g02-2234150",
+        "d055-g03-4720830",
+        "d055-g04-3010460",
+        "d055-g05-3583970",
+        "d055-g06-2835530",
+        "d055-g07-2300840"
+      ],
+      "legacyKey": "DAY055_250826"
+    },
+    {
+      "id": "day-056",
+      "dayNumber": 56,
+      "date": "2026-08-26",
+      "appearanceIds": [
+        "d056-g01-3673050",
+        "d056-g02-4149700",
+        "d056-g03-4038550",
+        "d056-g04-4530880"
+      ],
+      "legacyKey": "DAY056_260826"
     }
   ]
 };
