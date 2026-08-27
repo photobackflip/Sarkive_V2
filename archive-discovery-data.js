@@ -41,6 +41,23 @@ window.SARKIVE_DISCOVERY_DATA = {
       "homeImage": "assets/RADIO_RESPAWN_TITLE_CARD.png"
     },
     {
+      "id": "sarks-windowless-fun-van",
+      "title": "Sark's Windowless Fun Van",
+      "kind": "show",
+      "entryId": "sarks-windowless-fun-van",
+      "tags": [
+        "machinima",
+        "respawn",
+        "swfv",
+        "windowless fun van"
+      ],
+      "searchTerms": [
+        "Sark's Windowless Fun Van",
+        "SWFV"
+      ],
+      "homeImage": "assets/SWFV_TITLE_CARD.png"
+    },
+    {
       "id": "nerd-poker",
       "title": "Nerd Poker",
       "kind": "show",
@@ -91,13 +108,14 @@ window.SARKIVE_DISCOVERY_DATA = {
       "title": "POPULAR",
       "description": "A hand-picked front shelf of Sarkive staples and major collections.",
       "home": true,
-      "homeLimit": 9,
+      "homeLimit": 10,
       "cardStyle": "poster",
       "order": "custom",
       "homeOrder": "custom",
       "recordIds": [
         "collection:respawn-inbox",
         "collection:radio-respawn",
+        "collection:sarks-windowless-fun-van",
         "collection:nerd-poker",
         "collection:x-play",
         "tool:vod-index",
