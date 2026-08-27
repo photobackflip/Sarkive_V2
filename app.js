@@ -6,6 +6,7 @@
   const rawPodcastLibrary = window.NERD_POKER_DATA;
   const rawRadioRespawnLibrary = window.RADIO_RESPAWN_DATA;
   const rawRespawnInboxLibrary = window.RESPAWN_INBOX_DATA;
+  const rawSwfvLibrary = window.SWFV_DATA;
   const rawXPlayLibrary = window.XPLAY_DATA;
   const rawGuestPodcastLibrary = window.SARKIVE_PODCASTS_DATA;
   const rawMarblesScores = window.MARBLES_SCORES_DATA;
@@ -214,6 +215,14 @@
     runtimeBlock: document.querySelector('.runtime-block'),
     playerPlaceholder: document.querySelector('#player-placeholder'),
     youtubePlayerShell: document.querySelector('#youtube-player-shell'),
+    multicamPlayerShell: document.querySelector('#multicam-player-shell'),
+    multicamGrid: document.querySelector('#multicam-grid'),
+    multicamControls: document.querySelector('#multicam-controls'),
+    multicamCameraButtons: document.querySelector('#multicam-camera-buttons'),
+    multicamAudioButtons: document.querySelector('#multicam-audio-buttons'),
+    multicamSeek: document.querySelector('#multicam-seek'),
+    multicamTime: document.querySelector('#multicam-time'),
+    multicamStatus: document.querySelector('#multicam-status'),
     archivePlayer: document.querySelector('#archive-player')
   };
 
@@ -277,6 +286,42 @@
       return container.videoId ? [container] : [];
     }
 
+    function normalizeMulticam(rawMulticam, gameId) {
+      if (!rawMulticam || typeof rawMulticam !== 'object') return null;
+      const feeds = (Array.isArray(rawMulticam.feeds) ? rawMulticam.feeds : []).flatMap((feed, feedIndex) => {
+        if (!feed || typeof feed !== 'object') return [];
+        const id = String(feed.id || `feed-${feedIndex + 1}`).trim();
+        const label = String(feed.label || id).trim();
+        const videoId = String(feed.videoId || '').trim();
+        const timeline = (Array.isArray(feed.timeline) ? feed.timeline : []).flatMap((piece) => {
+          if (!piece || typeof piece !== 'object') return [];
+          const masterStartSeconds = Number(piece.masterStartSeconds);
+          const masterEndSeconds = Number(piece.masterEndSeconds);
+          const sourceStartSeconds = Number(piece.sourceStartSeconds);
+          const sourceEndSeconds = Number(piece.sourceEndSeconds);
+          if (![masterStartSeconds, masterEndSeconds, sourceStartSeconds, sourceEndSeconds].every(Number.isFinite)) return [];
+          if (masterEndSeconds <= masterStartSeconds || sourceEndSeconds <= sourceStartSeconds) return [];
+          return [{ masterStartSeconds, masterEndSeconds, sourceStartSeconds, sourceEndSeconds }];
+        }).sort((a, b) => a.masterStartSeconds - b.masterStartSeconds);
+        if (!id || !videoId || !timeline.length) {
+          console.warn(`Invalid multicam feed in game "${gameId}" at feeds[${feedIndex}].`);
+          return [];
+        }
+        return [{ id, label, videoId, timeline }];
+      });
+      if (feeds.length < 2) return null;
+      const feedIds = new Set(feeds.map((feed) => feed.id));
+      const requestedMaster = String(rawMulticam.masterFeedId || '').trim();
+      const requestedCamera = String(rawMulticam.defaultCameraId || '').trim();
+      const requestedAudio = String(rawMulticam.defaultAudioId || '').trim();
+      return {
+        masterFeedId: feedIds.has(requestedMaster) ? requestedMaster : feeds[0].id,
+        defaultCameraId: feedIds.has(requestedCamera) ? requestedCamera : feeds[0].id,
+        defaultAudioId: feedIds.has(requestedAudio) ? requestedAudio : feeds[0].id,
+        feeds
+      };
+    }
+
     return raw.games.flatMap((game, gameIndex) => {
       if (!game || typeof game !== 'object') return [];
 
@@ -301,6 +346,7 @@
       const searchTerms = (Array.isArray(game.searchTerms) ? game.searchTerms : [])
         .map((term) => String(term || '').trim())
         .filter(Boolean);
+      const multicam = normalizeMulticam(game.multicam, id);
 
       if (!id || !title || usedGameIds.has(id)) {
         console.warn(`Invalid or duplicate game entry at games[${gameIndex}].`);
@@ -396,6 +442,15 @@
 
           if (!segments.length) return [];
 
+          const rawMulticamRange = chapter.multicamRange && typeof chapter.multicamRange === 'object'
+            ? chapter.multicamRange
+            : null;
+          const multicamRangeStart = Number(rawMulticamRange?.startSeconds);
+          const multicamRangeEnd = Number(rawMulticamRange?.endSeconds);
+          const chapterMulticam = multicam && Number.isFinite(multicamRangeStart) && Number.isFinite(multicamRangeEnd) && multicamRangeEnd > multicamRangeStart
+            ? { ...multicam, rangeStartSeconds: multicamRangeStart, rangeEndSeconds: multicamRangeEnd }
+            : null;
+
           usedChapterIds.add(chapterId);
           const normalizedChapter = {
             id: chapterId,
@@ -413,6 +468,7 @@
             subject: chapterSubject,
             type: chapterType,
             runtimeSeconds: Number.isFinite(runtimeSeconds) && runtimeSeconds >= 0 ? runtimeSeconds : null,
+            multicam: chapterMulticam,
             groupId,
             groupTitle,
             segments
@@ -456,6 +512,7 @@
         tags,
         people,
         searchTerms,
+        multicam,
         groups,
         chapters
       }];
@@ -485,6 +542,7 @@
       ...(rawPodcastLibrary?.podcasts || []),
       ...(rawRadioRespawnLibrary?.shows || rawRadioRespawnLibrary?.podcasts || []),
       ...(rawRespawnInboxLibrary?.shows || rawRespawnInboxLibrary?.podcasts || []),
+      ...(rawSwfvLibrary?.shows || rawSwfvLibrary?.podcasts || []),
       ...(rawXPlayLibrary?.shows || rawXPlayLibrary?.podcasts || []),
       ...guestPodcastSourceEntries
     ]
@@ -1156,6 +1214,11 @@
     segmentTransitioning: false,
     suppressEndedUntil: 0,
     endMonitorId: null,
+    multicamCameraId: '',
+    multicamAudioId: '',
+    multicamQuad: false,
+    multicamMasterTime: 0,
+    multicamPendingPlay: false,
     view: 'home',
     pageId: 'home',
     contentType: 'game',
@@ -1182,6 +1245,16 @@
     vodPendingPlay: false,
     vodIsPlaying: false,
     vodReturnState: null
+  };
+
+  const multicamRuntime = {
+    players: new Map(),
+    ready: new Set(),
+    feedElements: new Map(),
+    monitorId: null,
+    seeking: false,
+    activeKey: '',
+    lastSyncMasterTime: null
   };
 
   const nerdPoker = {
@@ -1480,7 +1553,7 @@
             100: 'The source video is unavailable or private.',
             101: 'The uploader has disabled playback on other websites.',
             150: 'The uploader has disabled playback on other websites.',
-            153: 'YouTube did not receive the referring site identity. Open The Sarkive through https://thesarkive.com/ instead of a local file copy.'
+            153: 'YouTube did not receive the referring site identity. Launch the page through START_SITE.bat, or deploy it to a normal web host.'
           };
           showNerdPokerMessage('YouTube could not load this episode.', messages[event.data] || `YouTube returned player error ${event.data}.`);
           setNerdPokerPlayingUi(false);
@@ -1764,7 +1837,7 @@
     if (!isHttpPage) {
       showSarkRadioMessage(
         'Sark Radio needs the site to be served over HTTP.',
-        'Open Sark Radio through https://thesarkive.com/ instead of a local file copy.'
+        'Close this tab and launch START_SITE.bat, then open Sark Radio again.'
       );
       return Promise.resolve([]);
     }
@@ -1855,6 +1928,420 @@
 
   function currentSegment() {
     return state.chapter?.segments[state.segmentIndex] || null;
+  }
+
+  function currentMulticam() {
+    return state.chapter?.multicam || null;
+  }
+
+  function multicamFeedById(multicam, feedId) {
+    return multicam?.feeds?.find((feed) => feed.id === feedId) || null;
+  }
+
+  function multicamPieceForMasterTime(feed, masterTime) {
+    if (!feed || !Number.isFinite(masterTime)) return null;
+    return feed.timeline.find((piece) => masterTime >= piece.masterStartSeconds - 0.05 && masterTime <= piece.masterEndSeconds + 0.05) || null;
+  }
+
+  function multicamSourceTimeForMaster(feed, masterTime) {
+    const piece = multicamPieceForMasterTime(feed, masterTime);
+    if (!piece) return null;
+    const masterSpan = piece.masterEndSeconds - piece.masterStartSeconds;
+    const sourceSpan = piece.sourceEndSeconds - piece.sourceStartSeconds;
+    const ratio = masterSpan > 0 ? sourceSpan / masterSpan : 1;
+    return piece.sourceStartSeconds + ((masterTime - piece.masterStartSeconds) * ratio);
+  }
+
+  function multicamMasterTimeForSource(feed, sourceTime) {
+    if (!feed || !Number.isFinite(sourceTime)) return null;
+    const piece = feed.timeline.find((candidate) => sourceTime >= candidate.sourceStartSeconds - 0.05 && sourceTime <= candidate.sourceEndSeconds + 0.05);
+    if (!piece) return null;
+    const sourceSpan = piece.sourceEndSeconds - piece.sourceStartSeconds;
+    const masterSpan = piece.masterEndSeconds - piece.masterStartSeconds;
+    const ratio = sourceSpan > 0 ? masterSpan / sourceSpan : 1;
+    return piece.masterStartSeconds + ((sourceTime - piece.sourceStartSeconds) * ratio);
+  }
+
+  function multicamChapterBounds(multicam = currentMulticam()) {
+    if (!multicam) return null;
+    return {
+      start: multicam.rangeStartSeconds,
+      end: multicam.rangeEndSeconds
+    };
+  }
+
+  function multicamRuntimeKey(feed) {
+    return String(feed?.videoId || feed?.id || '').trim();
+  }
+
+  function multicamPlayerId(feed) {
+    return `multicam-player-${multicamRuntimeKey(feed).replace(/[^a-z0-9_-]/gi, '-')}`;
+  }
+
+  function createMulticamFeedElement(feed) {
+    if (multicamRuntime.feedElements.has(multicamRuntimeKey(feed))) return multicamRuntime.feedElements.get(multicamRuntimeKey(feed));
+    const shell = document.createElement('div');
+    shell.className = 'multicam-feed is-hidden';
+    shell.dataset.feedId = feed.id;
+
+    const playerHost = document.createElement('div');
+    playerHost.id = multicamPlayerId(feed);
+
+    const label = document.createElement('span');
+    label.className = 'multicam-feed-label';
+    label.textContent = feed.label;
+
+    const unavailable = document.createElement('div');
+    unavailable.className = 'multicam-feed-unavailable';
+    unavailable.hidden = true;
+    const unavailableTitle = document.createElement('strong');
+    unavailableTitle.textContent = `${feed.label} · SOURCE GAP`;
+    const unavailableCopy = document.createElement('span');
+    unavailableCopy.textContent = 'No synchronized footage survives for this point in the event.';
+    unavailable.append(unavailableTitle, unavailableCopy);
+
+    shell.append(playerHost, label, unavailable);
+    elements.multicamGrid.append(shell);
+    multicamRuntime.feedElements.set(multicamRuntimeKey(feed), shell);
+    return shell;
+  }
+
+  function ensureMulticamPlayer(feed) {
+    if (!feed || multicamRuntime.players.has(multicamRuntimeKey(feed))) return multicamRuntime.players.get(multicamRuntimeKey(feed)) || null;
+    if (!window.YT || typeof window.YT.Player !== 'function') return null;
+    createMulticamFeedElement(feed);
+
+    const playerVars = {
+      controls: 0,
+      disablekb: 1,
+      playsinline: 1,
+      rel: 0
+    };
+    if (window.location.origin && window.location.origin !== 'null') playerVars.origin = window.location.origin;
+
+    const player = new YT.Player(multicamPlayerId(feed), {
+      width: '1280',
+      height: '720',
+      videoId: feed.videoId,
+      playerVars,
+      events: {
+        onReady: () => {
+          multicamRuntime.ready.add(multicamRuntimeKey(feed));
+          try {
+            player.getIframe().referrerPolicy = 'strict-origin-when-cross-origin';
+            player.mute();
+          } catch (_) {}
+          if (state.view === 'watch' && currentMulticam()) {
+            syncMulticamPlayers(true);
+            elements.playPause.disabled = false;
+            if (state.multicamPendingPlay) playMulticamPlayers();
+          }
+        },
+        onStateChange: (event) => {
+          const multicam = currentMulticam();
+          if (!multicam || feed.id !== multicam.masterFeedId) return;
+          if (event.data === YT.PlayerState.PLAYING) setPlayingUi(true);
+          if (event.data === YT.PlayerState.PAUSED && state.isPlaying && !multicamRuntime.seeking) setPlayingUi(false);
+        },
+        onError: (event) => {
+          console.warn(`Multicam feed ${feed.id} returned YouTube error ${event.data}.`);
+          const feedElement = multicamRuntime.feedElements.get(multicamRuntimeKey(feed));
+          const unavailable = feedElement?.querySelector('.multicam-feed-unavailable');
+          if (unavailable) {
+            unavailable.hidden = false;
+            const title = unavailable.querySelector('strong');
+            const copy = unavailable.querySelector('span');
+            if (title) title.textContent = `${feed.label} · UNAVAILABLE`;
+            if (copy) copy.textContent = 'YouTube could not load this archived POV.';
+          }
+        }
+      }
+    });
+    multicamRuntime.players.set(multicamRuntimeKey(feed), player);
+    return player;
+  }
+
+  function primeMulticamPlayers() {
+    const seen = new Set();
+    games.forEach((game) => {
+      game.chapters.forEach((chapter) => {
+        const multicam = chapter.multicam;
+        if (!multicam) return;
+        multicam.feeds.forEach((feed) => {
+          if (seen.has(multicamRuntimeKey(feed))) return;
+          seen.add(multicamRuntimeKey(feed));
+          ensureMulticamPlayer(feed);
+        });
+      });
+    });
+  }
+
+  function pauseMulticamPlayers() {
+    multicamRuntime.players.forEach((player) => {
+      try { player.pauseVideo(); } catch (_) {}
+    });
+    state.multicamPendingPlay = false;
+  }
+
+  function multicamSelectedIds(multicam) {
+    const validIds = new Set(multicam.feeds.map((feed) => feed.id));
+    if (!validIds.has(state.multicamCameraId)) state.multicamCameraId = multicam.defaultCameraId;
+    if (!validIds.has(state.multicamAudioId)) state.multicamAudioId = multicam.defaultAudioId;
+    return { cameraId: state.multicamCameraId, audioId: state.multicamAudioId };
+  }
+
+  function updateMulticamFeedVisibility(masterTime = state.multicamMasterTime) {
+    const multicam = currentMulticam();
+    if (!multicam) return;
+    multicamRuntime.feedElements.forEach((shell) => shell.classList.add('is-hidden'));
+    const { cameraId, audioId } = multicamSelectedIds(multicam);
+    elements.multicamGrid.classList.toggle('is-quad', state.multicamQuad);
+
+    multicam.feeds.forEach((feed) => {
+      const shell = createMulticamFeedElement(feed);
+      const visible = state.multicamQuad || feed.id === cameraId;
+      shell.classList.toggle('is-hidden', !visible);
+      const unavailable = shell.querySelector('.multicam-feed-unavailable');
+      const available = Boolean(multicamPieceForMasterTime(feed, masterTime));
+      if (unavailable) unavailable.hidden = available;
+    });
+
+    elements.multicamCameraButtons.querySelectorAll('.multicam-button').forEach((button) => {
+      const feedId = button.dataset.feedId || '';
+      const isQuad = button.dataset.mode === 'quad';
+      const available = isQuad || Boolean(multicamPieceForMasterTime(multicamFeedById(multicam, feedId), masterTime));
+      button.disabled = !available;
+      button.classList.toggle('is-active', isQuad ? state.multicamQuad : (!state.multicamQuad && feedId === cameraId));
+    });
+    elements.multicamAudioButtons.querySelectorAll('.multicam-button').forEach((button) => {
+      const feed = multicamFeedById(multicam, button.dataset.feedId || '');
+      button.classList.toggle('is-active', button.dataset.feedId === audioId);
+      button.disabled = !multicamPieceForMasterTime(feed, masterTime);
+    });
+  }
+
+  function applyMulticamAudio(masterTime = state.multicamMasterTime) {
+    const multicam = currentMulticam();
+    if (!multicam) return;
+    const { audioId } = multicamSelectedIds(multicam);
+    multicam.feeds.forEach((feed) => {
+      const player = multicamRuntime.players.get(multicamRuntimeKey(feed));
+      if (!player || !multicamRuntime.ready.has(multicamRuntimeKey(feed))) return;
+      const shouldHear = feed.id === audioId && Boolean(multicamPieceForMasterTime(feed, masterTime));
+      try {
+        if (shouldHear) {
+          player.setVolume(100);
+          player.unMute();
+        } else {
+          player.mute();
+        }
+      } catch (_) {}
+    });
+  }
+
+  function renderMulticamControls() {
+    const multicam = currentMulticam();
+    if (!multicam) {
+      elements.multicamControls.hidden = true;
+      return;
+    }
+    multicamSelectedIds(multicam);
+    elements.multicamCameraButtons.replaceChildren(...multicam.feeds.map((feed) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'multicam-button';
+      button.dataset.feedId = feed.id;
+      button.textContent = feed.label;
+      button.addEventListener('click', () => {
+        state.multicamQuad = false;
+        state.multicamCameraId = feed.id;
+        updateMulticamFeedVisibility();
+        syncMulticamPlayers(true);
+      });
+      return button;
+    }));
+    const quad = document.createElement('button');
+    quad.type = 'button';
+    quad.className = 'multicam-button';
+    quad.dataset.mode = 'quad';
+    quad.textContent = 'QUAD';
+    quad.addEventListener('click', () => {
+      state.multicamQuad = true;
+      updateMulticamFeedVisibility();
+      syncMulticamPlayers(true);
+    });
+    elements.multicamCameraButtons.append(quad);
+
+    elements.multicamAudioButtons.replaceChildren(...multicam.feeds.map((feed) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'multicam-button';
+      button.dataset.feedId = feed.id;
+      button.textContent = feed.label;
+      button.addEventListener('click', () => {
+        state.multicamAudioId = feed.id;
+        applyMulticamAudio();
+        updateMulticamFeedVisibility();
+      });
+      return button;
+    }));
+
+    const bounds = multicamChapterBounds(multicam);
+    elements.multicamSeek.min = String(bounds.start);
+    elements.multicamSeek.max = String(bounds.end);
+    elements.multicamSeek.value = String(Math.min(Math.max(state.multicamMasterTime || bounds.start, bounds.start), bounds.end));
+    elements.multicamStatus.textContent = `SYNC MASTER · ${multicamFeedById(multicam, multicam.masterFeedId)?.label || multicam.masterFeedId}`;
+    elements.multicamControls.hidden = false;
+    updateMulticamFeedVisibility();
+    updateMulticamTimelineUi();
+  }
+
+  function updateMulticamTimelineUi() {
+    const multicam = currentMulticam();
+    if (!multicam) return;
+    const bounds = multicamChapterBounds(multicam);
+    const masterTime = Math.min(Math.max(state.multicamMasterTime, bounds.start), bounds.end);
+    if (!multicamRuntime.seeking) elements.multicamSeek.value = String(masterTime);
+    const chapterElapsed = masterTime - bounds.start;
+    const chapterDuration = bounds.end - bounds.start;
+    elements.multicamTime.textContent = `${formatDuration(chapterElapsed)} / ${formatDuration(chapterDuration)} · EVENT ${formatDuration(masterTime)}`;
+    updateMulticamFeedVisibility(masterTime);
+  }
+
+  function seekMulticam(masterTime, shouldPlay = state.isPlaying) {
+    const multicam = currentMulticam();
+    if (!multicam) return;
+    const bounds = multicamChapterBounds(multicam);
+    const target = Math.min(Math.max(Number(masterTime) || bounds.start, bounds.start), bounds.end);
+    state.multicamMasterTime = target;
+    multicamRuntime.seeking = true;
+    multicam.feeds.forEach((feed) => {
+      const sourceTime = multicamSourceTimeForMaster(feed, target);
+      const player = multicamRuntime.players.get(multicamRuntimeKey(feed));
+      if (!player || !multicamRuntime.ready.has(multicamRuntimeKey(feed))) return;
+      try {
+        if (sourceTime === null) {
+          player.pauseVideo();
+          player.mute();
+        } else {
+          player.seekTo(Math.max(0, sourceTime), true);
+          if (shouldPlay) player.playVideo();
+          else player.pauseVideo();
+        }
+      } catch (_) {}
+    });
+    applyMulticamAudio(target);
+    updateMulticamTimelineUi();
+    window.setTimeout(() => { multicamRuntime.seeking = false; }, 350);
+  }
+
+  function playMulticamPlayers() {
+    const multicam = currentMulticam();
+    if (!multicam) return;
+    state.multicamPendingPlay = true;
+    let playedAny = false;
+    multicam.feeds.forEach((feed) => {
+      const sourceTime = multicamSourceTimeForMaster(feed, state.multicamMasterTime);
+      const player = multicamRuntime.players.get(multicamRuntimeKey(feed));
+      if (!player || !multicamRuntime.ready.has(multicamRuntimeKey(feed)) || sourceTime === null) return;
+      try {
+        const current = Number(player.getCurrentTime());
+        if (!Number.isFinite(current) || Math.abs(current - sourceTime) > 1.25) player.seekTo(sourceTime, true);
+        player.playVideo();
+        playedAny = true;
+      } catch (_) {}
+    });
+    applyMulticamAudio();
+    if (playedAny) {
+      setPlayingUi(true);
+      state.multicamPendingPlay = false;
+    }
+  }
+
+  function toggleMulticamPlayback() {
+    if (state.isPlaying) {
+      pauseMulticamPlayers();
+      setPlayingUi(false);
+    } else {
+      playMulticamPlayers();
+    }
+  }
+
+  function syncMulticamPlayers(force = false) {
+    const multicam = currentMulticam();
+    if (!multicam) return;
+    const masterFeed = multicamFeedById(multicam, multicam.masterFeedId);
+    const masterPlayer = multicamRuntime.players.get(multicamRuntimeKey(masterFeed));
+    const bounds = multicamChapterBounds(multicam);
+
+    if (masterPlayer && multicamRuntime.ready.has(multicamRuntimeKey(masterFeed))) {
+      try {
+        const sourceTime = Number(masterPlayer.getCurrentTime());
+        const converted = multicamMasterTimeForSource(masterFeed, sourceTime);
+        if (Number.isFinite(converted)) state.multicamMasterTime = converted;
+      } catch (_) {}
+    }
+
+    state.multicamMasterTime = Math.min(Math.max(state.multicamMasterTime, bounds.start), bounds.end);
+    updateMulticamTimelineUi();
+
+    if (state.isPlaying && state.multicamMasterTime >= bounds.end - 0.2) {
+      handleSegmentEnd();
+      return;
+    }
+
+    multicam.feeds.forEach((feed) => {
+      const player = multicamRuntime.players.get(multicamRuntimeKey(feed));
+      if (!player || !multicamRuntime.ready.has(multicamRuntimeKey(feed))) return;
+      const target = multicamSourceTimeForMaster(feed, state.multicamMasterTime);
+      try {
+        if (target === null) {
+          player.pauseVideo();
+          player.mute();
+          return;
+        }
+        const current = Number(player.getCurrentTime());
+        if (force || !Number.isFinite(current) || Math.abs(current - target) > 1.35) player.seekTo(target, true);
+        if (state.isPlaying && player.getPlayerState() !== YT.PlayerState.PLAYING) player.playVideo();
+      } catch (_) {}
+    });
+    applyMulticamAudio();
+  }
+
+  function startMulticamMonitor() {
+    if (multicamRuntime.monitorId !== null) return;
+    multicamRuntime.monitorId = window.setInterval(() => {
+      if (state.view !== 'watch' || !currentMulticam()) return;
+      syncMulticamPlayers(false);
+    }, 500);
+  }
+
+  function loadCurrentMulticam(shouldPlay) {
+    const multicam = currentMulticam();
+    if (!multicam) return false;
+    pauseMulticamPlayers();
+    stopArchivePlayer();
+    if (state.playerReady && state.player) state.player.pauseVideo();
+    setPlayerSourceMode('multicam');
+    hidePlayerMessage();
+
+    multicam.feeds.forEach((feed) => ensureMulticamPlayer(feed));
+    const key = `${state.game.id}:${state.chapter.id}`;
+    const chapterChanged = multicamRuntime.activeKey !== key;
+    multicamRuntime.activeKey = key;
+    if (chapterChanged || !Number.isFinite(state.multicamMasterTime)) {
+      state.multicamMasterTime = multicam.rangeStartSeconds;
+    } else if (state.multicamMasterTime < multicam.rangeStartSeconds || state.multicamMasterTime > multicam.rangeEndSeconds) {
+      state.multicamMasterTime = multicam.rangeStartSeconds;
+    }
+    if (!state.multicamCameraId) state.multicamCameraId = multicam.defaultCameraId;
+    if (!state.multicamAudioId) state.multicamAudioId = multicam.defaultAudioId;
+    renderMulticamControls();
+    seekMulticam(state.multicamMasterTime, shouldPlay);
+    state.multicamPendingPlay = shouldPlay;
+    if (shouldPlay) playMulticamPlayers();
+    startMulticamMonitor();
+    return true;
   }
 
   function segmentWatchUrl(segment) {
@@ -2163,7 +2650,7 @@
     }
 
     if (!isHttpPage) {
-      setSarkTvPlaceholder('SarkTV needs the live site.', 'Open The Sarkive through its web address instead of opening index.html directly.');
+      setSarkTvPlaceholder('SarkTV needs the site server.', 'Launch the site with START_SITE.bat instead of opening index.html directly.');
       elements.sarkTvPlayPause.disabled = true;
       elements.sarkTvNext.disabled = true;
       return;
@@ -2288,6 +2775,9 @@
     if (state.playerReady && state.player) {
       state.player.pauseVideo();
     }
+    pauseMulticamPlayers();
+    if (elements.multicamControls) elements.multicamControls.hidden = true;
+    if (elements.multicamPlayerShell) elements.multicamPlayerShell.hidden = true;
     if (elements.archivePlayer) {
       elements.archivePlayer.src = 'about:blank';
       elements.archivePlayer.hidden = true;
@@ -3566,7 +4056,7 @@
     if (!isHttpPage) {
       showVodPlayerMessage(
         'YouTube needs the site to be served over HTTP.',
-        'Open The Sarkive through https://thesarkive.com/ instead of opening index.html directly.'
+        'Launch START_SITE.bat or START_SITE.sh instead of opening index.html directly.'
       );
       return;
     }
@@ -4282,10 +4772,13 @@
   function setPlayerSourceMode(mode) {
     const youtubeMode = mode === 'youtube';
     const archiveMode = mode === 'archive';
+    const multicamMode = mode === 'multicam';
     elements.youtubePlayerShell.hidden = !youtubeMode;
+    elements.multicamPlayerShell.hidden = !multicamMode;
+    elements.multicamControls.hidden = !multicamMode;
     elements.archivePlayer.hidden = !archiveMode;
-    elements.playPause.disabled = !youtubeMode || !state.playerReady;
-    if (!youtubeMode) setPlayingUi(false);
+    elements.playPause.disabled = multicamMode ? false : (!youtubeMode || !state.playerReady);
+    if (!youtubeMode && !multicamMode) setPlayingUi(false);
   }
 
   function stopArchivePlayer() {
@@ -4300,6 +4793,14 @@
 
     const segment = currentSegment();
     if (!segment) return;
+
+    if (currentMulticam()) {
+      loadCurrentMulticam(shouldPlay);
+      return;
+    }
+
+    pauseMulticamPlayers();
+    if (elements.multicamControls) elements.multicamControls.hidden = true;
 
     if (segment.sourceType === 'archive') {
       state.pendingLoadMode = null;
@@ -4332,7 +4833,7 @@
       state.pendingLoadMode = null;
       showPlayerMessage(
         'YouTube needs the site to be served over HTTP.',
-        'Open The Sarkive through https://thesarkive.com/. Opening index.html directly gives YouTube no referring site, so it blocks the embed.'
+        'Close this tab and launch START_SITE.bat. Opening index.html directly gives YouTube no referring site, so it blocks the embed.'
       );
       return;
     }
@@ -4513,6 +5014,10 @@
   }
 
   function togglePlayback() {
+    if (currentMulticam()) {
+      toggleMulticamPlayback();
+      return;
+    }
     if (currentSegment()?.sourceType !== 'youtube') return;
     if (!state.playerReady || !state.player) return;
 
@@ -4539,6 +5044,7 @@
       setPlayingUi(false);
       loadCurrentSegment(true);
     } else {
+      if (currentMulticam()) pauseMulticamPlayers();
       setPlayingUi(false);
     }
 
@@ -4551,6 +5057,7 @@
     if (state.endMonitorId !== null) return;
 
     state.endMonitorId = window.setInterval(() => {
+      if (currentMulticam()) return;
       if (!state.playerReady || !state.player || state.segmentTransitioning) return;
       if (state.player.getPlayerState() !== YT.PlayerState.PLAYING) return;
 
@@ -4615,7 +5122,7 @@
             100: 'The source video is unavailable or private.',
             101: 'The uploader has disabled playback on other websites.',
             150: 'The uploader has disabled playback on other websites.',
-            153: 'YouTube did not receive the referring site identity. Open The Sarkive through https://thesarkive.com/ instead of a local file copy.'
+            153: 'YouTube did not receive the referring site identity. Launch the page through START_SITE.bat, or deploy it to a normal web host.'
           };
           const segment = currentSegment();
           const reason = messages[event.data] || `YouTube returned player error ${event.data}.`;
@@ -4624,6 +5131,8 @@
         }
       }
     });
+
+    primeMulticamPlayers();
 
     const initialVod = state.vodCurrent || vodIndexVods[0] || null;
     const initialVodCopy = initialVod
@@ -4653,7 +5162,7 @@
               100: 'This archive copy is unavailable or private.',
               101: 'The uploader has disabled playback on other websites.',
               150: 'The uploader has disabled playback on other websites.',
-              153: 'YouTube did not receive the referring site identity. Open The Sarkive through https://thesarkive.com/ instead of a local file copy.'
+              153: 'YouTube did not receive the referring site identity. Launch The Sarkive through START_SITE.bat or START_SITE.sh.'
             };
             showVodPlayerMessage('This archive copy could not load.', messages[event.data] || `YouTube returned player error ${event.data}.`);
             setVodPlayingUi(false);
@@ -4670,7 +5179,7 @@
     if (!isHttpPage) {
       showPlayerMessage(
         'YouTube needs the site to be served over HTTP.',
-        'Open The Sarkive through https://thesarkive.com/. Opening index.html directly gives YouTube no referring site, so it blocks the embed.'
+        'Close this tab and launch START_SITE.bat. Opening index.html directly gives YouTube no referring site, so it blocks the embed.'
       );
       return;
     }
@@ -4866,6 +5375,17 @@
     advanceSarkTvAfterEnd();
   });
   elements.playPause.addEventListener('click', togglePlayback);
+  elements.multicamSeek?.addEventListener('pointerdown', () => { multicamRuntime.seeking = true; });
+  elements.multicamSeek?.addEventListener('input', () => {
+    if (!currentMulticam()) return;
+    state.multicamMasterTime = Number(elements.multicamSeek.value);
+    updateMulticamTimelineUi();
+  });
+  elements.multicamSeek?.addEventListener('change', () => {
+    if (!currentMulticam()) return;
+    seekMulticam(Number(elements.multicamSeek.value), state.isPlaying);
+    window.setTimeout(() => { multicamRuntime.seeking = false; }, 350);
+  });
   elements.backroomsWatchBack?.addEventListener('click', returnToBackroomsArchive);
   elements.previousChapter.addEventListener('click', () => stepChapter(-1));
   elements.nextChapter.addEventListener('click', () => stepChapter(1));
