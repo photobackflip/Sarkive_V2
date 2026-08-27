@@ -29,7 +29,7 @@ window.SWFV_DATA = {
         "Sark's Windowless Fun Van",
         "Machinima Respawn"
       ],
-      "description": "The reconstructed 18-episode Sark's Windowless Fun Van run from Machinima Respawn. All 18 known episodes are watchable; episode numbers are reconstructed chronologically from the surviving archive.",
+      "description": "Mr Sark's 2012 Machinima Respawn commentary series, collected here in full.",
       "episodesLabel": "Episodes",
       "chaptersLabel": "Episodes",
       "groupTitle": "Sark's Windowless Fun Van",
