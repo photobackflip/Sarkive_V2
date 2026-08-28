@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 277,
+    "gamesPlayed": 283,
     "totalGames": 318,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -12392,7 +12392,9 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d056-g04-4530880"
+        "d056-g04-4530880",
+        "d057-g03-4530880",
+        "d058-g04-4530880"
       ],
       "sources": [
         {
@@ -12400,10 +12402,262 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/zxeUmyxlcDQ?t=14379",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/nGaTNFUuXxw?t=19724",
+          "legacyField": "vodLink2"
+        },
+        {
+          "id": "source-3",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink3"
         }
       ],
       "legacy": {
         "durationPlayed": "D056.G04 - 26.08.26"
+      }
+    },
+    {
+      "id": "game-4189480",
+      "archiveNumber": 278,
+      "counted": true,
+      "title": "Poolscape",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "May 12, 2026",
+      "developers": [
+        "CosmicArcade"
+      ],
+      "publishers": [
+        "CosmicArcade"
+      ],
+      "description": "Explore the Poolrooms as if it were lost media from 1998.",
+      "notes": [],
+      "steam": {
+        "appId": 4189480,
+        "assetHash": "a6167fd00cf5bc9520999f50b6c2e0217726eff8",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d057-g01-4189480"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/nGaTNFUuXxw?t=953",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D057.G01 - 27.08.26"
+      }
+    },
+    {
+      "id": "game-2600830",
+      "archiveNumber": 279,
+      "counted": true,
+      "title": "Lost Hope: Backrooms",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "May 22, 2026",
+      "developers": [
+        "mdvd"
+      ],
+      "publishers": [
+        "Lost Hope games"
+      ],
+      "description": "Lost Hope: Backrooms",
+      "notes": [],
+      "steam": {
+        "appId": 2600830,
+        "assetHash": "",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d057-g02-2600830"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/nGaTNFUuXxw?t=8920",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D057.G02 - 27.08.26"
+      }
+    },
+    {
+      "id": "game-4317700",
+      "archiveNumber": 280,
+      "counted": true,
+      "title": "IKUN vs XHZ",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "May 26, 2026",
+      "developers": [
+        "烤烤山药"
+      ],
+      "publishers": [
+        "烤烤山药"
+      ],
+      "description": "Play as an Aikun, armed with basketballs and chicken claws, reclaim the stolen eggs, and stand against endless waves of Black Fans across 250 levels. The unique death penalty and True Love Ranking system make every battle full of challenge and fun.",
+      "notes": [],
+      "steam": {
+        "appId": 4317700,
+        "assetHash": "3eb9ea0966f760053a1210e20e0d8117e273c261",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d058-g01-4317700"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D058.G01 - 28.08.26"
+      }
+    },
+    {
+      "id": "game-4611070",
+      "archiveNumber": 281,
+      "counted": true,
+      "title": "Backrooms Game Creator",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "May 30, 2026",
+      "developers": [
+        "Outlaw Games"
+      ],
+      "publishers": [
+        "Pixel Games"
+      ],
+      "description": "Backrooms Game Creator lets you build and explore your own liminal horror worlds. Design levels, customize enemies, lighting, and items, and create unique experiences—from quiet, eerie spaces to intense survival scenarios.",
+      "notes": [],
+      "steam": {
+        "appId": 4611070,
+        "assetHash": "b59df6b5ae55eafaa7d531d492d9df5bea831de2",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d058-g02-4611070"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D058.G02 - 28.08.26"
+      }
+    },
+    {
+      "id": "game-4750290",
+      "archiveNumber": 282,
+      "counted": true,
+      "title": "Liminal 98",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jun 13, 2026",
+      "developers": [
+        "BloodHound Studio"
+      ],
+      "publishers": [
+        "BloodHound Studio"
+      ],
+      "description": "Navigate four procedurally generated liminal spaces. Reach the exit. Beat your time. Something may be watching.",
+      "notes": [],
+      "steam": {
+        "appId": 4750290,
+        "assetHash": "781763624d11dae9c1fd82017ccbd447662efa57",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d058-g03-4750290"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D058.G03 - 28.08.26"
+      }
+    },
+    {
+      "id": "game-4036160",
+      "archiveNumber": 283,
+      "counted": true,
+      "title": "Backrooms Lost Dimension",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jun 17, 2026",
+      "developers": [
+        "SG STUDIOS"
+      ],
+      "publishers": [
+        "SG STUDIOS"
+      ],
+      "description": "Backrooms: Lost Dimension is a single-player horror game with puzzles, survival, and an original story. Explore mysterious levels, journey through unknown dimensions, and uncover hidden secrets along the way. Play the first chapter for free and continue the adventure by unlocking the next ones.",
+      "notes": [],
+      "steam": {
+        "appId": 4036160,
+        "assetHash": "bfd3dc7c03b1b0b0e5573e174fcbbbf9535b1cdd",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d058-g05-4036160"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D058.G05 - 28.08.26"
       }
     }
   ],
@@ -14381,6 +14635,54 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-4530880",
       "dayId": "day-056",
       "order": 4
+    },
+    {
+      "id": "d057-g01-4189480",
+      "gameId": "game-4189480",
+      "dayId": "day-057",
+      "order": 1
+    },
+    {
+      "id": "d057-g02-2600830",
+      "gameId": "game-2600830",
+      "dayId": "day-057",
+      "order": 2
+    },
+    {
+      "id": "d057-g03-4530880",
+      "gameId": "game-4530880",
+      "dayId": "day-057",
+      "order": 3
+    },
+    {
+      "id": "d058-g01-4317700",
+      "gameId": "game-4317700",
+      "dayId": "day-058",
+      "order": 1
+    },
+    {
+      "id": "d058-g02-4611070",
+      "gameId": "game-4611070",
+      "dayId": "day-058",
+      "order": 2
+    },
+    {
+      "id": "d058-g03-4750290",
+      "gameId": "game-4750290",
+      "dayId": "day-058",
+      "order": 3
+    },
+    {
+      "id": "d058-g04-4530880",
+      "gameId": "game-4530880",
+      "dayId": "day-058",
+      "order": 4
+    },
+    {
+      "id": "d058-g05-4036160",
+      "gameId": "game-4036160",
+      "dayId": "day-058",
+      "order": 5
     }
   ],
   "days": [
@@ -15160,6 +15462,30 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d056-g04-4530880"
       ],
       "legacyKey": "DAY056_260826"
+    },
+    {
+      "id": "day-057",
+      "dayNumber": 57,
+      "date": "2026-08-27",
+      "appearanceIds": [
+        "d057-g01-4189480",
+        "d057-g02-2600830",
+        "d057-g03-4530880"
+      ],
+      "legacyKey": "DAY057_270826"
+    },
+    {
+      "id": "day-058",
+      "dayNumber": 58,
+      "date": "2026-08-28",
+      "appearanceIds": [
+        "d058-g01-4317700",
+        "d058-g02-4611070",
+        "d058-g03-4750290",
+        "d058-g04-4530880",
+        "d058-g05-4036160"
+      ],
+      "legacyKey": "DAY058_280826"
     }
   ]
 };
