@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 283,
+    "gamesPlayed": 285,
     "totalGames": 319,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -12394,7 +12394,9 @@ window.SARKIVE_BACKROOMS_DATA = {
       "appearanceIds": [
         "d056-g04-4530880",
         "d057-g03-4530880",
-        "d058-g04-4530880"
+        "d058-g04-4530880",
+        "d059-g03-4530880",
+        "d059-g05-4530880"
       ],
       "sources": [
         {
@@ -12414,6 +12416,18 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/uETdyzecg9E?t=9244",
           "legacyField": "vodLink3"
+        },
+        {
+          "id": "source-4",
+          "kind": "youtube",
+          "url": "https://youtu.be/ZyLmIxou7Fw?t=16754",
+          "legacyField": "vodLink4"
+        },
+        {
+          "id": "source-5",
+          "kind": "youtube",
+          "url": "https://youtu.be/ZyLmIxou7Fw?t=27005",
+          "legacyField": "vodLink5"
         }
       ],
       "legacy": {
@@ -12468,7 +12482,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "status": "DONE",
       "statusLabel": "DONE",
       "players": [
-        "SARK"
+        "SARK",
+        "NFEN"
       ],
       "releaseDate": "May 22, 2026",
       "developers": [
@@ -12486,7 +12501,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d057-g02-2600830"
+        "d057-g02-2600830",
+        "d059-g02-2600830"
       ],
       "sources": [
         {
@@ -12494,6 +12510,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/nGaTNFUuXxw?t=8920",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/ZyLmIxou7Fw?t=2636",
+          "legacyField": "vodLink2"
         }
       ],
       "legacy": {
@@ -12658,6 +12680,87 @@ window.SARKIVE_BACKROOMS_DATA = {
       ],
       "legacy": {
         "durationPlayed": "D058.G05 - 28.08.26"
+      }
+    },
+    {
+      "id": "game-4720800",
+      "archiveNumber": 284,
+      "counted": true,
+      "title": "Backrooms: The Endless Halls",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK",
+        "NFEN"
+      ],
+      "releaseDate": "Aug 27, 2026",
+      "developers": [
+        "Skmaestro"
+      ],
+      "publishers": [
+        "Skmaestro"
+      ],
+      "description": "Backrooms: The Endless Halls is a cooperative horror game for 1–4 players. On your own or with friends, you’ll dive into an unknown world where everything will seem familiar to you, yet at the same time frightening and very confusing. Try to make it out alive, if that’s even possible...",
+      "notes": [],
+      "steam": {
+        "appId": 4720800,
+        "assetHash": "cb3a34faa7ebb128c60bf6f879153e7a144ae10c",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d059-g01-4720800"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/ZyLmIxou7Fw?t=995",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D059.G01 - 29.08.26"
+      }
+    },
+    {
+      "id": "game-3912090",
+      "archiveNumber": 285,
+      "counted": true,
+      "title": "Backrooms Untold",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jun 23, 2026",
+      "developers": [
+        "Maritime Games"
+      ],
+      "publishers": [
+        "Maritime Games"
+      ],
+      "description": "Backrooms Untold is an atmospheric horror experience where you’re lost in an endless, infinite maze of fluorescent lit corridors, stained carpet, and humming lights. The deeper you go, the more it feels wrong—familiar spaces twisting into something hostile and unknowable. 8 total levels on launch.",
+      "notes": [],
+      "steam": {
+        "appId": 3912090,
+        "assetHash": "d1bfa6c787d7f4116cdc682330c362c1a7740dfa",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d059-g04-3912090"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/ZyLmIxou7Fw?t=22602",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D059.G04 - 29.08.26"
       }
     }
   ],
@@ -14683,6 +14786,36 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-4036160",
       "dayId": "day-058",
       "order": 5
+    },
+    {
+      "id": "d059-g01-4720800",
+      "gameId": "game-4720800",
+      "dayId": "day-059",
+      "order": 1
+    },
+    {
+      "id": "d059-g02-2600830",
+      "gameId": "game-2600830",
+      "dayId": "day-059",
+      "order": 2
+    },
+    {
+      "id": "d059-g03-4530880",
+      "gameId": "game-4530880",
+      "dayId": "day-059",
+      "order": 3
+    },
+    {
+      "id": "d059-g04-3912090",
+      "gameId": "game-3912090",
+      "dayId": "day-059",
+      "order": 4
+    },
+    {
+      "id": "d059-g05-4530880",
+      "gameId": "game-4530880",
+      "dayId": "day-059",
+      "order": 5
     }
   ],
   "days": [
@@ -15486,6 +15619,19 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d058-g05-4036160"
       ],
       "legacyKey": "DAY058_280826"
+    },
+    {
+      "id": "day-059",
+      "dayNumber": 59,
+      "date": "2026-08-29",
+      "appearanceIds": [
+        "d059-g01-4720800",
+        "d059-g02-2600830",
+        "d059-g03-4530880",
+        "d059-g04-3912090",
+        "d059-g05-4530880"
+      ],
+      "legacyKey": "DAY059_290826"
     }
   ]
 };
