@@ -6,8 +6,8 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 285,
-    "totalGames": 319,
+    "gamesPlayed": 290,
+    "totalGames": 323,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
   "games": [
@@ -12371,8 +12371,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "archiveNumber": 277,
       "counted": true,
       "title": "BACK*SPACE",
-      "status": "UNRESOLVED",
-      "statusLabel": "-",
+      "status": "DONE",
+      "statusLabel": "DONE",
       "players": [
         "SARK"
       ],
@@ -12396,7 +12396,9 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d057-g03-4530880",
         "d058-g04-4530880",
         "d059-g03-4530880",
-        "d059-g05-4530880"
+        "d059-g05-4530880",
+        "d060-g02-4530880",
+        "d060-g05-4530880"
       ],
       "sources": [
         {
@@ -12428,6 +12430,18 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/ZyLmIxou7Fw?t=27005",
           "legacyField": "vodLink5"
+        },
+        {
+          "id": "source-6",
+          "kind": "youtube",
+          "url": "https://youtu.be/eQ3BmWNMtCU?t=4249",
+          "legacyField": "vodLink6"
+        },
+        {
+          "id": "source-7",
+          "kind": "youtube",
+          "url": "https://youtu.be/eQ3BmWNMtCU?t=14161",
+          "legacyField": "vodLink7"
         }
       ],
       "legacy": {
@@ -12761,6 +12775,206 @@ window.SARKIVE_BACKROOMS_DATA = {
       ],
       "legacy": {
         "durationPlayed": "D059.G04 - 29.08.26"
+      }
+    },
+    {
+      "id": "game-2859420",
+      "archiveNumber": 286,
+      "counted": true,
+      "title": "Scarlet Backrooms",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jun 26, 2026",
+      "developers": [
+        "BlueFireDev"
+      ],
+      "publishers": [
+        "BlueFire Publishing"
+      ],
+      "description": "A Supernatural Multidimensional Puzzle Liminal Exploration Game The Scarlet Dimension is meant to be a purgatory.",
+      "notes": [],
+      "steam": {
+        "appId": 2859420,
+        "assetHash": "a721d2977f99e635b2d67bda0d1fedb3c2204394",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d060-g01-2859420"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/eQ3BmWNMtCU?t=836",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D060.G01 - 02.09.26"
+      }
+    },
+    {
+      "id": "game-4833100",
+      "archiveNumber": 287,
+      "counted": true,
+      "title": "Backrooms: Exit 8",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jun 26, 2026",
+      "developers": [
+        "Luke Gayson"
+      ],
+      "publishers": [
+        "Luke Gayson"
+      ],
+      "description": "SCP-6876 has escaped. Your mission: retrieve 8 vials of water for DARPA to synthesize into a poison against it. Carefully observe each stall to escape the Endless Bathrooms, avoid SCP-6876, and reach 'Room 8'",
+      "notes": [],
+      "steam": {
+        "appId": 4833100,
+        "assetHash": "828b54665bcb6f962faebd4bd8b89b1fad73d2b6",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d060-g03-4833100"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/eQ3BmWNMtCU?t=6404",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D060.G03 - 02.09.26"
+      }
+    },
+    {
+      "id": "game-4666700",
+      "archiveNumber": 288,
+      "counted": true,
+      "title": "Corporate 0",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jul 17, 2026",
+      "developers": [
+        "Hushed Cat"
+      ],
+      "publishers": [
+        "Hushed Cat"
+      ],
+      "description": "You're trapped in your office after a typical working day. Carefully explore every corner to reach freedom and break the loop.",
+      "notes": [],
+      "steam": {
+        "appId": 4666700,
+        "assetHash": "8b03727d9f811610c7f626f488ba542ac3dc64da",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d060-g04-4666700"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/eQ3BmWNMtCU?t=12307",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D060.G04 - 02.09.26"
+      }
+    },
+    {
+      "id": "game-4637550",
+      "archiveNumber": 289,
+      "counted": true,
+      "title": "Retro Madness DX",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jun 24, 2026",
+      "developers": [
+        "Mergim Sahiti"
+      ],
+      "publishers": [
+        "Mergim Sahiti"
+      ],
+      "description": "Dreamcore Liminal Case is a psychological liminal horror game set deep within the Backrooms. You play as Detective, sent to investigate a mysterious murder. Your investigation leads you through surreal liminal worlds where familiar places become distorted, empty, and unsettling.",
+      "notes": [],
+      "steam": {
+        "appId": 4637550,
+        "assetHash": "b5561f07b2fb8670598ba7487631b36240b6d317",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d061-g01-4637550"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D061.G01 - 03.09.26"
+      }
+    },
+    {
+      "id": "game-4286120",
+      "archiveNumber": 290,
+      "counted": true,
+      "title": "Photomaly",
+      "status": "UNRESOLVED",
+      "statusLabel": "-",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jul 21, 2026",
+      "developers": [
+        "Revira Interactive"
+      ],
+      "publishers": [
+        "Alibi Games"
+      ],
+      "description": "A PSX-style horror game where you manage a photo studio. Restock supplies, buy upgrades, photograph customers and print their order whilst encountering unexpected events.",
+      "notes": [],
+      "steam": {
+        "appId": 4286120,
+        "assetHash": "9d803d58cb4e0e53c8b64a3e980c9118c4263301",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d061-g02-4286120"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D061.G02 - 03.09.26"
       }
     }
   ],
@@ -14816,6 +15030,48 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-4530880",
       "dayId": "day-059",
       "order": 5
+    },
+    {
+      "id": "d060-g01-2859420",
+      "gameId": "game-2859420",
+      "dayId": "day-060",
+      "order": 1
+    },
+    {
+      "id": "d060-g02-4530880",
+      "gameId": "game-4530880",
+      "dayId": "day-060",
+      "order": 2
+    },
+    {
+      "id": "d060-g03-4833100",
+      "gameId": "game-4833100",
+      "dayId": "day-060",
+      "order": 3
+    },
+    {
+      "id": "d060-g04-4666700",
+      "gameId": "game-4666700",
+      "dayId": "day-060",
+      "order": 4
+    },
+    {
+      "id": "d060-g05-4530880",
+      "gameId": "game-4530880",
+      "dayId": "day-060",
+      "order": 5
+    },
+    {
+      "id": "d061-g01-4637550",
+      "gameId": "game-4637550",
+      "dayId": "day-061",
+      "order": 1
+    },
+    {
+      "id": "d061-g02-4286120",
+      "gameId": "game-4286120",
+      "dayId": "day-061",
+      "order": 2
     }
   ],
   "days": [
@@ -15632,6 +15888,29 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d059-g05-4530880"
       ],
       "legacyKey": "DAY059_290826"
+    },
+    {
+      "id": "day-060",
+      "dayNumber": 60,
+      "date": "2026-09-02",
+      "appearanceIds": [
+        "d060-g01-2859420",
+        "d060-g02-4530880",
+        "d060-g03-4833100",
+        "d060-g04-4666700",
+        "d060-g05-4530880"
+      ],
+      "legacyKey": "DAY060_020926"
+    },
+    {
+      "id": "day-061",
+      "dayNumber": 61,
+      "date": "2026-09-03",
+      "appearanceIds": [
+        "d061-g01-4637550",
+        "d061-g02-4286120"
+      ],
+      "legacyKey": "DAY061_030926"
     }
   ]
 };
