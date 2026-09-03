@@ -149,7 +149,7 @@ summary {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 14px 0 8px;
+  padding: 20px 0px 8px 12px;
 }
 .video-actions {
   display: flex;
@@ -216,7 +216,8 @@ summary {
   font-size: 0.9rem;
 }
 .video-heading {
-  margin: 10px 0 20px;
+  margin: 10px 0 0px;
+  padding-left:12px;
 }
 .video-title {
   margin: 0;
@@ -905,14 +906,13 @@ body.sidebar-collapsed .nav-item span {
 body.watch-mode .sidebar {
   width: var(--sidebar-expanded-width);
   transform: translateX(-100%);
-  box-shadow: 18px 0 36px var(--shadow-medium);
 }
 body.watch-mode.nav-overlay-open .sidebar {
   transform: translateX(0);
 }
 body.watch-mode .content {
   margin-left: 0;
-  padding: 10px 12px 48px;
+  padding: 0px 0px 0px;
 }
 body.watch-mode .nav-item {
   justify-content: flex-start;
@@ -1030,15 +1030,15 @@ noscript {
    then let the 16:9 frame use whichever limit is smaller: page width or height. */
 body.watch-mode .video-frame {
   width: 100%;
-  max-width: calc((100vh - var(--topbar-height) - 176px) * 16 / 9);
-  max-height: calc(100vh - var(--topbar-height) - 176px);
+  max-width: calc((100vh - var(--topbar-height) - 140px) * 16 / 9);
+  max-height: calc(100vh - var(--topbar-height) - 140px);
   margin-right: auto;
   margin-left: auto;
 }
 @supports (height: 100dvh) {
   body.watch-mode .video-frame {
-    max-width: calc((100dvh - var(--topbar-height) - 176px) * 16 / 9);
-    max-height: calc(100dvh - var(--topbar-height) - 176px);
+    max-width: calc((100dvh - var(--topbar-height) - 140px) * 16 / 9);
+    max-height: calc(100dvh - var(--topbar-height) - 140px);
   }
 }
 @media (max-width: 650px) {
