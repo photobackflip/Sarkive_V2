@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 290,
+    "gamesPlayed": 293,
     "totalGames": 323,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -12901,7 +12901,7 @@ window.SARKIVE_BACKROOMS_DATA = {
       "id": "game-4637550",
       "archiveNumber": 289,
       "counted": true,
-      "title": "Retro Madness DX",
+      "title": "Dreamcore Liminal Case RM DX",
       "status": "DONE",
       "statusLabel": "DONE",
       "players": [
@@ -12915,7 +12915,13 @@ window.SARKIVE_BACKROOMS_DATA = {
         "Mergim Sahiti"
       ],
       "description": "Dreamcore Liminal Case is a psychological liminal horror game set deep within the Backrooms. You play as Detective, sent to investigate a mysterious murder. Your investigation leads you through surreal liminal worlds where familiar places become distorted, empty, and unsettling.",
-      "notes": [],
+      "notes": [
+        {
+          "id": "note-1",
+          "type": "note",
+          "text": "Full title: Dreamcore Liminal Case Retro Madness DX"
+        }
+      ],
       "steam": {
         "appId": 4637550,
         "assetHash": "b5561f07b2fb8670598ba7487631b36240b6d317",
@@ -12975,6 +12981,126 @@ window.SARKIVE_BACKROOMS_DATA = {
       ],
       "legacy": {
         "durationPlayed": "D061.G02 - 03.09.26"
+      }
+    },
+    {
+      "id": "game-4652340",
+      "archiveNumber": 291,
+      "counted": true,
+      "title": "Cloudrooms",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jul 22, 2026",
+      "developers": [
+        "LIGHTWORKER GAMES"
+      ],
+      "publishers": [
+        "LIGHTWORKER GAMES"
+      ],
+      "description": "You are trapped in a corridor suspended above the clouds. Each time you open the door at the end of the corridor, explore the environment that awaits you, find anomalies, use the alarm, and break the loop.",
+      "notes": [],
+      "steam": {
+        "appId": 4652340,
+        "assetHash": "2d81aa4c576c787a6028bffc4c82f3b00a9287a6",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d061-g03-4652340"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D061.G03 - 03.09.26"
+      }
+    },
+    {
+      "id": "game-4339240",
+      "archiveNumber": 292,
+      "counted": true,
+      "title": "Pixelwave Off",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jul 24, 2026",
+      "developers": [
+        "PixelwaveCraft Studios"
+      ],
+      "publishers": [
+        "PixelwaveCraft Studios"
+      ],
+      "description": "Pixelwave Off is a backrooms-mascot horror game set in the 2000s.You return to search for your friend, who disappeared a few years ago.Find him and uncover the dark secrets hidden within Pixelwave Entertainment.",
+      "notes": [],
+      "steam": {
+        "appId": 4339240,
+        "assetHash": "f11765c39e0b9c463caf17fd765dd15115c8206b",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d061-g04-4339240"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D061.G04 - 03.09.26"
+      }
+    },
+    {
+      "id": "game-3451970",
+      "archiveNumber": 293,
+      "counted": true,
+      "title": "BACKROOMS ANOMALY",
+      "status": "UNRESOLVED",
+      "statusLabel": "-",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jul 25, 2026",
+      "developers": [
+        "liminal_games"
+      ],
+      "publishers": [
+        "liminal_games"
+      ],
+      "description": "An anomaly-spotting horror game set in Level 0 of the Backrooms. Study the looping corridor and identify changes ranging from subtle details to terrifying entities. Decide to turn back if something has changed, or continue ahead if everything seems normal.",
+      "notes": [],
+      "steam": {
+        "appId": 3451970,
+        "assetHash": "ba1cffa203d9c26a162f6d7b55a6c643a28004f4",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d061-g05-3451970"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D061.G05 - 03.09.26"
       }
     }
   ],
@@ -15072,6 +15198,24 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-4286120",
       "dayId": "day-061",
       "order": 2
+    },
+    {
+      "id": "d061-g03-4652340",
+      "gameId": "game-4652340",
+      "dayId": "day-061",
+      "order": 3
+    },
+    {
+      "id": "d061-g04-4339240",
+      "gameId": "game-4339240",
+      "dayId": "day-061",
+      "order": 4
+    },
+    {
+      "id": "d061-g05-3451970",
+      "gameId": "game-3451970",
+      "dayId": "day-061",
+      "order": 5
     }
   ],
   "days": [
@@ -15908,7 +16052,10 @@ window.SARKIVE_BACKROOMS_DATA = {
       "date": "2026-09-03",
       "appearanceIds": [
         "d061-g01-4637550",
-        "d061-g02-4286120"
+        "d061-g02-4286120",
+        "d061-g03-4652340",
+        "d061-g04-4339240",
+        "d061-g05-3451970"
       ],
       "legacyKey": "DAY061_030926"
     }
