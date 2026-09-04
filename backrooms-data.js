@@ -1276,7 +1276,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "https://youtu.be/xwBANjGoAKk?t=6471",
+          "url": "https://youtu.be/xwBANjGoAKk?t=6056",
           "legacyField": "vodLink"
         }
       ],
@@ -1316,7 +1316,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "https://youtu.be/xwBANjGoAKk?t=6347",
+          "url": "https://youtu.be/xwBANjGoAKk?t=6463",
           "legacyField": "vodLink"
         }
       ],
