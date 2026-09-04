@@ -13175,7 +13175,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/8QnCrk43Wtk?t=958",
           "legacyField": "vodLink"
         }
       ],
@@ -13215,7 +13215,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/8QnCrk43Wtk?t=9275",
           "legacyField": "vodLink"
         }
       ],
@@ -13301,7 +13301,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/8QnCrk43Wtk?t=18255",
           "legacyField": "vodLink"
         }
       ],
@@ -13341,7 +13341,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/8QnCrk43Wtk?t=19712",
           "legacyField": "vodLink"
         }
       ],
