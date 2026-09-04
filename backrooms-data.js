@@ -6,8 +6,8 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 293,
-    "totalGames": 323,
+    "gamesPlayed": 294,
+    "totalGames": 324,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
   "games": [
@@ -12935,7 +12935,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/KlSkRQRFn_8?t=729",
           "legacyField": "vodLink"
         }
       ],
@@ -12948,8 +12948,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "archiveNumber": 290,
       "counted": true,
       "title": "Photomaly",
-      "status": "UNRESOLVED",
-      "statusLabel": "-",
+      "status": "DONE",
+      "statusLabel": "DONE",
       "players": [
         "SARK"
       ],
@@ -12975,7 +12975,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/KlSkRQRFn_8?t=3479",
           "legacyField": "vodLink"
         }
       ],
@@ -13015,7 +13015,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/KlSkRQRFn_8?t=12628",
           "legacyField": "vodLink"
         }
       ],
@@ -13055,7 +13055,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/KlSkRQRFn_8?t=19635",
           "legacyField": "vodLink"
         }
       ],
@@ -13068,8 +13068,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "archiveNumber": 293,
       "counted": true,
       "title": "BACKROOMS ANOMALY",
-      "status": "UNRESOLVED",
-      "statusLabel": "-",
+      "status": "DONE",
+      "statusLabel": "DONE",
       "players": [
         "SARK"
       ],
@@ -13095,12 +13095,52 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/KlSkRQRFn_8?t=21178",
           "legacyField": "vodLink"
         }
       ],
       "legacy": {
         "durationPlayed": "D061.G05 - 03.09.26"
+      }
+    },
+    {
+      "id": "game-4914590",
+      "archiveNumber": 294,
+      "counted": true,
+      "title": "A.D.D. (Anomaly Detection Department)",
+      "status": "UNRESOLVED",
+      "statusLabel": "-",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jul 31, 2026",
+      "developers": [
+        "One More Spoon"
+      ],
+      "publishers": [
+        "Jungle Game Lab"
+      ],
+      "description": "A.D.D is a management simulation game where you run operations for a company investigating the Backrooms. Connect nodes, build workflows, dispatch employees, and deliver the results the company demands.",
+      "notes": [],
+      "steam": {
+        "appId": 4914590,
+        "assetHash": "82a4d2765a4cc380593a2743843689e49579b992",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d062-g01-4914590"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D062.G01 - 04.09.26"
       }
     }
   ],
@@ -15216,6 +15256,12 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-3451970",
       "dayId": "day-061",
       "order": 5
+    },
+    {
+      "id": "d062-g01-4914590",
+      "gameId": "game-4914590",
+      "dayId": "day-062",
+      "order": 1
     }
   ],
   "days": [
@@ -16058,6 +16104,15 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d061-g05-3451970"
       ],
       "legacyKey": "DAY061_030926"
+    },
+    {
+      "id": "day-062",
+      "dayNumber": 62,
+      "date": "2026-09-04",
+      "appearanceIds": [
+        "d062-g01-4914590"
+      ],
+      "legacyKey": "DAY062_040926"
     }
   ]
 };
