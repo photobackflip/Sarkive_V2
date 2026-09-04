@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 295,
+    "gamesPlayed": 296,
     "totalGames": 324,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -13182,6 +13182,46 @@ window.SARKIVE_BACKROOMS_DATA = {
       "legacy": {
         "durationPlayed": "D062.G01 - 04.09.26"
       }
+    },
+    {
+      "id": "game-4913850",
+      "archiveNumber": 296,
+      "counted": true,
+      "title": "Ultradimensional",
+      "status": "UNRESOLVED",
+      "statusLabel": "-",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Aug 20, 2026",
+      "developers": [
+        "VYPXR Studios"
+      ],
+      "publishers": [
+        "VYPXR Studios"
+      ],
+      "description": "Explore over 40 interconnected levels, evade over 20 unique entities, solve puzzles, manage scarce resources, and survive a nonlinear backrooms horror experience with multiple routes, and extreme replayability.",
+      "notes": [],
+      "steam": {
+        "appId": 4913850,
+        "assetHash": "4dc5b8d91eaea332f392b1219ffcfa78c8d7a64a",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d062-g02-4913850"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D062.G02 - 04.09.26"
+      }
     }
   ],
   "appearances": [
@@ -15308,6 +15348,12 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-2370680",
       "dayId": "day-008",
       "order": 4
+    },
+    {
+      "id": "d062-g02-4913850",
+      "gameId": "game-4913850",
+      "dayId": "day-062",
+      "order": 2
     }
   ],
   "days": [
@@ -16157,7 +16203,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "dayNumber": 62,
       "date": "2026-09-04",
       "appearanceIds": [
-        "d062-g01-4914590"
+        "d062-g01-4914590",
+        "d062-g02-4913850"
       ],
       "legacyKey": "DAY062_040926"
     }
