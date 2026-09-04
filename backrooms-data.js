@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 298,
+    "gamesPlayed": 299,
     "totalGames": 324,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -13148,8 +13148,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "archiveNumber": 295,
       "counted": true,
       "title": "A.D.D. (Anomaly Detection Department)",
-      "status": "UNRESOLVED",
-      "statusLabel": "-",
+      "status": "DONE",
+      "statusLabel": "DONE",
       "players": [
         "SARK"
       ],
@@ -13188,8 +13188,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "archiveNumber": 296,
       "counted": true,
       "title": "Ultradimensional",
-      "status": "UNRESOLVED",
-      "statusLabel": "-",
+      "status": "DONE",
+      "statusLabel": "DONE",
       "players": [
         "SARK"
       ],
@@ -13274,8 +13274,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "archiveNumber": 297,
       "counted": true,
       "title": "The Expansion",
-      "status": "UNRESOLVED",
-      "statusLabel": "-",
+      "status": "DONE",
+      "statusLabel": "DONE",
       "players": [
         "SARK"
       ],
@@ -13307,6 +13307,46 @@ window.SARKIVE_BACKROOMS_DATA = {
       ],
       "legacy": {
         "durationPlayed": "D062.G04 - 04.09.26"
+      }
+    },
+    {
+      "id": "game-5041880",
+      "archiveNumber": 298,
+      "counted": true,
+      "title": "Liminal Space Holiday",
+      "status": "UNRESOLVED",
+      "statusLabel": "-",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Aug 22, 2026",
+      "developers": [
+        "Ravenhome Studios"
+      ],
+      "publishers": [
+        "Ravenhome Studios"
+      ],
+      "description": "Take a break from life and enjoy a Liminal Space Holiday. A Relaxing Liminal Space Adventure full of Beautiful Atmospheric Nostalgic Locations and Artwork.",
+      "notes": [],
+      "steam": {
+        "appId": 5041880,
+        "assetHash": "3ab6ac20421e4c2afdf8d1eb60db22852edc2fa3",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d062-g05-5041880"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D062.G05 - 04.09.26"
       }
     }
   ],
@@ -15452,6 +15492,12 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-4939820",
       "dayId": "day-062",
       "order": 4
+    },
+    {
+      "id": "d062-g05-5041880",
+      "gameId": "game-5041880",
+      "dayId": "day-062",
+      "order": 5
     }
   ],
   "days": [
@@ -16304,7 +16350,8 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d062-g01-4914590",
         "d062-g02-4913850",
         "d062-g03-4242080",
-        "d062-g04-4939820"
+        "d062-g04-4939820",
+        "d062-g05-5041880"
       ],
       "legacyKey": "DAY062_040926"
     }
