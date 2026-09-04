@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 296,
+    "gamesPlayed": 298,
     "totalGames": 324,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -13222,6 +13222,92 @@ window.SARKIVE_BACKROOMS_DATA = {
       "legacy": {
         "durationPlayed": "D062.G02 - 04.09.26"
       }
+    },
+    {
+      "id": "game-4242080",
+      "archiveNumber": null,
+      "counted": false,
+      "title": "Backrooms Santa",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Dec 29, 2025",
+      "developers": [
+        "Wild Tater Games"
+      ],
+      "publishers": [
+        "Wild Tater Games"
+      ],
+      "description": "Backrooms Santa is a singleplayer horror game. Bring back the kids gifts and escape a massive Backrooms maze — while holiday horrors hunt you every step of the way. How fast can you save the kids christmas?",
+      "notes": [
+        {
+          "id": "note-1",
+          "type": "note",
+          "text": "Played pre trapped. Still counts."
+        }
+      ],
+      "steam": {
+        "appId": 4242080,
+        "assetHash": "fb09f7f691075443490a702b430a92c2342b5cdf",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d062-g03-4242080"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/rgeYz1jJrp8?t=1105",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D062.G03 - 04.09.26"
+      }
+    },
+    {
+      "id": "game-4939820",
+      "archiveNumber": 297,
+      "counted": true,
+      "title": "The Expansion",
+      "status": "UNRESOLVED",
+      "statusLabel": "-",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Aug 21, 2026",
+      "developers": [
+        "JMO INTERACTIVE"
+      ],
+      "publishers": [
+        "JMO INTERACTIVE"
+      ],
+      "description": "A psychological first-person horror experience set in endless Backrooms. Explore abandoned corridors, uncover hidden secrets, evade mysterious entities, and survive a world where every turn leads deeper into the unknown.",
+      "notes": [],
+      "steam": {
+        "appId": 4939820,
+        "assetHash": "df66063110554b52778f73590339e0434f663f9e",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d062-g04-4939820"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D062.G04 - 04.09.26"
+      }
     }
   ],
   "appearances": [
@@ -15354,6 +15440,18 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-4913850",
       "dayId": "day-062",
       "order": 2
+    },
+    {
+      "id": "d062-g03-4242080",
+      "gameId": "game-4242080",
+      "dayId": "day-062",
+      "order": 3
+    },
+    {
+      "id": "d062-g04-4939820",
+      "gameId": "game-4939820",
+      "dayId": "day-062",
+      "order": 4
     }
   ],
   "days": [
@@ -16204,7 +16302,9 @@ window.SARKIVE_BACKROOMS_DATA = {
       "date": "2026-09-04",
       "appearanceIds": [
         "d062-g01-4914590",
-        "d062-g02-4913850"
+        "d062-g02-4913850",
+        "d062-g03-4242080",
+        "d062-g04-4939820"
       ],
       "legacyKey": "DAY062_040926"
     }
