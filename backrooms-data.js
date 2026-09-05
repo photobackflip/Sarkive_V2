@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 299,
+    "gamesPlayed": 301,
     "totalGames": 324,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -13348,6 +13348,94 @@ window.SARKIVE_BACKROOMS_DATA = {
       "legacy": {
         "durationPlayed": "D062.G05 - 04.09.26"
       }
+    },
+    {
+      "id": "game-3360220",
+      "archiveNumber": 299,
+      "counted": true,
+      "title": "Run the Backrooms",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK",
+        "NFEN"
+      ],
+      "releaseDate": "Apr 12, 2026",
+      "developers": [
+        "Campos Studio"
+      ],
+      "publishers": [
+        "Campos Studio"
+      ],
+      "description": "Run the Backrooms is a cooperative horror game that supports up to 6 players. The game has several levels and entities that will certainly make your gameplay very exciting. The game has free updates, always bringing new game levels and bug fixes.",
+      "notes": [
+        {
+          "id": "note-1",
+          "type": "note",
+          "text": "300"
+        }
+      ],
+      "steam": {
+        "appId": 3360220,
+        "assetHash": "1ac88f4c60282e20778def35f5f8c9877fd78f00",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d063-g01-3360220"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D063.G01 - 05.09.26"
+      }
+    },
+    {
+      "id": "game-3964500",
+      "archiveNumber": 300,
+      "counted": true,
+      "title": "Lost In The Backrooms: Day 100",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK",
+        "NFEN"
+      ],
+      "releaseDate": "May 26, 2026",
+      "developers": [
+        "Rough devs"
+      ],
+      "publishers": [
+        "Rough devs"
+      ],
+      "description": "Lost in the backrooms day 100 is a co-op horror game based on the concept of the backrooms with different levels and entities , a sanity system and unreal engine 5 graphics for the best immersive experience.",
+      "notes": [],
+      "steam": {
+        "appId": 3964500,
+        "assetHash": "8b01bdc8b601a32d519ce1b92bf5735c0de88606",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d063-g02-3964500"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D063.G02 - 05.09.26"
+      }
     }
   ],
   "appearances": [
@@ -15498,6 +15586,18 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-5041880",
       "dayId": "day-062",
       "order": 5
+    },
+    {
+      "id": "d063-g01-3360220",
+      "gameId": "game-3360220",
+      "dayId": "day-063",
+      "order": 1
+    },
+    {
+      "id": "d063-g02-3964500",
+      "gameId": "game-3964500",
+      "dayId": "day-063",
+      "order": 2
     }
   ],
   "days": [
@@ -16354,6 +16454,16 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d062-g05-5041880"
       ],
       "legacyKey": "DAY062_040926"
+    },
+    {
+      "id": "day-063",
+      "dayNumber": 63,
+      "date": "2026-09-05",
+      "appearanceIds": [
+        "d063-g01-3360220",
+        "d063-g02-3964500"
+      ],
+      "legacyKey": "DAY063_050926"
     }
   ]
 };
