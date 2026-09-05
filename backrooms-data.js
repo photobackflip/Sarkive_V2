@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 301,
+    "gamesPlayed": 303,
     "totalGames": 324,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -13295,7 +13295,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d062-g04-4939820"
+        "d062-g04-4939820",
+        "d063-g04-4939820"
       ],
       "sources": [
         {
@@ -13303,6 +13304,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/8QnCrk43Wtk?t=18255",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/ZEJr_XLQsp0?t=20165",
+          "legacyField": "vodLink2"
         }
       ],
       "legacy": {
@@ -13388,7 +13395,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/ZEJr_XLQsp0?t=2445",
           "legacyField": "vodLink"
         }
       ],
@@ -13429,12 +13436,93 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/ZEJr_XLQsp0?t=4787",
           "legacyField": "vodLink"
         }
       ],
       "legacy": {
         "durationPlayed": "D063.G02 - 05.09.26"
+      }
+    },
+    {
+      "id": "game-4294630",
+      "archiveNumber": 301,
+      "counted": true,
+      "title": "Backrooms: No Escape",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK",
+        "NFEN"
+      ],
+      "releaseDate": "Jun 4, 2026",
+      "developers": [
+        "GameLabyrinth"
+      ],
+      "publishers": [
+        "GameLabyrinth"
+      ],
+      "description": "A 1–6 player immersive psychological horror experience. Venture through multiple handcrafted liminal Backrooms levels, solve puzzles, explore and survive.",
+      "notes": [],
+      "steam": {
+        "appId": 4294630,
+        "assetHash": "7bcdff4a44e798b853d8501928f1f2b0dc505443",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d063-g03-4294630"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/ZEJr_XLQsp0?t=12952",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D063.G03 - 05.09.26"
+      }
+    },
+    {
+      "id": "game-4822110",
+      "archiveNumber": 302,
+      "counted": true,
+      "title": "Backfools",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Aug 29, 2026",
+      "developers": [
+        "LuuuLuuuL"
+      ],
+      "publishers": [
+        "LuuuLuuuL"
+      ],
+      "description": "One ordinary moment, you suddenly find yourself lost in a strange and unfamiliar place. There, you encounter the beings who inhabit it. Backfools is a first-person adventure game.",
+      "notes": [],
+      "steam": {
+        "appId": 4822110,
+        "assetHash": "141712f01d6ff8a8fd96f6600fe3af5c279d788e",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d063-g05-4822110"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/ZEJr_XLQsp0?t=22067",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D063.G05 - 05.09.26"
       }
     }
   ],
@@ -15598,6 +15686,24 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-3964500",
       "dayId": "day-063",
       "order": 2
+    },
+    {
+      "id": "d063-g03-4294630",
+      "gameId": "game-4294630",
+      "dayId": "day-063",
+      "order": 3
+    },
+    {
+      "id": "d063-g04-4939820",
+      "gameId": "game-4939820",
+      "dayId": "day-063",
+      "order": 4
+    },
+    {
+      "id": "d063-g05-4822110",
+      "gameId": "game-4822110",
+      "dayId": "day-063",
+      "order": 5
     }
   ],
   "days": [
@@ -16461,7 +16567,10 @@ window.SARKIVE_BACKROOMS_DATA = {
       "date": "2026-09-05",
       "appearanceIds": [
         "d063-g01-3360220",
-        "d063-g02-3964500"
+        "d063-g02-3964500",
+        "d063-g03-4294630",
+        "d063-g04-4939820",
+        "d063-g05-4822110"
       ],
       "legacyKey": "DAY063_050926"
     }
