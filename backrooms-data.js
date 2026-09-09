@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 303,
+    "gamesPlayed": 308,
     "totalGames": 324,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -586,7 +586,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "localImage": "",
       "appearanceIds": [
         "d004-g04-2099110",
-        "d005-g01-2099110"
+        "d005-g01-2099110",
+        "d064-g04-2099110"
       ],
       "sources": [
         {
@@ -600,6 +601,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/UB-gCln-y_A?t=395",
           "legacyField": "vodLink2"
+        },
+        {
+          "id": "source-3",
+          "kind": "youtube",
+          "url": "https://youtu.be/cgSNJyKJqPw?t=20504",
+          "legacyField": "vodLink3"
         }
       ],
       "legacy": {
@@ -851,7 +858,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d006-g04-1926620"
+        "d006-g04-1926620",
+        "d064-g05-1926620"
       ],
       "sources": [
         {
@@ -859,6 +867,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/4Khd9UB8c04?t=22558",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/cgSNJyKJqPw?t=26489",
+          "legacyField": "vodLink2"
         }
       ],
       "legacy": {
@@ -3113,7 +3127,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d014-g07-2275020"
+        "d014-g07-2275020",
+        "d064-g06-2275020"
       ],
       "sources": [
         {
@@ -3121,6 +3136,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/jLD6VlxwTek?t=12913",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/cgSNJyKJqPw?t=27303",
+          "legacyField": "vodLink2"
         }
       ],
       "legacy": {
@@ -13524,6 +13545,219 @@ window.SARKIVE_BACKROOMS_DATA = {
       "legacy": {
         "durationPlayed": "D063.G05 - 05.09.26"
       }
+    },
+    {
+      "id": "game-15",
+      "archiveNumber": 303,
+      "counted": true,
+      "title": "Your Happy Place",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jul 21, 2026",
+      "developers": [
+        "Dark_Knife15"
+      ],
+      "publishers": [
+        "Dark_Knife15"
+      ],
+      "description": "Originally started as a prototype 3 years ago and only had occasional bursts of development, this is closest to the kind of backrooms game I've always wanted to make. I joined the Liminal Game Jam 2026 by MCL Software 2 months ago to finally finish it.",
+      "notes": [
+        {
+          "id": "note-1",
+          "type": "note",
+          "text": "https://dark-knife15.itch.io/your-happy-place"
+        }
+      ],
+      "steam": {
+        "appId": 15,
+        "assetHash": "",
+        "useSteamArt": true
+      },
+      "localImage": "assets/backrooms/yhp.png",
+      "appearanceIds": [
+        "d064-g01-15"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/cgSNJyKJqPw?t=1890",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D064.G01 - 08.09.26"
+      }
+    },
+    {
+      "id": "game-3336620",
+      "archiveNumber": 304,
+      "counted": true,
+      "title": "Liminal Shroud",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Sep 4, 2026",
+      "developers": [
+        "Everdeep Studios"
+      ],
+      "publishers": [
+        "Everdeep Studios"
+      ],
+      "description": "Explore surreal liminal spaces, uncover hidden paths, and unravel a haunting mystery. No monsters, no combat… just atmosphere, discovery, and quiet dread.",
+      "notes": [],
+      "steam": {
+        "appId": 3336620,
+        "assetHash": "30a840a7c3ff0974d4983d28a336c5a15dd6f258",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d064-g02-3336620"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/cgSNJyKJqPw?t=6361",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D064.G02 - 08.09.26"
+      }
+    },
+    {
+      "id": "game-4922550",
+      "archiveNumber": 305,
+      "counted": true,
+      "title": "Eternal Levels",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Aug 29, 2026",
+      "developers": [
+        "Iohiko Colina"
+      ],
+      "publishers": [
+        "CatBunny Studio"
+      ],
+      "description": "Explore and survive in this 2D game set in the urban legend of the “backrooms,” with a wealth of objects, entities, levels, and sublevels at your disposal. Will you be able to survive and escape, or will you be trapped forever in this new reality?",
+      "notes": [],
+      "steam": {
+        "appId": 4922550,
+        "assetHash": "91b1727ebf969302a52179dfb9656211b46029d9",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d064-g03-4922550"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/cgSNJyKJqPw?t=17990",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D064.G03 - 08.09.26"
+      }
+    },
+    {
+      "id": "game-2663530",
+      "archiveNumber": 306,
+      "counted": true,
+      "title": "POOLS",
+      "status": "UNRESOLVED",
+      "statusLabel": "-",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Apr 26, 2024",
+      "developers": [
+        "Tensori"
+      ],
+      "publishers": [
+        "Tensori",
+        "UNIKAT Label"
+      ],
+      "description": "Walking simulator. Explore, admire and listen. Uncanny. Relaxing. Unnerving. Eerie. Immersive. No monsters chasing you or jumping at your screen, but can feel oppressive at times by invoking fears of getting lost, the dark, tight spaces and liminal space architecture. Inspired by backrooms.",
+      "notes": [
+        {
+          "id": "note-1",
+          "type": "note",
+          "text": "VR session"
+        }
+      ],
+      "steam": {
+        "appId": 2663530,
+        "assetHash": "",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d065-g01-2663530"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D065.G01 - 10.09.26"
+      }
+    },
+    {
+      "id": "game-723610",
+      "archiveNumber": 307,
+      "counted": true,
+      "title": "Dream Golf VR",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Nov 4, 2017",
+      "developers": [
+        "Isaac Stearns"
+      ],
+      "publishers": [
+        "Isaac Stearns"
+      ],
+      "description": "Looking for a mini golf experience that'll remind you of the real thing? Look no further!!! Download FREE today!",
+      "notes": [],
+      "steam": {
+        "appId": 723610,
+        "assetHash": "",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d065-g02-723610"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D065.G02 - 10.09.26"
+      }
     }
   ],
   "appearances": [
@@ -15704,6 +15938,54 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-4822110",
       "dayId": "day-063",
       "order": 5
+    },
+    {
+      "id": "d064-g01-15",
+      "gameId": "game-15",
+      "dayId": "day-064",
+      "order": 1
+    },
+    {
+      "id": "d064-g02-3336620",
+      "gameId": "game-3336620",
+      "dayId": "day-064",
+      "order": 2
+    },
+    {
+      "id": "d064-g03-4922550",
+      "gameId": "game-4922550",
+      "dayId": "day-064",
+      "order": 3
+    },
+    {
+      "id": "d064-g04-2099110",
+      "gameId": "game-2099110",
+      "dayId": "day-064",
+      "order": 4
+    },
+    {
+      "id": "d064-g05-1926620",
+      "gameId": "game-1926620",
+      "dayId": "day-064",
+      "order": 5
+    },
+    {
+      "id": "d064-g06-2275020",
+      "gameId": "game-2275020",
+      "dayId": "day-064",
+      "order": 6
+    },
+    {
+      "id": "d065-g01-2663530",
+      "gameId": "game-2663530",
+      "dayId": "day-065",
+      "order": 1
+    },
+    {
+      "id": "d065-g02-723610",
+      "gameId": "game-723610",
+      "dayId": "day-065",
+      "order": 2
     }
   ],
   "days": [
@@ -16573,6 +16855,30 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d063-g05-4822110"
       ],
       "legacyKey": "DAY063_050926"
+    },
+    {
+      "id": "day-064",
+      "dayNumber": 64,
+      "date": "2026-09-08",
+      "appearanceIds": [
+        "d064-g01-15",
+        "d064-g02-3336620",
+        "d064-g03-4922550",
+        "d064-g04-2099110",
+        "d064-g05-1926620",
+        "d064-g06-2275020"
+      ],
+      "legacyKey": "DAY064_080926"
+    },
+    {
+      "id": "day-065",
+      "dayNumber": 65,
+      "date": "2026-09-09",
+      "appearanceIds": [
+        "d065-g01-2663530",
+        "d065-g02-723610"
+      ],
+      "legacyKey": "DAY065_090926"
     }
   ]
 };
