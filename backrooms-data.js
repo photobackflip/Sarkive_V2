@@ -13711,7 +13711,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/n6fxhyC23bY?t=651",
           "legacyField": "vodLink"
         }
       ],
@@ -13751,7 +13751,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/n6fxhyC23bY?t=20800",
           "legacyField": "vodLink"
         }
       ],
@@ -16873,12 +16873,12 @@ window.SARKIVE_BACKROOMS_DATA = {
     {
       "id": "day-065",
       "dayNumber": 65,
-      "date": "2026-09-09",
+      "date": "2026-09-10",
       "appearanceIds": [
         "d065-g01-2663530",
         "d065-g02-723610"
       ],
-      "legacyKey": "DAY065_090926"
+      "legacyKey": "DAY065_100926"
     }
   ]
 };
