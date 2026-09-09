@@ -16873,12 +16873,12 @@ window.SARKIVE_BACKROOMS_DATA = {
     {
       "id": "day-065",
       "dayNumber": 65,
-      "date": "2026-09-10",
+      "date": "2026-09-09",
       "appearanceIds": [
         "d065-g01-2663530",
         "d065-g02-723610"
       ],
-      "legacyKey": "DAY065_100926"
+      "legacyKey": "DAY065_090926"
     }
   ]
 };
