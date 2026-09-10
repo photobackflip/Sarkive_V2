@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 308,
+    "gamesPlayed": 310,
     "totalGames": 324,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -7450,7 +7450,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d025-g04-1486280"
+        "d025-g04-1486280",
+        "d066-g02-1486280"
       ],
       "sources": [
         {
@@ -7458,6 +7459,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/cp8hoMqjE14?t=27232",
           "legacyField": "vodLink"
+        },
+        {
+          "id": "source-2",
+          "kind": "youtube",
+          "url": "https://youtu.be/hSxkzaNzfKA?t=7957",
+          "legacyField": "vodLink2"
         }
       ],
       "legacy": {
@@ -13758,6 +13765,88 @@ window.SARKIVE_BACKROOMS_DATA = {
       "legacy": {
         "durationPlayed": "D065.G02 - 10.09.26"
       }
+    },
+    {
+      "id": "game-1922060",
+      "archiveNumber": 308,
+      "counted": true,
+      "title": "BrVR Backrooms Virtual Reality",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Aug 15, 2023",
+      "developers": [
+        "Paul Wallace",
+        "John Wallace"
+      ],
+      "publishers": [
+        "LakesideCentral LLC",
+        "Woo Studios"
+      ],
+      "description": "Explore 120+ Backrooms levels in a massive single‑player survival adventure. Build, craft, fight, or just wander endless liminal spaces shaped by the community.",
+      "notes": [],
+      "steam": {
+        "appId": 1922060,
+        "assetHash": "4d6b0c6fb48d64063c9e1e7b67c27cb95d7eb9b2",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d066-g01-1922060"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/hSxkzaNzfKA?t=682",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D066.G01 - 10.09.26"
+      }
+    },
+    {
+      "id": "game-3960200",
+      "archiveNumber": 309,
+      "counted": true,
+      "title": "Backrooms: Missing Persons",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Dec 6, 2025",
+      "developers": [
+        "Dajo Forge"
+      ],
+      "publishers": [
+        "Dajo Forge"
+      ],
+      "description": "Many have vanished without a trace, swallowed by the endless halls of the Backrooms. Now it’s your turn to step inside. Wander through unsettling liminal spaces, guided only by the constant hum of fluorescent lights. Are you the next to disappear?",
+      "notes": [],
+      "steam": {
+        "appId": 3960200,
+        "assetHash": "b34e3ef94acedbe62368a66553ea0e2e6cf67085",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d066-g03-3960200"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/hSxkzaNzfKA?t=9929",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D066.G03 - 10.09.26"
+      }
     }
   ],
   "appearances": [
@@ -15986,6 +16075,24 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-723610",
       "dayId": "day-065",
       "order": 2
+    },
+    {
+      "id": "d066-g01-1922060",
+      "gameId": "game-1922060",
+      "dayId": "day-066",
+      "order": 1
+    },
+    {
+      "id": "d066-g02-1486280",
+      "gameId": "game-1486280",
+      "dayId": "day-066",
+      "order": 2
+    },
+    {
+      "id": "d066-g03-3960200",
+      "gameId": "game-3960200",
+      "dayId": "day-066",
+      "order": 3
     }
   ],
   "days": [
@@ -16879,6 +16986,17 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d065-g02-723610"
       ],
       "legacyKey": "DAY065_090926"
+    },
+    {
+      "id": "day-066",
+      "dayNumber": 66,
+      "date": "2026-09-10",
+      "appearanceIds": [
+        "d066-g01-1922060",
+        "d066-g02-1486280",
+        "d066-g03-3960200"
+      ],
+      "legacyKey": "DAY066_100926"
     }
   ]
 };
