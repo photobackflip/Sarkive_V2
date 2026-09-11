@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 310,
+    "gamesPlayed": 313,
     "totalGames": 324,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -243,7 +243,8 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d002-g01-1987080",
         "d004-g02-1987080",
         "d006-g02-1987080",
-        "d009-g04-1987080"
+        "d009-g04-1987080",
+        "d067-g01-1987080"
       ],
       "sources": [
         {
@@ -269,6 +270,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/mRirc25NdeI?t=5346",
           "legacyField": "vodLink4"
+        },
+        {
+          "id": "source-5",
+          "kind": "youtube",
+          "url": "https://youtu.be/Qj5LSaKU-OI?t=1290",
+          "legacyField": "vodLink5"
         }
       ],
       "legacy": {
@@ -3128,7 +3135,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "localImage": "",
       "appearanceIds": [
         "d014-g07-2275020",
-        "d064-g06-2275020"
+        "d064-g06-2275020",
+        "d067-g06-2275020"
       ],
       "sources": [
         {
@@ -3142,6 +3150,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/cgSNJyKJqPw?t=27303",
           "legacyField": "vodLink2"
+        },
+        {
+          "id": "source-3",
+          "kind": "youtube",
+          "url": "https://youtu.be/Qj5LSaKU-OI?t=20212",
+          "legacyField": "vodLink3"
         }
       ],
       "legacy": {
@@ -6830,7 +6844,8 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d023-g14-1943950",
         "d033-g16-1943950",
         "d039-g01-1943950",
-        "d046-g01-1943950"
+        "d046-g01-1943950",
+        "d067-g02-1943950"
       ],
       "sources": [
         {
@@ -6856,6 +6871,12 @@ window.SARKIVE_BACKROOMS_DATA = {
           "kind": "youtube",
           "url": "https://youtu.be/zGR-mGzNLGA?t=2530",
           "legacyField": "vodLink4"
+        },
+        {
+          "id": "source-5",
+          "kind": "youtube",
+          "url": "https://youtu.be/Qj5LSaKU-OI?t=7853",
+          "legacyField": "vodLink5"
         }
       ],
       "legacy": {
@@ -13252,52 +13273,6 @@ window.SARKIVE_BACKROOMS_DATA = {
       }
     },
     {
-      "id": "game-4242080",
-      "archiveNumber": null,
-      "counted": false,
-      "title": "Backrooms Santa",
-      "status": "DONE",
-      "statusLabel": "DONE",
-      "players": [
-        "SARK"
-      ],
-      "releaseDate": "Dec 29, 2025",
-      "developers": [
-        "Wild Tater Games"
-      ],
-      "publishers": [
-        "Wild Tater Games"
-      ],
-      "description": "Backrooms Santa is a singleplayer horror game. Bring back the kids gifts and escape a massive Backrooms maze — while holiday horrors hunt you every step of the way. How fast can you save the kids christmas?",
-      "notes": [
-        {
-          "id": "note-1",
-          "type": "note",
-          "text": "Played pre trapped. Still counts."
-        }
-      ],
-      "steam": {
-        "appId": 4242080,
-        "assetHash": "fb09f7f691075443490a702b430a92c2342b5cdf",
-        "useSteamArt": true
-      },
-      "localImage": "",
-      "appearanceIds": [
-        "d062-g03-4242080"
-      ],
-      "sources": [
-        {
-          "id": "source-1",
-          "kind": "youtube",
-          "url": "https://youtu.be/rgeYz1jJrp8?t=1105",
-          "legacyField": "vodLink"
-        }
-      ],
-      "legacy": {
-        "durationPlayed": "D062.G03 - 04.09.26"
-      }
-    },
-    {
       "id": "game-4939820",
       "archiveNumber": 297,
       "counted": true,
@@ -13323,7 +13298,7 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d062-g04-4939820",
+        "d062-g03-4939820",
         "d063-g04-4939820"
       ],
       "sources": [
@@ -13341,7 +13316,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D062.G04 - 04.09.26"
+        "durationPlayed": "D062.G03 - 04.09.26"
       }
     },
     {
@@ -13370,7 +13345,7 @@ window.SARKIVE_BACKROOMS_DATA = {
       },
       "localImage": "",
       "appearanceIds": [
-        "d062-g05-5041880"
+        "d062-g04-5041880"
       ],
       "sources": [
         {
@@ -13381,7 +13356,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         }
       ],
       "legacy": {
-        "durationPlayed": "D062.G05 - 04.09.26"
+        "durationPlayed": "D062.G04 - 04.09.26"
       }
     },
     {
@@ -13846,6 +13821,128 @@ window.SARKIVE_BACKROOMS_DATA = {
       ],
       "legacy": {
         "durationPlayed": "D066.G03 - 10.09.26"
+      }
+    },
+    {
+      "id": "game-3922260",
+      "archiveNumber": 310,
+      "counted": true,
+      "title": "Acatalepsy",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK",
+        "NFEN"
+      ],
+      "releaseDate": "Jun 23, 2026",
+      "developers": [
+        "Heavy_Tankr"
+      ],
+      "publishers": [
+        "Heavy_Tankr"
+      ],
+      "description": "Welcome to Acatalepsy, a new take on the liminal space experience. Progress deeper into varying liminal spaces with your team. Complete various tasks to continue forward, dive deeper, and don't expect to survive for long. You aren't alone in these spaces; nowhere is safe.",
+      "notes": [],
+      "steam": {
+        "appId": 3922260,
+        "assetHash": "aec698169785403061fa70680ad587a67c806c9d",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d067-g03-3922260"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/Qj5LSaKU-OI?t=11963",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D067.G03 - 11.09.26"
+      }
+    },
+    {
+      "id": "game-4476610",
+      "archiveNumber": 311,
+      "counted": true,
+      "title": "Backrooms: Collision Not Found",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK",
+        "NFEN"
+      ],
+      "releaseDate": "Jul 2, 2026",
+      "developers": [
+        "Lz Games"
+      ],
+      "publishers": [
+        "Lz Games"
+      ],
+      "description": "A 1-4 player co-op horror experience. Navigate hyper-realistic Backrooms levels and liminal spaces, survive unique entities, and uncover the dark mystery behind those levels. Extreme visual fidelity meets psychological dread.",
+      "notes": [],
+      "steam": {
+        "appId": 4476610,
+        "assetHash": "c51ea5c1a4623dec600524a7fac5cae85ae9d89d",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d067-g04-4476610"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/Qj5LSaKU-OI?t=13570",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D067.G04 - 11.09.26"
+      }
+    },
+    {
+      "id": "game-4242080",
+      "archiveNumber": 312,
+      "counted": true,
+      "title": "Backrooms Santa",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Dec 29, 2025",
+      "developers": [
+        "Wild Tater Games"
+      ],
+      "publishers": [
+        "Wild Tater Games"
+      ],
+      "description": "Backrooms Santa is a singleplayer horror game. Bring back the kids gifts and escape a massive Backrooms maze — while holiday horrors hunt you every step of the way. How fast can you save the kids christmas?",
+      "notes": [],
+      "steam": {
+        "appId": 4242080,
+        "assetHash": "fb09f7f691075443490a702b430a92c2342b5cdf",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d067-g05-4242080"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/Qj5LSaKU-OI?t=17347",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D067.G05 - 11.09.26"
       }
     }
   ],
@@ -15981,22 +16078,16 @@ window.SARKIVE_BACKROOMS_DATA = {
       "order": 2
     },
     {
-      "id": "d062-g03-4242080",
-      "gameId": "game-4242080",
+      "id": "d062-g03-4939820",
+      "gameId": "game-4939820",
       "dayId": "day-062",
       "order": 3
     },
     {
-      "id": "d062-g04-4939820",
-      "gameId": "game-4939820",
-      "dayId": "day-062",
-      "order": 4
-    },
-    {
-      "id": "d062-g05-5041880",
+      "id": "d062-g04-5041880",
       "gameId": "game-5041880",
       "dayId": "day-062",
-      "order": 5
+      "order": 4
     },
     {
       "id": "d063-g01-3360220",
@@ -16093,6 +16184,42 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-3960200",
       "dayId": "day-066",
       "order": 3
+    },
+    {
+      "id": "d067-g01-1987080",
+      "gameId": "game-1987080",
+      "dayId": "day-067",
+      "order": 1
+    },
+    {
+      "id": "d067-g03-3922260",
+      "gameId": "game-3922260",
+      "dayId": "day-067",
+      "order": 3
+    },
+    {
+      "id": "d067-g04-4476610",
+      "gameId": "game-4476610",
+      "dayId": "day-067",
+      "order": 4
+    },
+    {
+      "id": "d067-g05-4242080",
+      "gameId": "game-4242080",
+      "dayId": "day-067",
+      "order": 5
+    },
+    {
+      "id": "d067-g02-1943950",
+      "gameId": "game-1943950",
+      "dayId": "day-067",
+      "order": 2
+    },
+    {
+      "id": "d067-g06-2275020",
+      "gameId": "game-2275020",
+      "dayId": "day-067",
+      "order": 6
     }
   ],
   "days": [
@@ -16944,9 +17071,8 @@ window.SARKIVE_BACKROOMS_DATA = {
       "appearanceIds": [
         "d062-g01-4914590",
         "d062-g02-4913850",
-        "d062-g03-4242080",
-        "d062-g04-4939820",
-        "d062-g05-5041880"
+        "d062-g03-4939820",
+        "d062-g04-5041880"
       ],
       "legacyKey": "DAY062_040926"
     },
@@ -16997,6 +17123,20 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d066-g03-3960200"
       ],
       "legacyKey": "DAY066_100926"
+    },
+    {
+      "id": "day-067",
+      "dayNumber": 67,
+      "date": "2026-09-11",
+      "appearanceIds": [
+        "d067-g01-1987080",
+        "d067-g02-1943950",
+        "d067-g03-3922260",
+        "d067-g04-4476610",
+        "d067-g05-4242080",
+        "d067-g06-2275020"
+      ],
+      "legacyKey": "DAY067_110926"
     }
   ]
 };
