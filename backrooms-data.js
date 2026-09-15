@@ -6,7 +6,7 @@ window.SARKIVE_BACKROOMS_DATA = {
     "status": "ongoing",
     "startedAt": "2026-05-06T08:00:09",
     "endedAt": "",
-    "gamesPlayed": 313,
+    "gamesPlayed": 319,
     "totalGames": 324,
     "teaser": "assets/backrooms/SBR_INTRO.mp4"
   },
@@ -13944,6 +13944,248 @@ window.SARKIVE_BACKROOMS_DATA = {
       "legacy": {
         "durationPlayed": "D067.G05 - 11.09.26"
       }
+    },
+    {
+      "id": "game-4796850",
+      "archiveNumber": 313,
+      "counted": true,
+      "title": "LIMINAL ESCAPE",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jun 16, 2026",
+      "developers": [
+        "SupKai"
+      ],
+      "publishers": [
+        "SupKai"
+      ],
+      "description": "LIMINAL ESCAPE is a Backrooms co-op survival horror game for up to 4 players, where you and your friends will fight to escape from the unsettling, endless depths of Liminal space.",
+      "notes": [],
+      "steam": {
+        "appId": 4796850,
+        "assetHash": "bd2c397125400f37c5124f8d28af4f84ec05b2b4",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d068-g01-4796850"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/UmBUbCVcaKs?t=1483",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D068.G01 - 12.09.26"
+      }
+    },
+    {
+      "id": "game-4380850",
+      "archiveNumber": 314,
+      "counted": true,
+      "title": "Backrooms: Multiverse",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jul 3, 2026",
+      "developers": [
+        "Misconcepter"
+      ],
+      "publishers": [
+        "Misconcepter"
+      ],
+      "description": "Backrooms Multiverse is a cooperative survival horror exploration game where you play as a team of researchers venturing deep into the endless Backrooms multiverse. Explore rare and mysterious environments, and encounter unique entities that few explorers have ever lived to see.",
+      "notes": [],
+      "steam": {
+        "appId": 4380850,
+        "assetHash": "93f7fe1afdb2dced9bdc03186a236c4fc054bfeb",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d068-g02-4380850"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/UmBUbCVcaKs?t=6350",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D068.G02 - 12.09.26"
+      }
+    },
+    {
+      "id": "game-4895520",
+      "archiveNumber": 315,
+      "counted": true,
+      "title": "Backrooms Manager - Together",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Aug 14, 2026",
+      "developers": [
+        "Nyxtails Studio",
+        "Nyxzen",
+        "Voidtails"
+      ],
+      "publishers": [
+        "Nyxtails Studio"
+      ],
+      "description": "A 1–6 player co-op survival logistics game where a routine delivery traps your crew inside the Backrooms. Scavenge, recycle, deliver cargo, manage a shared budget, and survive 49 days to earn your freedom.",
+      "notes": [],
+      "steam": {
+        "appId": 4895520,
+        "assetHash": "e628ccb5d127eb7706f0de406c82db170951a4c1",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d068-g03-4895520"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/UmBUbCVcaKs?t=13806",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D068.G03 - 12.09.26"
+      }
+    },
+    {
+      "id": "game-4197920",
+      "archiveNumber": 316,
+      "counted": true,
+      "title": "Dream Corps",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Jul 10, 2026",
+      "developers": [
+        "98 Redd Games"
+      ],
+      "publishers": [
+        "98 Redd Games"
+      ],
+      "description": "Surreal horror game. You have been selected by a sinister group to participate in a twisted game of exploration and escape. Wander through colorful, nostalgic environments that feel increasingly disturbing and discover why nobody ever leaves.",
+      "notes": [],
+      "steam": {
+        "appId": 4197920,
+        "assetHash": "e5c3c53a2a45bd3acb4c1fb468aa3081887040b6",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d068-g04-4197920"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/UmBUbCVcaKs?t=15958",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D068.G04 - 12.09.26"
+      }
+    },
+    {
+      "id": "game-4673710",
+      "archiveNumber": 317,
+      "counted": true,
+      "title": "Infinite Backrooms",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Aug 15, 2026",
+      "developers": [
+        "ww_azevedo"
+      ],
+      "publishers": [
+        "@OverrideGameStudio"
+      ],
+      "description": "Explore a virtually endless Backrooms world, procedurally generated from a seed as you move through interconnected environments. No loading screens. No boundaries. Every journey is different. How far will you go before something finds you?",
+      "notes": [],
+      "steam": {
+        "appId": 4673710,
+        "assetHash": "731f267c122b75e85da8a18d18f94aa20af2099e",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d068-g05-4673710"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/UmBUbCVcaKs?t=20592",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D068.G05 - 12.09.26"
+      }
+    },
+    {
+      "id": "game-4858490",
+      "archiveNumber": 318,
+      "counted": true,
+      "title": "Real backrooms",
+      "status": "DONE",
+      "statusLabel": "DONE",
+      "players": [
+        "SARK"
+      ],
+      "releaseDate": "Aug 18, 2026",
+      "developers": [
+        "Talcom Game"
+      ],
+      "publishers": [
+        "Talcom Game"
+      ],
+      "description": "Explore the deepest parts of the Backrooms in an attempt to escape alive, alone or with your friends! Are you ready to face this dangerous world? Or will you accept your fate and die? Choose, or the Backrooms will choose for you!",
+      "notes": [],
+      "steam": {
+        "appId": 4858490,
+        "assetHash": "88ca79115f11ea0246efa654181a292c7c9f9de4",
+        "useSteamArt": true
+      },
+      "localImage": "",
+      "appearanceIds": [
+        "d068-g06-4858490"
+      ],
+      "sources": [
+        {
+          "id": "source-1",
+          "kind": "youtube",
+          "url": "https://youtu.be/UmBUbCVcaKs?t=27877",
+          "legacyField": "vodLink"
+        }
+      ],
+      "legacy": {
+        "durationPlayed": "D068.G06 - 12.09.26"
+      }
     }
   ],
   "appearances": [
@@ -16220,6 +16462,42 @@ window.SARKIVE_BACKROOMS_DATA = {
       "gameId": "game-2275020",
       "dayId": "day-067",
       "order": 6
+    },
+    {
+      "id": "d068-g01-4796850",
+      "gameId": "game-4796850",
+      "dayId": "day-068",
+      "order": 1
+    },
+    {
+      "id": "d068-g02-4380850",
+      "gameId": "game-4380850",
+      "dayId": "day-068",
+      "order": 2
+    },
+    {
+      "id": "d068-g03-4895520",
+      "gameId": "game-4895520",
+      "dayId": "day-068",
+      "order": 3
+    },
+    {
+      "id": "d068-g04-4197920",
+      "gameId": "game-4197920",
+      "dayId": "day-068",
+      "order": 4
+    },
+    {
+      "id": "d068-g05-4673710",
+      "gameId": "game-4673710",
+      "dayId": "day-068",
+      "order": 5
+    },
+    {
+      "id": "d068-g06-4858490",
+      "gameId": "game-4858490",
+      "dayId": "day-068",
+      "order": 6
     }
   ],
   "days": [
@@ -17137,6 +17415,20 @@ window.SARKIVE_BACKROOMS_DATA = {
         "d067-g06-2275020"
       ],
       "legacyKey": "DAY067_110926"
+    },
+    {
+      "id": "day-068",
+      "dayNumber": 68,
+      "date": "2026-09-12",
+      "appearanceIds": [
+        "d068-g01-4796850",
+        "d068-g02-4380850",
+        "d068-g03-4895520",
+        "d068-g04-4197920",
+        "d068-g05-4673710",
+        "d068-g06-4858490"
+      ],
+      "legacyKey": "DAY068_120926"
     }
   ]
 };
