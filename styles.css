@@ -5733,12 +5733,18 @@ button.backrooms-calendar-day {
 .backrooms-teaser-dialog {
   position: relative;
   z-index: 1;
-  width: min(1100px, 94vw);
+  width: min(1100px, 94vw, calc((100vh - 94px) * 16 / 9));
   border: 1px solid var(--border-strong);
   border-radius: 4px;
   background: var(--background-deep);
   box-shadow: 0 24px 70px var(--shadow-strong);
   overflow: hidden;
+}
+
+@supports (height: 100dvh) {
+  .backrooms-teaser-dialog {
+    width: min(1100px, 94vw, calc((100dvh - 94px) * 16 / 9));
+  }
 }
 .backrooms-teaser-head {
   display: flex;
@@ -5763,7 +5769,9 @@ button.backrooms-calendar-day {
 .backrooms-teaser-video {
   display: block;
   width: 100%;
-  max-height: 76vh;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
   background: var(--black);
 }
 body.backrooms-teaser-open {
