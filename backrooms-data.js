@@ -1958,7 +1958,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-2",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/a_E8OGLlwc8?t=4070",
           "legacyField": "vodLink2"
         }
       ],
@@ -14260,7 +14260,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/a_E8OGLlwc8?t=1780",
           "legacyField": "vodLink"
         }
       ],
@@ -14301,7 +14301,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/a_E8OGLlwc8?t=3167",
           "legacyField": "vodLink"
         }
       ],
@@ -14342,7 +14342,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/a_E8OGLlwc8?t=10831",
           "legacyField": "vodLink"
         }
       ],
@@ -14383,7 +14383,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/a_E8OGLlwc8?t=4597",
           "legacyField": "vodLink"
         }
       ],
@@ -14425,7 +14425,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/a_E8OGLlwc8?t=15116",
           "legacyField": "vodLink"
         }
       ],
@@ -14471,7 +14471,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/a_E8OGLlwc8?t=16965",
           "legacyField": "vodLink"
         }
       ],
@@ -14517,7 +14517,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/a_E8OGLlwc8?t=23753",
           "legacyField": "vodLink"
         }
       ],
@@ -14563,7 +14563,7 @@ window.SARKIVE_BACKROOMS_DATA = {
         {
           "id": "source-1",
           "kind": "youtube",
-          "url": "",
+          "url": "https://youtu.be/a_E8OGLlwc8?t=28149",
           "legacyField": "vodLink"
         }
       ],
