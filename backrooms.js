@@ -689,18 +689,43 @@
     syncUrl();
   }
 
+  function getYouTubeEmbedUrl(value) {
+    if (!value) return '';
+    try {
+      const url = new URL(value, window.location.href);
+      let videoId = '';
+
+      if (url.hostname === 'youtu.be') {
+        videoId = url.pathname.split('/').filter(Boolean)[0] || '';
+      } else if (url.hostname.includes('youtube.com')) {
+        videoId = url.searchParams.get('v') || '';
+        if (!videoId && url.pathname.startsWith('/embed/')) {
+          videoId = url.pathname.split('/')[2] || '';
+        }
+      }
+
+      return videoId
+        ? `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0`
+        : '';
+    } catch {
+      return '';
+    }
+  }
+
   function openTeaser() {
     if (!raw.project?.teaser || !elements.teaserModal || !elements.teaserVideo) return;
-    elements.teaserVideo.src = raw.project.teaser;
+
+    const embedUrl = getYouTubeEmbedUrl(raw.project.teaser);
+    if (!embedUrl) return;
+
+    elements.teaserVideo.src = embedUrl;
     elements.teaserModal.hidden = false;
     document.body.classList.add('backrooms-teaser-open');
-    elements.teaserVideo.play().catch(() => {});
   }
 
   function closeTeaser() {
     if (!elements.teaserModal || !elements.teaserVideo) return;
-    elements.teaserVideo.pause();
-    elements.teaserVideo.currentTime = 0;
+    elements.teaserVideo.src = '';
     elements.teaserModal.hidden = true;
     document.body.classList.remove('backrooms-teaser-open');
   }
