@@ -84,7 +84,7 @@ window.SARKIVE_DISCOVERY_DATA = {
     },
     {
       "id": "vod-index",
-      "title": "VOD INDEX",
+      "title": "STREAMS",
       "kind": "tool",
       "entryId": "vod-index",
       "tags": [
@@ -108,7 +108,7 @@ window.SARKIVE_DISCOVERY_DATA = {
       "title": "POPULAR",
       "description": "A hand-picked front shelf of Sarkive staples and major collections.",
       "home": true,
-      "homeLimit": 10,
+      "homeLimit": 12,
       "cardStyle": "poster",
       "order": "custom",
       "homeOrder": "custom",
@@ -118,11 +118,13 @@ window.SARKIVE_DISCOVERY_DATA = {
         "collection:sarks-windowless-fun-van",
         "collection:nerd-poker",
         "collection:x-play",
-        "tool:vod-index",
-        "game:hardcore-minecraft",
-        "game:raft",
-        "game:lethal-company",
-        "game:hunt-showdown-1896"
+        "game:among-us",
+        "game:disc-golf",
+        "game:7-days-to-die",
+        "game:bogos-binted",
+        "game:jeopardy",
+        "game:marbles-on-stream",
+        "game:peak"
       ],
       "rule": {}
     },

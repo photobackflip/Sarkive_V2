@@ -40,13 +40,16 @@
       { id: 'home', label: 'HOME', icon: 'home' }
     ],
     [
+      { id: 'streams', label: 'STREAMS', icon: 'vod-index' },
+      { id: 'games', label: 'GAMES', icon: 'games' },
+      { id: 'backrooms', label: 'BACKROOMS', icon: 'backrooms' }
+    ],
+    [
       { id: 'sark-tv', label: 'SARK TV', icon: 'sark-tv' },
       { id: 'sark-radio', label: 'SARK RADIO', icon: 'sark-radio' }
     ],
     [
-      { id: 'vod-index', label: 'VOD INDEX', icon: 'vod-index' },
-      { id: 'categories', label: 'CATAGORIES', icon: 'categories' },
-      { id: 'backrooms', label: 'BACKROOMS', icon: 'backrooms' }
+      { id: 'nerd-poker', label: 'NERD POKER', icon: 'd20' }
     ],
     [
       { id: 'marbles-scores', label: 'MARBLES SCORES', icon: 'marbles-scores' },
@@ -75,8 +78,6 @@
     categoryPageTitle: document.querySelector('#category-page-title'),
     categoryPageDescription: document.querySelector('#category-page-description'),
     categoryGrid: document.querySelector('#category-grid'),
-    categoriesPage: document.querySelector('#categories-page'),
-    categoriesList: document.querySelector('#categories-list'),
     aboutPage: document.querySelector('#about-page'),
     searchPage: document.querySelector('#search-page'),
     searchSummary: document.querySelector('#search-summary'),
@@ -232,7 +233,7 @@
 
   function scrollPageToTop() {
     requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      if(!window.SARKIVE_NAV.returning) window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     });
   }
 
@@ -533,7 +534,9 @@
     return request;
   }
 
-  const games = normalizeLibrary(rawLibrary);
+  const allArchiveEntries = normalizeLibrary(rawLibrary);
+  const gameKinds = new Map((rawLibrary.games || []).map(g => [g.id, g.publicKind]));
+  const games = allArchiveEntries.filter(g => !gameKinds.get(g.id) || gameKinds.get(g.id) === 'GAME');
   const guestPodcastSourceEntries = Array.isArray(rawGuestPodcastLibrary?.podcasts)
     ? rawGuestPodcastLibrary.podcasts
     : [];
@@ -547,9 +550,9 @@
       ...guestPodcastSourceEntries
     ]
   });
-  const gamesById = new Map(games.map((game) => [game.id, game]));
+  const gamesById = new Map(allArchiveEntries.map((game) => [game.id, game]));
   const podcastsById = new Map(podcasts.map((podcast) => [podcast.id, podcast]));
-  const playableEntries = [...games, ...podcasts];
+  const playableEntries = [...allArchiveEntries, ...podcasts];
   const guestPodcastEntryIds = new Set(guestPodcastSourceEntries
     .map((entry) => String(entry?.id || '').trim())
     .filter(Boolean));
@@ -734,6 +737,7 @@
 
   function discoveryRoute(record) {
     if (!record) return '#home';
+    if (record.kind === 'date') return `#page=stream&date=${encodeURIComponent(record.date)}`;
     if (record.kind === 'game') return `#game=${encodeURIComponent(record.entryId)}`;
     if (record.kind === 'chapter') {
       const params = new URLSearchParams({ game: record.entryId, watch: '1', chapter: record.itemId });
@@ -756,6 +760,7 @@
 
   function buildDiscoveryRecords() {
     const records = [];
+    const catalogueGames = new Map((window.SARKIVE_CATALOGUE?.games || []).map(g => [g.id,g]));
 
     games.forEach((game) => {
       // Native scope remains precise, but the parent game discovery card rolls up
@@ -763,7 +768,7 @@
       // game discoverable without falsely inheriting that metadata into every chapter.
       const gameTags = uniqueDiscoveryTags(game.tags, ['games', 'gameplay']);
       const gamePeople = uniqueDiscoveryTags(game.people);
-      const gameSearchTerms = uniqueDiscoveryTags(game.searchTerms);
+      const gameSearchTerms = uniqueDiscoveryTags(game.searchTerms, catalogueGames.get(game.id)?.aliases);
       const descendantTags = uniqueDiscoveryTags(
         game.groups.flatMap((group) => group.tags),
         game.chapters.flatMap((chapter) => chapter.tags)
@@ -898,7 +903,7 @@
       });
 
     discoveryCollectionDefs
-      .filter((definition) => definition.kind === 'tool')
+      .filter((definition) => definition.kind === 'tool' && definition.id !== 'vod-index')
       .forEach((definition) => {
         const isVodIndex = definition.id === 'vod-index';
         records.push({
@@ -920,13 +925,31 @@
         });
       });
 
-    return records.map((record) => ({ ...record, route: discoveryRoute(record) }));
+    const indexedGames = new Set(records.filter(r => r.kind === 'game').map(r => r.entryId));
+    catalogueGames.forEach(g => {
+      if (!indexedGames.has(g.id)) records.push({id:`game:${g.id}`,kind:'game',collectionId:'games',entryId:g.id,itemId:g.id,title:g.title,parentTitle:'',description:g.description,date:'',image:g.image,tags:g.tags,people:[],searchTerms:g.aliases,eyebrow:'GAME',metaLine:g.chapterCount?`${g.chapterCount} chapters`:''});
+    });
+    (window.SARKIVE_CATALOGUE?.dates || []).forEach(d => records.push({id:`date:${d.date}`,kind:'date',collectionId:'streams',entryId:d.date,itemId:d.date,title:d.title || d.dateLabel,parentTitle:d.dateLabel,description:d.games.map(g=>g.title).join(' · '),date:d.date,image:d.thumbnail,tags:[...(d.tags || []),...(d.streamTypes || [])],blocks:d.blocks || [],people:d.people.map(p=>p.name),searchTerms:[...d.titles,d.dateLabel,...d.games.flatMap(g=>[g.title,...g.aliases])],eyebrow:'STREAM DATE',metaLine:''}));
+    return records.map((record) => {
+      const game=catalogueGames.get(record.entryId);
+      if(game) {
+        record.blocks=game.blocks || [];
+        record.searchTerms=uniqueDiscoveryTags(record.searchTerms,record.blocks);
+        if(record.kind==='game') {
+          record.tags=uniqueDiscoveryTags(record.tags,game.tags);
+          record.people=uniqueDiscoveryTags(record.people,game.people.map(p=>p.name));
+          record.dates=game.dates;record.firstPlayed=game.firstPlayed;record.lastPlayed=game.lastPlayed;record.streamCount=game.streamCount;
+        }
+      }
+      return { ...record, route: discoveryRoute(record) };
+    });
   }
 
   const discoveryRecords = buildDiscoveryRecords();
   const discoveryRecordsById = new Map(discoveryRecords.map((record) => [record.id, record]));
 
   const searchKindOptions = [
+    { id: 'date', label: 'Stream dates' },
     { id: 'game', label: 'Games' },
     { id: 'chapter', label: 'Chapters' },
     { id: 'episode', label: 'Episodes' },
@@ -934,19 +957,15 @@
     { id: 'tool', label: 'Tools' }
   ];
 
-  const searchSourceOptions = discoveryCollectionDefs.map((collection) => ({
+  const usedSearchSources=new Set(discoveryRecords.map(r=>r.collectionId));
+  const searchSourceOptions = discoveryCollectionDefs.filter(c=>usedSearchSources.has(c.id)).map((collection) => ({
     id: collection.id,
     label: collection.id === 'games' ? 'Games' : collection.title
   }));
 
-  function normalizedSearchText(value) {
-    return String(value || '')
-      .normalize('NFKD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .replace(/[^a-z0-9&]+/g, ' ')
-      .trim();
-  }
+  searchSourceOptions.push({id:'streams',label:'Streams'});
+
+  function normalizedSearchText(value) { return window.SARKIVE_SEARCH.normalize(value); }
 
   const gameTagDirectory = (() => {
     const tagsByKey = new Map();
@@ -1067,7 +1086,7 @@
 
     const compactMatch = compactQuery.length >= 3 && compactIdentity.includes(compactQuery);
     if (hasShortPhraseToken && !compactMatch) return 0;
-    if (!tokens.every((token) => haystack.includes(token)) && !compactMatch) return 0;
+    if (!window.SARKIVE_SEARCH.query(record,rawQuery)) return 0;
 
     let score = compactMatch ? 180 : 1;
     if (title === query) score += 700;
@@ -1231,6 +1250,7 @@
     searchQuery: '',
     searchBaseResults: [],
     searchFiltersOpen: false,
+    searchFacets: window.SARKIVE_SEARCH.blank(),
     searchKinds: new Set(searchKindOptions.map((option) => option.id)),
     searchSources: new Set(searchSourceOptions.map((option) => option.id)),
     vodQuery: '',
@@ -1389,7 +1409,7 @@
     hideNerdPokerMessage();
 
     const params = new URLSearchParams({ page: 'nerd-poker', episode: String(episode.episodeNumber) });
-    history.replaceState(null, '', `#${params.toString()}`);
+    window.SARKIVE_NAV.commit(null, '', `#${params.toString()}`);
 
     if (!nerdPoker.playerReady || !nerdPoker.player) return;
     nerdPoker.started = nerdPoker.started || shouldPlay;
@@ -2382,6 +2402,13 @@
 
   function routeFromUrl() {
     const params = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+    if (params.get('page') === 'backrooms-watch') {
+      const payload = window.SARKIVE_BACKROOMS_UI?.watchPayload?.(params.get('game') || '', params.get('appearance') || '');
+      if (payload) return {view:'backrooms-watch', payload};
+    }
+    if (['streams','stream','vod-index'].includes(params.get('page'))) return {view:'archive', params};
+    if (params.get('page') === 'games' || params.get('page') === 'categories' || params.has('tag') || params.get('category') === 'all-games') return {view:'archive', params};
+    if (params.has('game') && !params.has('watch') && !params.has('chapter') && params.get('page') !== 'backrooms-watch') return {view:'archive', params};
 
     const searchQuery = String(params.get('search') || '').trim();
     if (searchQuery) return { view: 'search', query: searchQuery };
@@ -2487,7 +2514,7 @@
       if (state.backroomsWatchContext.appearanceId) {
         params.set('appearance', state.backroomsWatchContext.appearanceId);
       }
-      history.replaceState(null, '', `#${params.toString()}`);
+      window.SARKIVE_NAV.commit(null, '', `#${params.toString()}`);
       return;
     }
 
@@ -2499,7 +2526,7 @@
       segment: String(state.segmentIndex)
     });
 
-    history.replaceState(null, '', `#${params.toString()}`);
+    window.SARKIVE_NAV.commit(null, '', `#${params.toString()}`);
   }
 
   function setPlayingUi(isPlaying) {
@@ -2516,6 +2543,7 @@
       inbox: '<path d="M3.5 6.5h17v11h-17z"/><path d="m4 7 8 6 8-6"/>',
       'respawn-inbox': '<path d="M5 8.5h14v9H5z"/><path d="m5.5 9 6.5 4.5L18.5 9"/><path d="M8 5H4v4"/><path d="M4.5 8A8 8 0 0 1 18 5.5"/>',
       'radio-respawn': '<path d="M5 10.5h14v9H5z"/><path d="M8 14h5M8 17h3"/><circle cx="16" cy="15" r="1.8"/><path d="m7 10.5 9-5"/><path d="M18.5 4.5a4 4 0 0 1 0 5M21 2a7.5 7.5 0 0 1 0 10"/>',
+      d20: '<path d="M12 2 3 7v10l9 5 9-5V7L12 2Z"/><path d="m12 2-4 6-5-1m9-5 4 6 5-1M8 8h8l-4 9-4-9Zm-5 9 5-9m13 9-5-9M3 17h18m-9 0v5"/>',
       'nerd-poker': '<rect x="5" y="4" width="10" height="14" rx="1.5"/><path d="m10 8 2 2-2 2-2-2z"/><path d="M14 7.5h4.5v12H9v-1.5"/>',
       'x-play': '<path d="M5 6h7l-5 7h7M14 9v9M18 6v12"/>',
       'stream-tracker': '<path d="M3 12h4l2.2-5 4.2 10 2.2-5H21"/><path d="M4 4v16h16"/>',
@@ -2768,6 +2796,8 @@
 
   function pausePlayerForPageChange() {
     state.pendingLoadMode = null;
+    state.vodPendingPlay = false;
+    elements.vodWatchPage.hidden = true;
 
     if (state.sarkTvPlaying) pauseSarkTvForPageChange();
     state.segmentTransitioning = false;
@@ -3171,9 +3201,9 @@
   }
 
   function hideDiscoveryPages() {
+    window.SARKIVE_ARCHIVE?.hide();
     elements.homePage.hidden = true;
     elements.categoryPage.hidden = true;
-    elements.categoriesPage.hidden = true;
     elements.searchPage.hidden = true;
     elements.aboutPage.hidden = true;
   }
@@ -3204,8 +3234,14 @@
 
   function activateDiscoveryRecord(record) {
     if (!record) return;
+    if (record.kind === 'date') { window.SARKIVE_ARCHIVE.date(record.date); return; }
     state.segmentTransitioning = false;
 
+    if (record.kind === 'vod') {
+      const params = new URLSearchParams(record.route.replace(/^#/, ''));
+      showVodWatchPage(params.get('vod'), params.get('copy') || '', true);
+      return;
+    }
     if (record.kind === 'game') {
       showGamePage(record.entryId);
       return;
@@ -3268,6 +3304,7 @@
     link.append(media, copy);
 
     link.addEventListener('click', (event) => {
+      if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       activateDiscoveryRecord(record);
     });
@@ -3275,6 +3312,7 @@
   }
 
   function showCategoryPage(categoryId) {
+    if (categoryId === 'all-games') { window.SARKIVE_ARCHIVE.games(); return; }
     const category = discoveryCategoriesById.get(categoryId);
     if (!category) {
       showHomePage();
@@ -3297,43 +3335,16 @@
     elements.categoryPage.hidden = false;
 
     document.title = `The Sarkive | ${category.title}`;
-    history.replaceState(null, '', `#category=${encodeURIComponent(category.id)}`);
+    window.SARKIVE_NAV.commit(null, '', `#category=${encodeURIComponent(category.id)}`);
     updateSiteMenu();
   }
 
   function showTagPage(tagValue) {
-    const tag = gameTagsByKey.get(normalizedSearchText(tagValue));
-    if (!tag) {
-      showCategoriesPage();
-      return;
-    }
-
-    state.view = 'tag';
-    state.pageId = 'categories';
-    state.navOverlayOpen = false;
-    pausePlayerForPageChange();
-    hideDiscoveryPages();
-    hideArchiveAndToolPages();
-
-    const records = tag.gameIds
-      .map((gameId) => discoveryRecordsById.get(`game:${gameId}`))
-      .filter(Boolean)
-      .sort((a, b) => a.title.localeCompare(b.title, undefined, { numeric: true, sensitivity: 'base' }));
-
-    elements.categoryPageTitle.textContent = tag.label;
-    elements.categoryPageDescription.textContent = '';
-    elements.categoryPageDescription.hidden = true;
-    elements.categoryGrid.classList.add('is-poster-grid');
-    elements.categoryGrid.replaceChildren(...records.map((record) => createDiscoveryCard(record, 'poster')));
-    elements.categoryPage.hidden = false;
-
-    document.title = `The Sarkive | ${tag.label}`;
-    history.replaceState(null, '', `#tag=${encodeURIComponent(tag.label)}`);
-    updateSiteMenu();
+    return window.SARKIVE_ARCHIVE.games([tagValue], true);
   }
 
   function homeShelfRecord(record) {
-    if (!record || record.kind === 'game') return record;
+    if (!record || record.kind === 'game' || record.kind === 'vod') return record;
     const collection = discoveryCollectionsById.get(record.collectionId);
     return { ...record, image: collection?.homeImage || fallbackGameImage };
   }
@@ -3377,6 +3388,31 @@
     return [...records.slice(leadIndex), ...records.slice(0, leadIndex)];
   }
 
+  const HOME_LATEST_VODS_LIMIT = 12;
+
+  async function latestVodRecords() {
+    const dates = [...(window.SARKIVE_CATALOGUE?.dates || [])]
+      .filter(day => day.vodCount > 0)
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .slice(0, HOME_LATEST_VODS_LIMIT);
+    const days = await Promise.all(dates.map(async day => {
+      const response = await fetch(`archive/dates/${encodeURIComponent(day.date)}.json`);
+      if (!response.ok) throw new Error('Could not load latest VODs');
+      return response.json();
+    }));
+    return days.flatMap(day => {
+      const vod = day.vods?.[0];
+      if (!vod?.playHref) return [];
+      const seconds = vod.durationSeconds;
+      const runtime = seconds == null ? 'Length unavailable' : formatDuration(seconds);
+      return [{
+        id: `latest-vod:${day.date}`, kind: 'vod', eyebrow: 'VOD',
+        title: day.dateLabel, metaLine: runtime,
+        image: vod.thumbnail, route: vod.playHref
+      }];
+    });
+  }
+
   function createHomeShelf(category, usedLeadIds) {
     const section = document.createElement('section');
     section.className = 'archive-shelf';
@@ -3386,23 +3422,25 @@
     header.className = 'archive-shelf-header';
     const titleLink = document.createElement('a');
     titleLink.className = 'archive-shelf-title-link';
-    titleLink.href = `#category=${encodeURIComponent(category.id)}`;
+    titleLink.href = category.href || `#category=${encodeURIComponent(category.id)}`;
     const title = document.createElement('h2');
     title.className = 'archive-shelf-title';
     title.textContent = category.title;
     titleLink.append(title);
     titleLink.addEventListener('click', (event) => {
       event.preventDefault();
-      showCategoryPage(category.id);
+      if (category.id === 'latest-vods') window.SARKIVE_ARCHIVE.streams();
+      else showCategoryPage(category.id);
     });
 
     const viewAll = document.createElement('a');
     viewAll.className = 'archive-shelf-view-all';
-    viewAll.href = `#category=${encodeURIComponent(category.id)}`;
+    viewAll.href = titleLink.href;
     viewAll.textContent = 'VIEW ALL';
     viewAll.addEventListener('click', (event) => {
       event.preventDefault();
-      showCategoryPage(category.id);
+      if (category.id === 'latest-vods') window.SARKIVE_ARCHIVE.streams();
+      else showCategoryPage(category.id);
     });
     header.append(titleLink, viewAll);
 
@@ -3410,11 +3448,12 @@
     carousel.className = 'archive-shelf-carousel';
 
     const track = document.createElement('div');
-    track.className = 'archive-shelf-track archive-shelf-track--home';
-    const orderedRecords = recordsForCategory(category, 'home');
+    track.className = `archive-shelf-track archive-shelf-track--${category.cardStyle === 'landscape' ? 'landscape' : 'home'}`;
+    const orderedRecords = category.loadRecords ? [] : recordsForCategory(category, 'home');
     const records = rotateHomeShelfLead(orderedRecords, usedLeadIds).slice(0, category.homeLimit);
     if (records[0]) usedLeadIds?.add(records[0].id);
-    track.replaceChildren(...records.map((record) => createDiscoveryCard(homeShelfRecord(record), 'poster')));
+    const cardStyle = category.cardStyle === 'landscape' ? 'landscape' : 'poster';
+    track.replaceChildren(...records.map((record) => createDiscoveryCard(homeShelfRecord(record), cardStyle)));
 
     const previousButton = createShelfArrow('previous', track);
     const nextButton = createShelfArrow('next', track);
@@ -3430,46 +3469,39 @@
 
     carousel.append(previousButton, track, nextButton);
     section.append(header, carousel);
+    if (category.loadRecords) {
+      section.classList.add('archive-shelf--vods');
+      const status = document.createElement('p');
+      status.className = 'archive-muted';
+      status.setAttribute('role', 'status');
+      status.textContent = 'Loading latest VODs…';
+      track.append(status);
+      category.loadRecords().then(items => {
+        if (items.length) track.replaceChildren(...items.map(record => createDiscoveryCard(record, cardStyle)));
+        else status.textContent = 'No VODs available yet.';
+        requestAnimationFrame(syncArrows);
+      }).catch(() => {
+        status.textContent = 'Latest VODs couldn’t load. Browse Streams using View All.';
+      });
+    }
     requestAnimationFrame(syncArrows);
     return section;
   }
 
   function renderHomeShelves() {
     const categories = discoveryCategories.filter((category) => category.home);
+    const popularIndex = categories.findIndex(category => category.id === 'popular');
+    categories.splice(popularIndex < 0 ? 0 : popularIndex + 1, 0, {
+      id: 'latest-vods', title: 'LATEST VODS', href: '#page=streams',
+      homeLimit: HOME_LATEST_VODS_LIMIT, cardStyle: 'landscape', loadRecords: latestVodRecords
+    });
     const usedLeadIds = new Set();
     elements.homeShelves.replaceChildren(...categories.map((category) => createHomeShelf(category, usedLeadIds)));
   }
 
-  function renderCategoriesDirectory() {
-    const links = gameTagDirectory.map((tag) => {
-      const link = document.createElement('a');
-      link.className = 'categories-directory-link';
-      link.href = `#tag=${encodeURIComponent(tag.label)}`;
-      link.textContent = tag.label;
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        showTagPage(tag.key);
-      });
-      return link;
-    });
-
-    elements.categoriesList.replaceChildren(...links);
-  }
-
   function showCategoriesPage() {
-    state.view = 'categories';
-    state.pageId = 'categories';
-    state.navOverlayOpen = false;
-    pausePlayerForPageChange();
-    hideDiscoveryPages();
-    hideArchiveAndToolPages();
-    renderCategoriesDirectory();
-    elements.categoriesPage.hidden = false;
-    document.title = 'The Sarkive | Catagories';
-    history.replaceState(null, '', '#page=categories');
-    updateSiteMenu();
+    return window.SARKIVE_ARCHIVE.games(null, true);
   }
-
 
   function showAboutPage() {
     state.view = 'about';
@@ -3480,7 +3512,7 @@
     hideArchiveAndToolPages();
     elements.aboutPage.hidden = false;
     document.title = 'The Sarkive | About';
-    history.replaceState(null, '', '#page=about');
+    window.SARKIVE_NAV.commit(null, '', '#page=about');
     updateSiteMenu();
   }
 
@@ -3493,7 +3525,7 @@
     hideArchiveAndToolPages();
     elements.homePage.hidden = false;
     document.title = 'The Sarkive';
-    history.replaceState(null, '', '#home');
+    window.SARKIVE_NAV.commit(null, '', '#home');
     updateSiteMenu();
   }
 
@@ -3523,7 +3555,7 @@
     title.textContent = record.title;
     const meta = document.createElement('span');
     meta.className = 'search-result-meta';
-    meta.textContent = [record.parentTitle, record.date].filter(Boolean).join(' · ') || record.metaLine || '';
+    meta.textContent = (record.kind === 'date' ? record.parentTitle : [record.parentTitle, record.date].filter(Boolean).join(' · ')) || record.metaLine || '';
     meta.hidden = !meta.textContent;
     const description = document.createElement('span');
     description.className = 'search-result-description';
@@ -3541,14 +3573,14 @@
 
   function filteredSearchResults() {
     return state.searchBaseResults.filter((record) => (
-      state.searchKinds.has(record.kind) && state.searchSources.has(record.collectionId)
+      state.searchKinds.has(record.kind) && state.searchSources.has(record.collectionId) && window.SARKIVE_SEARCH.matches(record,state.searchFacets)
     ));
   }
 
   function searchFiltersAreDefault() {
     return (
       state.searchKinds.size === searchKindOptions.length &&
-      state.searchSources.size === searchSourceOptions.length
+      state.searchSources.size === searchSourceOptions.length && !window.SARKIVE_SEARCH.count(state.searchFacets)
     );
   }
 
@@ -3568,13 +3600,14 @@
 
     options.forEach((option) => {
       const count = countForOption(option);
+      if (!count && activeSet.has(option.id)) return;
       const label = document.createElement('label');
       label.className = 'search-filter-option';
 
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.checked = activeSet.has(option.id);
-      checkbox.disabled = count === 0;
+      checkbox.disabled = false;
       checkbox.dataset.filterId = option.id;
 
       const mark = document.createElement('span');
@@ -3599,7 +3632,7 @@
       fragment.append(label);
     });
 
-    return fragment;
+    return fragment.childElementCount>1?fragment:document.createDocumentFragment();
   }
 
   function syncSearchFilterControls() {
@@ -3608,18 +3641,19 @@
       'RESULT TYPE',
       searchKindOptions,
       state.searchKinds,
-      (option) => results.filter((record) => record.kind === option.id).length
+      (option) => results.filter((record) => record.kind === option.id && state.searchSources.has(record.collectionId) && window.SARKIVE_SEARCH.matches(record,state.searchFacets)).length
     ));
     elements.searchFilterSources.replaceChildren(createSearchFilterGroup(
       'SOURCE',
       searchSourceOptions,
       state.searchSources,
-      (option) => results.filter((record) => record.collectionId === option.id).length
+      (option) => results.filter((record) => record.collectionId === option.id && state.searchKinds.has(record.kind) && window.SARKIVE_SEARCH.matches(record,state.searchFacets)).length
     ));
 
+    window.SARKIVE_SEARCH.controls(document.querySelector('#search-filter-discovery'),results.filter(r=>state.searchKinds.has(r.kind)&&state.searchSources.has(r.collectionId)),state.searchFacets,renderSearchResults);
     const hiddenCount = (
       searchKindOptions.length - state.searchKinds.size +
-      searchSourceOptions.length - state.searchSources.size
+      searchSourceOptions.length - state.searchSources.size + window.SARKIVE_SEARCH.count(state.searchFacets)
     );
     elements.searchFilterBadge.hidden = hiddenCount === 0;
     elements.searchFilterBadge.textContent = hiddenCount ? String(hiddenCount) : '';
@@ -3650,7 +3684,7 @@
 
       if (allResults.length && filtersActive) {
         title.textContent = 'Nothing matches the current filters.';
-        text.textContent = 'Turn a result type or source back on, or reset the filters.';
+        text.textContent = 'Try another type, tag, guest or year, or reset the filters.';
       } else {
         title.textContent = 'Nothing in the archive matched that search.';
         text.textContent = 'Try a game, episode title, chapter, person, subject, or phrase from a description.';
@@ -3664,6 +3698,7 @@
   }
 
   function resetSearchFilters() {
+    state.searchFacets = window.SARKIVE_SEARCH.blank();
     state.searchKinds = new Set(searchKindOptions.map((option) => option.id));
     state.searchSources = new Set(searchSourceOptions.map((option) => option.id));
     renderSearchResults();
@@ -3688,7 +3723,7 @@
 
     elements.searchPage.hidden = false;
     document.title = `The Sarkive | Search: ${query}`;
-    history.replaceState(null, '', `#search=${encodeURIComponent(query)}`);
+    window.SARKIVE_NAV.commit(null, '', `#search=${encodeURIComponent(query)}`);
     updateSiteMenu();
   }
 
@@ -3701,7 +3736,7 @@
     hideArchiveAndToolPages();
     elements.sarkLinksPage.hidden = false;
     document.title = 'The Sarkive | Sark Links';
-    history.replaceState(null, '', '#page=sark-links');
+    window.SARKIVE_NAV.commit(null, '', '#page=sark-links');
     updateSiteMenu();
   }
 
@@ -3725,7 +3760,7 @@
     elements.sarkTvPage.hidden = true;
     elements.palsPage.hidden = false;
     document.title = 'The Sarkive | Pals';
-    history.replaceState(null, '', '#page=pals');
+    window.SARKIVE_NAV.commit(null, '', '#page=pals');
     updateSiteMenu();
   }
 
@@ -3751,11 +3786,13 @@
     populateMarblesRaceSelect();
     renderMarblesScores();
     document.title = 'The Sarkive | Marbles Scores';
-    history.replaceState(null, '', '#page=marbles-scores');
+    window.SARKIVE_NAV.commit(null, '', '#page=marbles-scores');
     updateSiteMenu();
   }
 
   function showGamesPage() {
+    window.SARKIVE_ARCHIVE.games(); return;
+
     showCategoryPage('all-games');
   }
 
@@ -3804,7 +3841,7 @@
     document.title = episode ? `The Sarkive | Nerd Poker #${String(episode.episodeNumber).padStart(2, '0')}` : 'The Sarkive | Nerd Poker';
     const historyParams = new URLSearchParams({ page: 'nerd-poker' });
     if (episode) historyParams.set('episode', String(episode.episodeNumber));
-    history.replaceState(null, '', `#${historyParams.toString()}`);
+    window.SARKIVE_NAV.commit(null, '', `#${historyParams.toString()}`);
     updateSiteMenu();
   }
 
@@ -3828,7 +3865,7 @@
     elements.palsPage.hidden = true;
     elements.sarkRadioPage.hidden = false;
     document.title = 'The Sarkive | Sark Radio';
-    history.replaceState(null, '', '#page=sark-radio');
+    window.SARKIVE_NAV.commit(null, '', '#page=sark-radio');
     updateSiteMenu();
     ensureSarkRadioData();
   }
@@ -4009,6 +4046,7 @@
     if (!elements.vodPlayPause) return;
     elements.vodPlayPause.classList.toggle('is-playing', state.vodIsPlaying);
     elements.vodPlayPauseLabel.textContent = state.vodIsPlaying ? 'Pause' : 'Play';
+    elements.vodPlayPause.title = elements.vodPlayPauseLabel.textContent;
   }
 
   function showVodPlayerMessage(title, message) {
@@ -4027,6 +4065,7 @@
     if (!vod || !copy) return;
 
     elements.vodPlayerTitle.textContent = vod.title || copy.title || 'Archived VOD';
+    elements.vodPlayerTitle.title = elements.vodPlayerTitle.textContent;
     elements.vodRuntime.textContent = copy.duration || vod.duration || '—';
     const dateLabel = vodHumanDate(vod.date);
     const sourceLabel = copy.channel || vod.primaryChannel || 'Archive copy';
@@ -4093,7 +4132,7 @@
       : -1;
     state.vodCopyIndex = requestedCopyIndex >= 0 ? requestedCopyIndex : 0;
     state.view = 'vod-watch';
-    state.pageId = 'vod-index';
+    state.pageId = 'streams';
     state.navOverlayOpen = false;
 
     hideDiscoveryPages();
@@ -4104,27 +4143,14 @@
 
     const copy = currentVodCopy();
     document.title = `The Sarkive | ${vod.title}`;
-    history.replaceState(null, '', vodInternalUrl(vod, copy?.videoId || ''));
+    window.SARKIVE_NAV.commit(null, '', vodInternalUrl(vod, copy?.videoId || ''));
     updateSiteMenu();
     syncNavigationShell();
     scrollPageToTop();
   }
 
   function returnToVodIndex() {
-    const snapshot = state.vodReturnState;
-    showVodIndexPage(snapshot?.date || '');
-    if (!snapshot) return;
-
-    state.vodQuery = snapshot.query || '';
-    state.vodSelectedDate = snapshot.date || '';
-    state.vodCalendarYear = snapshot.calendarYear || state.vodCalendarYear;
-    state.vodCalendarMonth = Number.isInteger(snapshot.calendarMonth) ? snapshot.calendarMonth : state.vodCalendarMonth;
-    state.vodVisibleLimit = snapshot.visibleLimit || 60;
-    elements.vodSearch.value = state.vodQuery;
-    elements.vodDateJump.value = state.vodSelectedDate;
-    renderVodCalendar();
-    renderVodResults(false);
-    history.replaceState(null, '', state.vodSelectedDate ? `#page=vod-index&date=${encodeURIComponent(state.vodSelectedDate)}` : '#page=vod-index');
+    window.SARKIVE_NAV.back();
   }
 
   function toggleVodPlayback() {
@@ -4219,7 +4245,7 @@
           state.vodVisibleLimit = 60;
           renderVodCalendar();
           renderVodResults(true);
-          history.replaceState(null, '', `#page=vod-index&date=${encodeURIComponent(date)}`);
+          window.SARKIVE_NAV.commit(null, '', `#page=vod-index&date=${encodeURIComponent(date)}`);
           elements.vodResultsTitle?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       }
@@ -4250,8 +4276,10 @@
   }
 
   function showVodIndexPage(initialDate = '') {
+    window.SARKIVE_ARCHIVE.streams(initialDate); return;
+
     state.view = 'vod-index';
-    state.pageId = 'vod-index';
+    state.pageId = 'streams';
     state.navOverlayOpen = false;
     pausePlayerForPageChange();
     hideDiscoveryPages();
@@ -4277,7 +4305,7 @@
     renderVodResults(true);
 
     document.title = 'The Sarkive | VOD Index';
-    history.replaceState(null, '', requestedDate ? `#page=vod-index&date=${encodeURIComponent(requestedDate)}` : '#page=vod-index');
+    window.SARKIVE_NAV.commit(null, '', requestedDate ? `#page=vod-index&date=${encodeURIComponent(requestedDate)}` : '#page=vod-index');
     updateSiteMenu();
   }
 
@@ -4309,7 +4337,7 @@
     hideArchiveAndToolPages();
     elements.shopPage.hidden = false;
     document.title = 'The Sarkive | Shop';
-    history.replaceState(null, '', '#page=shop');
+    window.SARKIVE_NAV.commit(null, '', '#page=shop');
     updateSiteMenu();
   }
 
@@ -4340,7 +4368,7 @@
     prepareInitialSarkTvClip();
 
     document.title = 'The Sarkive | SarkTV';
-    history.replaceState(null, '', '#page=sark-tv');
+    window.SARKIVE_NAV.commit(null, '', '#page=sark-tv');
     updateSiteMenu();
   }
 
@@ -4370,7 +4398,7 @@
     elements.comingSoonPage.hidden = false;
     elements.comingSoonTitle.textContent = page.label;
     document.title = `The Sarkive | ${page.label}`;
-    history.replaceState(null, '', `#page=${encodeURIComponent(page.id)}`);
+    window.SARKIVE_NAV.commit(null, '', `#page=${encodeURIComponent(page.id)}`);
     updateSiteMenu();
   }
 
@@ -4394,6 +4422,12 @@
         showSarkTvPage();
       } else if (item.id === 'sark-radio') {
         showSarkRadioPage();
+      } else if (item.id === 'nerd-poker') {
+        showNerdPokerPage();
+      } else if (item.id === 'streams') {
+        window.SARKIVE_ARCHIVE.streams();
+      } else if (item.id === 'games') {
+        window.SARKIVE_ARCHIVE.games();
       } else if (item.id === 'vod-index') {
         showVodIndexPage();
       } else if (item.id === 'backrooms') {
@@ -4415,6 +4449,28 @@
     return button;
   }
 
+  function loadNavImage(button) {
+    const value = getComputedStyle(button).getPropertyValue('--nav-icon-image').trim();
+    const match = /^url\(\s*(?:"([^"]*)"|'([^']*)'|([^)]*?))\s*\)$/i.exec(value);
+    const path = match && (match[1] || match[2] || match[3] || '').trim();
+    if (!path) return;
+
+    const image = document.createElement('img');
+    image.className = 'nav-image-icon';
+    image.alt = '';
+    image.setAttribute('aria-hidden', 'true');
+    image.addEventListener('load', () => {
+      if (image.naturalWidth > 0) button.classList.add('has-image-icon');
+    });
+    image.addEventListener('error', () => {
+      button.classList.remove('has-image-icon');
+      image.remove();
+    });
+    button.prepend(image);
+    // CSS and index.html live together; asset paths are relative to that folder.
+    image.src = path;
+  }
+
   function renderSiteMenu() {
     const fragment = document.createDocumentFragment();
 
@@ -4432,6 +4488,7 @@
     });
 
     elements.siteMenu.replaceChildren(fragment);
+    elements.siteMenu.querySelectorAll('.nav-item').forEach(loadNavImage);
   }
 
   function updateSiteMenu() {
@@ -4499,8 +4556,16 @@
     const label = state.contentType === 'backrooms' && state.backroomsWatchContext
       ? String(state.backroomsWatchContext.metaLabel || '').trim()
       : (currentSegment()?.label || '');
-    elements.segmentLabel.textContent = label;
-    elements.segmentLabel.hidden = !label;
+    elements.segmentLabel.textContent = '';
+    elements.segmentLabel.hidden = true;
+    document.querySelector('#game-chapter-position').textContent = `${state.chapterIndex + 1} / ${state.game.chapters.length}` + (state.chapter.segments.length > 1 ? ` · Part ${state.segmentIndex + 1} of ${state.chapter.segments.length}` : '');
+    const segmentDate = label.match(/\b\d{4}-\d{2}-\d{2}\b/)?.[0];
+    const date = segmentDate || state.chapter?.date || '';
+    const dateElement = document.querySelector('#game-player-date');
+    dateElement.textContent = date.replace(/\b\d{4}-\d{2}-\d{2}\b/g, value =>
+      new Intl.DateTimeFormat('en-GB', {day:'numeric', month:'short', year:'numeric'}).format(new Date(`${value}T12:00:00`)));
+    dateElement.hidden = !date;
+
   }
 
   function createChapterButton(chapter, index, onSelect) {
@@ -4520,7 +4585,9 @@
     name.textContent = chapter.title;
     copy.append(name);
 
-    const descriptionText = chapter.date || chapterDescription(chapter);
+    const descriptionText = chapter.date
+      ? chapter.date.replace(/\b\d{4}-\d{2}-\d{2}\b/g, value => new Intl.DateTimeFormat('en-GB', {day:'numeric', month:'short', year:'numeric'}).format(new Date(`${value}T12:00:00`)))
+      : chapterDescription(chapter);
     if (descriptionText) {
       const description = document.createElement('small');
       description.className = 'chapter-description';
@@ -4551,9 +4618,11 @@
     }
 
     elements.watchGroupSelect.value = group.id;
+    document.querySelector('#game-chapter-count').textContent = `${group.chapters.length} ${(state.game.chaptersLabel || 'chapters').toLowerCase()}`;
     elements.chapterList.replaceChildren(...group.chapters.map((chapter) => {
       const chapterIndex = state.game.chapters.indexOf(chapter);
       return createChapterButton(chapter, chapterIndex, (selectedChapter) => {
+        closeChapterMenu();
         selectChapter(selectedChapter.id, 0, true);
       });
     }));
@@ -4561,11 +4630,14 @@
 
   function configureWatchModeUi() {
     const backroomsMode = state.contentType === 'backrooms';
-    if (elements.backroomsWatchBack) elements.backroomsWatchBack.hidden = !backroomsMode;
-    if (elements.chapterPanel) elements.chapterPanel.hidden = backroomsMode;
+    if (elements.backroomsWatchBack) elements.backroomsWatchBack.hidden = true;
+    closeChapterMenu();
+    document.querySelector('#game-chapters-toggle').hidden = backroomsMode;
+    document.querySelector('#game-chapter-position').hidden = backroomsMode;
     if (elements.runtimeBlock) elements.runtimeBlock.hidden = backroomsMode;
     if (elements.videoTitleSeparator) elements.videoTitleSeparator.hidden = backroomsMode;
-    if (elements.chapterTitle) elements.chapterTitle.hidden = backroomsMode;
+    if (elements.chapterTitle) elements.chapterTitle.hidden = false;
+    elements.gameTitle.hidden = backroomsMode;
   }
 
   function renderChapters() {
@@ -4652,7 +4724,7 @@
       if (hiddenLabel) hiddenLabel.textContent = entry.groupSelectLabel || 'Select group';
     }
     if (contentType === 'podcast') {
-      if (elements.podcastHeroKicker) elements.podcastHeroKicker.textContent = entry.kicker || entry.title;
+      if (elements.podcastHeroKicker) elements.podcastHeroKicker.textContent = guestPodcastEntryIds.has(entry.id) ? 'PODCAST APPEARANCE' : 'COLLECTION';
       if (elements.podcastEpisodesTitle) elements.podcastEpisodesTitle.textContent = entry.episodesLabel || 'Episodes';
       elements.podcastGroupSelect.setAttribute('aria-label', entry.groupSelectLabel || 'Select season');
       const hiddenLabel = elements.podcastGroupSelect.parentElement?.querySelector('.visually-hidden');
@@ -4662,7 +4734,9 @@
     detail.tags.hidden = entry.tags.length === 0;
     detail.description.textContent = entry.description;
     detail.description.hidden = !entry.description;
-    const heroSources = [...new Set([entry.heroImage, entry.image, fallbackGameImage].filter(Boolean))];
+    const tileImage = contentType === 'podcast' ? discoveryCollectionDefs.find(item => item.entryId === entry.id)?.homeImage : '';
+    const heroSources = [...new Set((contentType === 'podcast' ? [tileImage, entry.image, entry.heroImage, fallbackGameImage] : [entry.heroImage, entry.image, fallbackGameImage]).filter(Boolean))];
+    if (contentType === 'podcast') detail.page.querySelector('.archive-hero-backdrop').style.backgroundImage = `url("${heroSources[0]}")`;
     let heroSourceIndex = 0;
     detail.heroImage.alt = '';
     detail.heroImage.onerror = () => {
@@ -4728,12 +4802,12 @@
 
     document.title = `The Sarkive | ${entry.title}`;
     const entryKey = contentType === 'podcast' ? 'podcast' : 'game';
-    history.replaceState(null, '', `#${entryKey}=${encodeURIComponent(entry.id)}`);
+    window.SARKIVE_NAV.commit(null, '', `#${entryKey}=${encodeURIComponent(entry.id)}`);
     updateSiteMenu();
   }
 
   function showGamePage(gameId) {
-    showEntryPage(gameId, 'game');
+    window.SARKIVE_ARCHIVE.game(gameId);
   }
 
   function showPodcastPage(podcastId) {
@@ -4742,7 +4816,9 @@
 
   function updateChapterUi() {
     elements.gameTitle.textContent = state.game.title;
-    elements.chapterTitle.textContent = state.chapter.title;
+    elements.chapterTitle.textContent = state.contentType === 'backrooms' ? state.game.title : state.chapter.title;
+    elements.chapterTitle.parentElement.title = elements.chapterTitle.textContent;
+    document.querySelector('#game-chapter-position').textContent = `${state.chapterIndex + 1} / ${state.game.chapters.length}` + (state.chapter.segments.length > 1 ? ` · Part ${state.segmentIndex + 1} of ${state.chapter.segments.length}` : '');
     updateSegmentLabel();
     const runtime = chapterRuntimeSeconds(state.chapter);
     elements.chapterRuntime.textContent = runtime === null ? '' : formatDuration(runtime);
@@ -4919,7 +4995,7 @@
   function returnToBackroomsArchive() {
     const returnHash = state.backroomsWatchContext?.returnHash || '#page=backrooms';
     const params = new URLSearchParams(String(returnHash).replace(/^#/, ''));
-    history.replaceState(null, '', returnHash);
+    window.SARKIVE_NAV.commit(null, '', returnHash);
     showBackroomsPage({
       date: String(params.get('date') || '').trim(),
       query: String(params.get('q') || '').trim(),
@@ -4979,7 +5055,6 @@
     updateChapterUi();
     setPlayingUi(false);
     loadCurrentSegment(shouldPlay);
-    scrollPageToTop();
   }
 
   function stepBackroomsGame(direction) {
@@ -5280,6 +5355,57 @@
     renderDetailEpisodes(state.game, elements.podcastGroupSelect.value, 'podcast');
   });
 
+  // Fit the stage to its real footer, including wrapped descriptions.
+  // Fixed allowances left empty space after the old watch navigation was removed.
+  const watchFooterParts = [...elements.watchPage.children].filter(element =>
+    element.matches('.game-control-bar, .multicam-controls'));
+  function fitWatchStage() {
+    if (elements.watchPage.hidden) return;
+    const footerHeight = watchFooterParts.reduce((height, element) => {
+      if (element.hidden) return height;
+      const style = getComputedStyle(element);
+      return height + element.getBoundingClientRect().height
+        + (parseFloat(style.marginTop) || 0) + (parseFloat(style.marginBottom) || 0);
+    }, 12);
+    const value = `${Math.ceil(footerHeight)}px`;
+    if (elements.watchPage.style.getPropertyValue('--watch-chrome') !== value) {
+      elements.watchPage.style.setProperty('--watch-chrome', value);
+    }
+  }
+  const watchFooterObserver = new ResizeObserver(fitWatchStage);
+  watchFooterParts.forEach(element => watchFooterObserver.observe(element));
+  window.addEventListener('resize', fitWatchStage);
+
+  const chapterMenuToggle = document.querySelector('#game-chapters-toggle');
+  function closeChapterMenu() {
+    if (elements.chapterPanel.open) elements.chapterPanel.close();
+    chapterMenuToggle.setAttribute('aria-expanded', 'false');
+  }
+  chapterMenuToggle.addEventListener('click', () => {
+    updateChapterUi();
+    elements.chapterPanel.showModal();
+    chapterMenuToggle.setAttribute('aria-expanded', 'true');
+    elements.chapterList.querySelector('.active')?.scrollIntoView({block: 'nearest'});
+  });
+  document.querySelector('#game-chapters-close').addEventListener('click', closeChapterMenu);
+  elements.chapterPanel.addEventListener('click', (event) => {
+    const rect = elements.chapterPanel.getBoundingClientRect();
+    if (event.target === elements.chapterPanel && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) closeChapterMenu();
+  });
+  elements.chapterPanel.addEventListener('close', () => chapterMenuToggle.setAttribute('aria-expanded', 'false'));
+  window.addEventListener('popstate', closeChapterMenu);
+  window.addEventListener('hashchange', closeChapterMenu);
+  document.querySelector('#game-watch-back').addEventListener('click', () => {
+    closeChapterMenu();
+    if (state.contentType === 'backrooms') elements.backroomsWatchBack.click();
+    else window.SARKIVE_NAV.back();
+  });
+  new MutationObserver(() => {
+    const label = elements.playPauseLabel.textContent;
+    elements.playPause.setAttribute('aria-label', label);
+    elements.playPause.title = label;
+  }).observe(elements.playPauseLabel, {childList: true, subtree: true, characterData: true});
+
   elements.watchGroupSelect.addEventListener('change', () => {
     if (!state.game || state.view !== 'watch') return;
     renderWatchChapterList(elements.watchGroupSelect.value);
@@ -5399,7 +5525,7 @@
     elements.vodDateJump.value = '';
     renderVodCalendar();
     renderVodResults(true);
-    history.replaceState(null, '', '#page=vod-index');
+    window.SARKIVE_NAV.commit(null, '', '#page=vod-index');
   });
   elements.vodDateJump?.addEventListener('change', () => {
     const date = String(elements.vodDateJump.value || '').trim();
@@ -5410,14 +5536,14 @@
     setVodCalendarFromDate(date);
     renderVodCalendar();
     renderVodResults(true);
-    history.replaceState(null, '', `#page=vod-index&date=${encodeURIComponent(date)}`);
+    window.SARKIVE_NAV.commit(null, '', `#page=vod-index&date=${encodeURIComponent(date)}`);
   });
   elements.vodSearch?.addEventListener('input', () => {
     state.vodQuery = String(elements.vodSearch.value || '').trim();
     if (state.vodQuery) {
       state.vodSelectedDate = '';
       elements.vodDateJump.value = '';
-      history.replaceState(null, '', '#page=vod-index');
+      window.SARKIVE_NAV.commit(null, '', '#page=vod-index');
     }
     renderVodCalendar();
     renderVodResults(true);
@@ -5443,7 +5569,7 @@
     renderVodPlayerDetails();
     loadCurrentVod(true);
     const copy = currentVodCopy();
-    history.replaceState(null, '', vodInternalUrl(state.vodCurrent, copy?.videoId || ''));
+    window.SARKIVE_NAV.commit(null, '', vodInternalUrl(state.vodCurrent, copy?.videoId || ''));
   });
 
   renderSiteMenu();
@@ -5457,13 +5583,27 @@
     }, { once: true });
   });
 
+  window.SARKIVE_ARCHIVE.connect({
+    prepare(pageId) {
+      pausePlayerForPageChange();
+      hideDiscoveryPages(); hideArchiveAndToolPages();
+      window.SARKIVE_BACKROOMS_UI?.hide?.();
+      state.view = 'archive'; state.pageId = pageId; state.navOverlayOpen = false;
+      updateSiteMenu();
+    },
+    navigate: navigateCurrentUrl
+  });
+  async function navigateCurrentUrl(shouldPlay = false) {
+  shouldPlay = shouldPlay === true;
   const initial = routeFromUrl();
-  if (initial.view === 'watch') {
-    selectEntry(initial.entry.id, initial.chapter.id, initial.segmentIndex, false, initial.contentType);
+  if (initial.view === 'archive') {
+    await window.SARKIVE_ARCHIVE.route(initial.params);
+  } else if (initial.view === 'watch') {
+    selectEntry(initial.entry.id, initial.chapter.id, initial.segmentIndex, shouldPlay, initial.contentType);
   } else if (initial.view === 'backrooms-watch') {
-    selectBackroomsWatch(initial.payload, false);
+    selectBackroomsWatch(initial.payload, shouldPlay);
   } else if (initial.view === 'vod-watch') {
-    showVodWatchPage(initial.vod.id, initial.copyId, false, false);
+    showVodWatchPage(initial.vod.id, initial.copyId, shouldPlay, false);
   } else if (initial.view === 'game-detail') {
     showGamePage(initial.entry.id);
   } else if (initial.view === 'podcast-detail') {
@@ -5502,5 +5642,9 @@
     showHomePage();
   }
 
+    window.SARKIVE_NAV.finish();
+  }
+  window.addEventListener('popstate', navigateCurrentUrl);
+  navigateCurrentUrl();
   loadYouTubeApi();
 })();

@@ -648,7 +648,7 @@
     if (state.mode === 'search' && state.query) params.set('q', state.query);
     if (state.mode === 'date' && state.selectedDate) params.set('date', state.selectedDate);
     if (state.mode === 'index') params.set('index', '1');
-    history.replaceState(null, '', `#${params.toString()}`);
+    window.SARKIVE_NAV.commit(null, '', `#${params.toString()}`);
   }
 
   function selectDate(date, scroll = true) {
