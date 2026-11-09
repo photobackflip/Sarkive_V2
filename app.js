@@ -3400,17 +3400,14 @@
       if (!response.ok) throw new Error('Could not load latest VODs');
       return response.json();
     }));
-    return days.flatMap(day => {
-      const vod = day.vods?.[0];
-      if (!vod?.playHref) return [];
-      const seconds = vod.durationSeconds;
-      const runtime = seconds == null ? 'Length unavailable' : formatDuration(seconds);
-      return [{
-        id: `latest-vod:${day.date}`, kind: 'vod', eyebrow: 'VOD',
-        title: day.dateLabel, metaLine: runtime,
+    return days.flatMap(day => (day.vods || [])
+      .filter(vod => vod.playHref)
+      .map(vod => ({
+        id: `latest-vod:${day.date}:${vod.id}`, kind: 'vod', eyebrow: 'VOD',
+        title: day.dateLabel,
+        metaLine: vod.durationSeconds == null ? 'Length unavailable' : formatDuration(vod.durationSeconds),
         image: vod.thumbnail, route: vod.playHref
-      }];
-    });
+      }))).slice(0, HOME_LATEST_VODS_LIMIT);
   }
 
   function createHomeShelf(category, usedLeadIds) {
