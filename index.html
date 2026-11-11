@@ -27,9 +27,9 @@
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=41541ebbe1e1">
-  <link rel="stylesheet" href="archive.css?v=431514fc13b6">
-  <link rel="stylesheet" href="responsive.css?v=c05dff95e6c0">
+  <link rel="stylesheet" href="styles.css?v=98b988084101">
+  <link rel="stylesheet" href="archive.css?v=17034a1e684d">
+  <link rel="stylesheet" href="responsive.css?v=4b8a26ee48e7">
 </head>
 <body>
   <header class="topbar">
@@ -67,6 +67,12 @@
     </aside>
 
     <main class="content">
+      <div id="site-return-navigation" hidden></div>
+        <div id="marbles-return-navigation" class="site-page-navigation" hidden>
+          <button id="marbles-back-scorecard" class="site-back-link discovery-back-button site-compact-back" type="button" hidden>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg><span>BACK</span>
+          </button>
+        </div>
       <section id="home-page" class="home-page" aria-labelledby="home-page-title" hidden>
         <h1 id="home-page-title" class="visually-hidden">The Sarkive</h1>
         <div id="home-shelves" class="home-shelves" aria-label="Browse the Sarkive"></div>
@@ -74,12 +80,6 @@
 
       <section id="category-page" class="category-page" aria-labelledby="category-page-title" hidden>
         <header class="discovery-page-header">
-          <div class="discovery-page-kicker-row">
-            <button id="category-back" class="discovery-back-button" type="button">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg>
-              <span>BACK</span>
-            </button>
-          </div>
           <h1 id="category-page-title" class="discovery-page-title"></h1>
           <p id="category-page-description" class="discovery-page-description"></p>
         </header>
@@ -310,10 +310,6 @@
               <p id="marbles-score-context" class="marbles-score-context"></p>
             </div>
             <div class="marbles-score-controls">
-              <button id="marbles-back-scorecard" class="game-play-button marbles-score-action-button" type="button" hidden>
-                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg>
-                BACK
-              </button>
               <button id="marbles-watch-race" class="game-play-button marbles-score-action-button" type="button" hidden>
                 <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
                 WATCH
@@ -765,20 +761,26 @@
 
           <div class="sark-tv-control-row">
             <div class="video-actions" aria-label="SarkTV playback controls">
+              <button id="clip-player-previous" class="action-button" type="button" title="Previous clip" hidden disabled><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m19 5-10 7 10 7zM7 5H4v14h3z"/></svg><span class="visually-hidden">Previous clip</span></button>
               <button id="sark-tv-play-pause" class="action-button" type="button">
                 <svg class="play-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
                 <svg class="pause-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
                 <span id="sark-tv-play-pause-label" class="visually-hidden">Play</span>
               </button>
               <button id="sark-tv-next" class="action-button" type="button" title="Next clip"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 5 10 7-10 7zM17 5h3v14h-3z"/></svg><span class="visually-hidden">Next clip</span></button>
+              <button id="clip-player-autoplay" class="action-button" type="button" title="Autoplay" aria-label="Autoplay" aria-pressed="false" hidden><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 9a8 8 0 1 0 .4 5M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="m10 8.5 5.5 3.5-5.5 3.5z"/></svg></button>
             </div>
 
-            <div class="sark-tv-bezel-brand" aria-hidden="true">SarkTV</div>
-
-            <div class="sark-tv-status-block">
-              <strong id="sark-tv-status">Clip archive ready</strong>
-              <span id="sark-tv-count"></span>
+            <div class="sark-tv-clip-info">
+              <h2 id="sark-tv-clip-title" aria-live="polite">SarkTV</h2>
+              <div class="sark-tv-clip-links">
+                <a id="sark-tv-game-link" data-archive hidden></a>
+                <span id="sark-tv-game" hidden></span>
+                <a id="sark-tv-stream-link" data-archive hidden></a>
+              </div>
             </div>
+
+            <span id="sark-tv-status" class="visually-hidden" role="status"></span>
           </div>
         </div>
       </section>
@@ -920,9 +922,6 @@
         </div>
 
         <div class="vod-control-bar" aria-label="VOD controls and details">
-          <button id="vod-back" class="action-button vod-icon-button" type="button" title="Back" aria-label="Back">
-            <svg class="vod-back-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6M8 12h12"/></svg>
-          </button>
           <button id="vod-play-pause" class="action-button vod-icon-button" type="button" title="Play" disabled>
             <svg class="play-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
             <svg class="pause-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
@@ -973,8 +972,6 @@
 
         <div class="game-control-bar">
           <div class="video-actions" aria-label="Playback and chapter controls">
-<button id="game-watch-back" class="action-button game-remote-button" type="button" title="Back" aria-label="Back" ><svg class="remote-back" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6M8 12h12"/></svg></button>
-            <button id="backrooms-watch-back" class="action-button" type="button" hidden>Back to Backrooms</button>
 <button id="previous-chapter" class="action-button game-remote-button" type="button" title="Previous chapter" aria-label="Previous chapter" ><svg class="remote-previous" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h2v14H5zm14 0L8 12l11 7z"/></svg></button>
             <button id="play-pause" class="action-button game-remote-button" type="button" title="Play" aria-label="Play" disabled>
               <svg class="play-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
@@ -1016,18 +1013,17 @@
   <script src="xplay-data.js"></script>
   <script src="podcasts.js?v=v61-podcast-discovery"></script>
   <script src="marbles-scores-data.js"></script>
-  <script src="sark-tv-data.js"></script>
   <script src="pals-data.js"></script>
-  <script src="archive-discovery-data.js?v=c66bcd3a02c4"></script>
+  <script src="archive-discovery-data.js?v=0202e0026a2b"></script>
   <script src="vod-index-data.js?v=643bc808352e"></script>
   <script src="backrooms-data.js"></script>
-  <script src="navigation.js?v=6c7827594a2a"></script>
+  <script src="navigation.js?v=7f257a453887"></script>
   <script src="backrooms.js?v=0bf49a78eff2"></script>
-  <script src="archive-catalogue.js?v=07ad2384f0cc"></script>
+  <script src="archive-catalogue.js?v=aab2d0bed70e"></script>
   <script src="golden-kappa-dates.js?v=599c14679498"></script>
   <script src="archive-search.js?v=8c89bb498b4a"></script>
-  <script src="responsive.js?v=6063da324f01"></script>
-  <script src="archive.js?v=24ea13d0586c"></script>
-  <script src="app.js?v=37436052a488"></script>
+  <script src="responsive.js?v=c953e83de076"></script>
+  <script src="archive.js?v=0c0c5189e34a"></script>
+  <script src="app.js?v=5d2a8c90931a"></script>
 </body>
 </html>

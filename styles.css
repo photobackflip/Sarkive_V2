@@ -2368,33 +2368,6 @@ body.watch-mode .video-frame {
 .sark-tv-control-row .video-actions {
   justify-self: start;
 }
-.sark-tv-bezel-brand {
-  justify-self: center;
-  color: var(--button);
-  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  user-select: none;
-}
-.sark-tv-status-block {
-  justify-self: end;
-  min-width: 180px;
-  text-align: right;
-}
-.sark-tv-status-block strong,
-.sark-tv-status-block span {
-  display: block;
-}
-.sark-tv-status-block strong {
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-}
-.sark-tv-status-block span {
-  margin-top: 3px;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
 .sark-tv-video {
   display: block;
   object-fit: contain;
@@ -2420,17 +2393,6 @@ body.watch-mode .video-frame {
   .sark-tv-control-row .video-actions {
     grid-column: 1;
     grid-row: 1;
-  }
-  .sark-tv-bezel-brand {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: end;
-  }
-  .sark-tv-status-block {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    justify-self: start;
-    text-align: left;
   }
 }
 /* V31 pals directory */
@@ -6337,18 +6299,6 @@ body.backrooms-teaser-open {
     grid-column: 1;
     grid-row: 1;
   }
-  .sark-tv-bezel-brand {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: end;
-  }
-  .sark-tv-status-block {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    min-width: 0;
-    justify-self: start;
-    text-align: left;
-  }
 
   .pals-grid {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
@@ -6791,30 +6741,29 @@ body.backrooms-teaser-open {
 
 /* VOD viewer: one compact footer, bounded by the same width as the video. */
 body.watch-mode:has(#vod-watch-page:not([hidden])) .content{padding:0 12px}
-body.watch-mode #vod-watch-page{--vod-chrome:72px;width:100%;max-width:min(100%,calc((100vh - var(--topbar-height) - var(--vod-chrome))*16/9));min-width:0;margin:0 auto;padding:0 0 12px}
+body.watch-mode #vod-watch-page{--vod-chrome:72px;width:100%;max-width:min(100%,calc((100vh - var(--topbar-height) - var(--vod-chrome) - var(--watch-return-space))*16/9));min-width:0;margin:0 auto;padding:0 0 12px}
 body.watch-mode #vod-watch-page:has(#vod-copy-selector:not([hidden])){--vod-chrome:110px}
-@supports(height:100dvh){body.watch-mode #vod-watch-page{max-width:min(100%,calc((100dvh - var(--topbar-height) - var(--vod-chrome))*16/9))}}
+@supports(height:100dvh){body.watch-mode #vod-watch-page{max-width:min(100%,calc((100dvh - var(--topbar-height) - var(--vod-chrome) - var(--watch-return-space))*16/9))}}
 body.watch-mode #vod-watch-page>.video-frame{width:100%;max-width:100%;max-height:none;margin:0;border-radius:6px 6px 0 0}
-#vod-watch-page .vod-control-bar{display:grid;grid-template-columns:36px 36px minmax(0,1fr) auto;align-items:center;gap:6px 12px;min-width:0;width:100%;box-sizing:border-box;padding:10px 12px;background:var(--surface);border-radius:0 0 6px 6px;border-top:1px solid var(--border-soft)}
+#vod-watch-page .vod-control-bar{display:grid;grid-template-columns:36px minmax(0,1fr) auto;align-items:center;gap:6px 12px;min-width:0;width:100%;box-sizing:border-box;padding:10px 12px;background:var(--surface);border-radius:0 0 6px 6px;border-top:1px solid var(--border-soft)}
 #vod-watch-page .vod-icon-button{width:36px;height:36px;min-width:0;min-height:0;padding:0;border-radius:4px;border:1px solid var(--border);background:var(--surface-raised)}
 #vod-watch-page .vod-icon-button:hover:not(:disabled){background:var(--button-hover)}
 #vod-watch-page .vod-icon-button:focus-visible{outline:2px solid var(--accent-soft);outline-offset:2px}
-#vod-watch-page .vod-icon-button .vod-back-icon{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 #vod-watch-page .vod-icon-button svg{width:18px;height:18px}
 #vod-watch-page .vod-player-heading{min-width:0;margin:0;padding:0}
 #vod-watch-page #vod-player-title{min-width:0;margin:0;padding:0;font-size:13px;font-weight:600;line-height:1.45;letter-spacing:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #vod-watch-page #vod-player-meta{margin:3px 0 0;padding:0;font-size:11px;line-height:1.4;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #vod-watch-page .vod-duration{font-size:12px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
 #vod-watch-page .vod-duration strong{font-weight:500}
-#vod-watch-page .vod-player-copy-selector{grid-column:3/-1;min-width:0;margin:0;padding:2px 0 0}
+#vod-watch-page .vod-player-copy-selector{grid-column:2/-1;min-width:0;margin:0;padding:2px 0 0}
 #vod-watch-page .vod-player-copy-selector .watch-group-selector{flex:0 1 360px;min-width:0;max-width:100%;margin:0}
 #vod-watch-page .vod-player-copy-selector select{width:100%;min-width:0;max-width:100%;height:30px;min-height:0;padding:4px 26px 4px 8px;font-size:11px;line-height:1.4;text-overflow:ellipsis}
-@media(max-width:650px){#vod-watch-page .vod-control-bar{grid-template-columns:32px 32px minmax(0,1fr) auto;padding:8px;gap:5px 8px}#vod-watch-page .vod-icon-button{width:32px;height:36px}#vod-watch-page #vod-player-title{font-size:12px}#vod-watch-page #vod-player-meta{font-size:10px}#vod-watch-page .vod-duration{font-size:11px}}
+@media(max-width:650px){#vod-watch-page .vod-control-bar{grid-template-columns:32px minmax(0,1fr) auto;padding:8px;gap:5px 8px}#vod-watch-page .vod-icon-button{width:32px;height:36px}#vod-watch-page #vod-player-title{font-size:12px}#vod-watch-page #vod-player-meta{font-size:10px}#vod-watch-page .vod-duration{font-size:11px}}
 /* Round 4: cinema player. Chapters are temporary and never resize the stage. */
 body.watch-mode:has(#watch-page:not([hidden])) .content { padding:0 12px; }
 body.watch-mode #watch-page {
   width:100%; min-width:0; margin:0 auto; padding:0 0 12px;
-  max-width:min(100%,calc((100dvh - var(--topbar-height) - var(--watch-chrome, 69px))*16/9));
+  max-width:min(100%,calc((100dvh - var(--topbar-height) - var(--watch-chrome, 69px) - var(--watch-return-space))*16/9));
 }
 body.watch-mode #watch-page:has(#multicam-controls:not([hidden])) { max-width:100%; }
 body.watch-mode #watch-page > .video-frame { width:100%; max-width:100%; max-height:none; margin:0; border-radius:6px 6px 0 0; }
@@ -6824,7 +6773,7 @@ body.watch-mode #watch-page > .video-frame { width:100%; max-width:100%; max-hei
 #watch-page .game-remote-button:hover:not(:disabled) { background:var(--button-hover); }
 #watch-page .game-remote-button:focus-visible { outline:2px solid var(--accent-text); outline-offset:2px; }
 #watch-page .game-remote-button svg { width:18px; height:18px; }
-#watch-page .remote-back, #watch-page .remote-chapters, #watch-page .remote-close { fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+#watch-page .remote-chapters, #watch-page .remote-close { fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
 #watch-page .game-player-heading { min-width:0; }
 #watch-page .video-title { margin:0; padding:0; font-size:13px; font-weight:600; line-height:1.45; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 #watch-page .game-player-meta { margin:3px 0 0; font-size:11px; color:var(--muted); line-height:1.4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -6860,7 +6809,7 @@ body.watch-mode #watch-page > .video-frame { width:100%; max-width:100%; max-hei
   #watch-page .game-remote-button { width:40px; height:40px; flex-basis:40px; }
   #watch-page .game-chapter-dialog { inset:auto 0 0; width:100%; height:min(70dvh,600px); border-radius:12px 12px 0 0; padding-bottom:env(safe-area-inset-bottom); }
 }
-#watch-page .game-chapter-dialog { bottom:auto; max-height:calc(100dvh - var(--topbar-height) - 24px); right:max(12px,calc((100vw - (100dvh - var(--topbar-height) - var(--watch-chrome, 69px))*16/9)/2)); }
+#watch-page .game-chapter-dialog { bottom:auto; max-height:calc(100dvh - var(--topbar-height) - 24px); right:max(12px,calc((100vw - (100dvh - var(--topbar-height) - var(--watch-chrome, 69px) - var(--watch-return-space))*16/9)/2)); }
 #watch-page .game-player-meta #game-title { text-transform:none; }
 @media(max-width:650px) { #watch-page .game-chapter-dialog { inset:auto 0 0; max-height:70dvh; } }
 
@@ -6877,7 +6826,7 @@ body.watch-mode #watch-page > .video-frame { width:100%; max-width:100%; max-hei
 /* Round 5: SarkTV uses the same attached remote bar as the archive players. */
 .sark-tv-frame { border-radius:6px 6px 0 0; }
 .sark-tv-control-row {
-  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  grid-template-columns:auto minmax(0,1fr);
   gap:12px;min-height:58px;padding:10px 12px;
   background:var(--surface);border-top:1px solid var(--border-soft);border-radius:0 0 6px 6px;
 }
@@ -6888,21 +6837,42 @@ body.watch-mode #watch-page > .video-frame { width:100%; max-width:100%; max-hei
   width:36px;height:36px;min-height:36px;flex:0 0 36px;padding:0;
   border:1px solid var(--border);border-radius:4px;background:var(--surface-raised);
 }
-.sark-tv-control-row .action-button:hover:not(:disabled) { background:var(--button-hover); }
+.sark-tv-control-row .action-button:hover:not(:disabled),
+.sark-tv-control-row .action-button[aria-pressed="true"] { background:var(--button-hover); }
 .sark-tv-control-row .action-button:focus-visible { outline:2px solid var(--accent-soft);outline-offset:2px; }
 .sark-tv-control-row .action-button svg { width:18px;height:18px; }
-.sark-tv-control-row .sark-tv-bezel-brand {
-  grid-column:2;grid-row:1;justify-self:center;
-  color:var(--muted-dim);font-size:18px;
+.sark-tv-clip-info {
+  grid-column:2;grid-row:1;min-width:0;text-align:right;
+  color:var(--muted);font-size:11px;line-height:1.4;
 }
-.sark-tv-control-row .sark-tv-status-block {
-  grid-column:3;grid-row:1;justify-self:end;min-width:0;max-width:100%;text-align:right;
+.sark-tv-clip-info h2 {
+  margin:0;color:inherit;font:inherit;font-weight:500;
+  letter-spacing:.06em;overflow-wrap:anywhere;
 }
-.sark-tv-status-block strong { color:var(--muted);font-size:11px;font-weight:500;line-height:1.4;letter-spacing:.06em; }
-.sark-tv-status-block span { margin-top:3px;font-size:11px;line-height:1.4; }
+.sark-tv-clip-links {
+  display:flex;flex-wrap:wrap;justify-content:flex-end;gap:0 12px;
+}
+.sark-tv-clip-links > * { margin-top:3px;overflow-wrap:anywhere; }
+.sark-tv-clip-links a { color:inherit;text-decoration:underline;text-underline-offset:2px; }
+.sark-tv-clip-links a:hover { color:var(--accent-soft); }
+.sark-tv-clip-links a:focus-visible { outline:2px solid var(--accent-soft);outline-offset:3px; }
+.sark-tv-clip-links [hidden] { display:none; }
+.sark-tv-page.is-clip-player { min-height:0; }
+#clip-player-previous[hidden], #clip-player-autoplay[hidden] { display:none; }
 @media(max-width:650px) {
   .sark-tv-control-row { gap:8px;padding:8px; }
+  .sark-tv-clip-info { font-size:10px; }
   .sark-tv-control-row .action-button { width:32px;flex-basis:32px; }
-  .sark-tv-control-row .sark-tv-bezel-brand { font-size:16px; }
-  .sark-tv-status-block strong,.sark-tv-status-block span { font-size:10px; }
+}
+
+
+/* Page return controls sit above the content, outside the media controls. */
+body.watch-mode { --watch-return-space:64px; }
+body.watch-mode #site-return-navigation:not([hidden]) { padding-top:14px; }
+@media(min-width:861px) {
+  body.watch-mode #site-return-navigation { margin-inline:6px; }
+}
+#marbles-back-scorecard[hidden], #marbles-return-navigation[hidden], #marbles-return-navigation:has(> button[hidden]) { display:none; }
+@media(max-width:650px) {
+  body.watch-mode:has(#watch-page:not([hidden])) #site-return-navigation { margin-inline:12px; }
 }

@@ -13,11 +13,7 @@
   const rawPalsData = window.SARKIVE_PALS_DATA;
   const rawDiscoveryLibrary = window.SARKIVE_DISCOVERY_DATA;
   const rawVodIndex = window.SARKIVE_VOD_INDEX_DATA;
-  const rawSarkTvClips = window.SARK_TV_CLIPS;
   const fallbackGameImage = String(rawLibrary?.fallbackGameImage || 'https://static-cdn.jtvnw.net/ttv-static/404_boxart-210x280.jpg').trim();
-  const sarkTvClips = [...new Set((Array.isArray(rawSarkTvClips) ? rawSarkTvClips : [])
-    .map((slug) => String(slug || '').trim())
-    .filter(Boolean))];
 
   const vodIndexVods = (Array.isArray(rawVodIndex?.vods) ? rawVodIndex.vods : [])
     .filter((vod) => vod && vod.id && vod.date)
@@ -74,7 +70,6 @@
     homePage: document.querySelector('#home-page'),
     homeShelves: document.querySelector('#home-shelves'),
     categoryPage: document.querySelector('#category-page'),
-    categoryBack: document.querySelector('#category-back'),
     categoryPageTitle: document.querySelector('#category-page-title'),
     categoryPageDescription: document.querySelector('#category-page-description'),
     categoryGrid: document.querySelector('#category-grid'),
@@ -145,8 +140,13 @@
     sarkTvPlayPause: document.querySelector('#sark-tv-play-pause'),
     sarkTvPlayPauseLabel: document.querySelector('#sark-tv-play-pause-label'),
     sarkTvNext: document.querySelector('#sark-tv-next'),
+    clipPrevious: document.querySelector('#clip-player-previous'),
+    clipAutoplay: document.querySelector('#clip-player-autoplay'),
+    sarkTvClipTitle: document.querySelector('#sark-tv-clip-title'),
+    sarkTvGame: document.querySelector('#sark-tv-game'),
+    sarkTvGameLink: document.querySelector('#sark-tv-game-link'),
+    sarkTvStreamLink: document.querySelector('#sark-tv-stream-link'),
     sarkTvStatus: document.querySelector('#sark-tv-status'),
-    sarkTvCount: document.querySelector('#sark-tv-count'),
     sarkRadioPage: document.querySelector('#sark-radio-page'),
     sarkRadioLibraryCount: document.querySelector('#sark-radio-library-count'),
     sarkRadioYoutube: document.querySelector('#sark-radio-youtube'),
@@ -187,7 +187,6 @@
     vodPlayerPlaceholder: document.querySelector('#vod-player-placeholder'),
     vodPlayPause: document.querySelector('#vod-play-pause'),
     vodPlayPauseLabel: document.querySelector('#vod-play-pause-label'),
-    vodBack: document.querySelector('#vod-back'),
     vodPlayerTitle: document.querySelector('#vod-player-title'),
     vodPlayerMeta: document.querySelector('#vod-player-meta'),
     vodRuntime: document.querySelector('#vod-runtime'),
@@ -211,7 +210,6 @@
     playPauseLabel: document.querySelector('#play-pause-label'),
     previousChapter: document.querySelector('#previous-chapter'),
     nextChapter: document.querySelector('#next-chapter'),
-    backroomsWatchBack: document.querySelector('#backrooms-watch-back'),
     chapterPanel: document.querySelector('#chapter-panel'),
     runtimeBlock: document.querySelector('.runtime-block'),
     playerPlaceholder: document.querySelector('#player-placeholder'),
@@ -2402,6 +2400,17 @@
 
   function routeFromUrl() {
     const params = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+    if (params.get('page') === 'clip') {
+      const slug = params.get('clip') || '';
+      const kind = params.get('from');
+      const id = params.get('id') || '';
+      const validSource = (kind === 'dates' && /^\d{4}-\d{2}-\d{2}$/.test(id))
+        || (kind === 'entities' && /^[a-z0-9_-]+$/i.test(id));
+      if (/^[A-Za-z0-9_-]{1,200}$/.test(slug) && validSource) {
+        return { view: 'clip', selection: { slug, kind, id } };
+      }
+      return { view: 'sark-tv' };
+    }
     if (params.get('page') === 'backrooms-watch') {
       const payload = window.SARKIVE_BACKROOMS_UI?.watchPayload?.(params.get('game') || '', params.get('appearance') || '');
       if (payload) return {view:'backrooms-watch', payload};
@@ -2562,11 +2571,48 @@
     return `<svg aria-hidden="true" viewBox="0 0 24 24">${icons[name] || icons.links}</svg>`;
   }
 
+  let sarkTvClips = [];
+  let sarkTvPoolRequest = null;
+  const sarkTvDetails = new Map();
   let sarkTvDeck = [];
   let sarkTvDeckIndex = 0;
   let sarkTvNextPrepared = null;
+  let sarkTvNextRequest = null;
   let sarkTvPrepareSerial = 0;
   let sarkTvSwitching = false;
+  let sarkTvRotationClip = null;
+  let clipQueue = null;
+
+  async function readSarkTvData(file) {
+    const response = await fetch(`archive/sark-tv/${file}.json`, { cache: 'no-cache' });
+    if (!response.ok) throw new Error(`SarkTV catalogue request failed (${response.status}).`);
+    return response.json();
+  }
+
+  function loadSarkTvPool() {
+    if (!sarkTvPoolRequest) {
+      sarkTvPoolRequest = readSarkTvData('pool').then((slugs) => {
+        if (!Array.isArray(slugs)) throw new Error('Invalid SarkTV catalogue.');
+        sarkTvClips = [...new Set(slugs.filter((slug) => typeof slug === 'string' && /^[A-Za-z0-9_-]{1,200}$/.test(slug)))];
+      }).catch((error) => {
+        sarkTvPoolRequest = null;
+        throw error;
+      });
+    }
+    return sarkTvPoolRequest;
+  }
+
+  async function readSarkTvClipDetails(slug) {
+    const shard = slug.slice(0, 2).toLowerCase();
+    if (!sarkTvDetails.has(shard)) {
+      sarkTvDetails.set(shard, readSarkTvData(`clips-${shard}`).catch(() => {
+        sarkTvDetails.delete(shard);
+        return {};
+      }));
+    }
+    const entries = await sarkTvDetails.get(shard);
+    return entries && Object.hasOwn(entries, slug) ? entries[slug] : {};
+  }
 
   function shuffleSarkTvDeck() {
     sarkTvDeck = [...sarkTvClips];
@@ -2617,7 +2663,7 @@
     }
     const clip = await response.json();
     if (!clip?.mediaUrl) throw new Error('Twitch returned no playable media URL.');
-    return clip;
+    return { ...clip, slug, details: await readSarkTvClipDetails(slug) };
   }
 
   async function resolveNextPlayableSarkTvClip(preferredSlug = '') {
@@ -2645,6 +2691,17 @@
     player.pause();
     state.sarkTvSlug = clip.slug;
     state.sarkTvClip = clip;
+    if (state.view === 'sark-tv') sarkTvRotationClip = clip;
+    const { title, game, gameHref, stream, streamHref } = clip.details || {};
+    elements.sarkTvClipTitle.textContent = clip.title || title || 'Untitled clip';
+    elements.sarkTvGame.textContent = game || '';
+    elements.sarkTvGame.hidden = !game || Boolean(gameHref);
+    elements.sarkTvGameLink.textContent = game || '';
+    elements.sarkTvGameLink.href = gameHref || '#';
+    elements.sarkTvGameLink.hidden = !gameHref;
+    elements.sarkTvStreamLink.textContent = stream ? `Stream · ${stream}` : '';
+    elements.sarkTvStreamLink.href = streamHref || '#';
+    elements.sarkTvStreamLink.hidden = !streamHref;
     player.src = clip.mediaUrl;
     player.poster = clip.thumbnailUrl || '';
     player.muted = false;
@@ -2653,30 +2710,24 @@
     player.load();
     elements.sarkTvPlaceholder.hidden = true;
     elements.sarkTvStatus.textContent = 'READY';
-    elements.sarkTvCount.textContent = `${sarkTvClips.length.toLocaleString()} clips in rotation`;
     elements.sarkTvPlayPause.disabled = false;
     sarkTvSwitching = false;
     setSarkTvPlayingUi(false);
     return true;
   }
 
-  async function prepareSarkTvNext() {
-    if (!sarkTvClips.length) return null;
+  function prepareSarkTvNext() {
+    if (!sarkTvClips.length || sarkTvNextRequest) return;
     elements.sarkTvNext.disabled = true;
-    const clip = await resolveNextPlayableSarkTvClip();
-    sarkTvNextPrepared = clip;
-    elements.sarkTvNext.disabled = !clip;
-    return clip;
+    sarkTvNextRequest = resolveNextPlayableSarkTvClip().then((clip) => {
+      sarkTvNextPrepared = clip;
+      if (state.view === 'sark-tv') elements.sarkTvNext.disabled = !clip;
+    }).finally(() => {
+      sarkTvNextRequest = null;
+    });
   }
 
   async function prepareInitialSarkTvClip() {
-    if (!sarkTvClips.length) {
-      setSarkTvPlaceholder('No clips loaded.', 'Add clip slugs to sark-tv-data.js.');
-      elements.sarkTvPlayPause.disabled = true;
-      elements.sarkTvNext.disabled = true;
-      return;
-    }
-
     if (!isHttpPage) {
       setSarkTvPlaceholder('SarkTV needs the site server.', 'Launch the site with START_SITE.bat instead of opening index.html directly.');
       elements.sarkTvPlayPause.disabled = true;
@@ -2686,6 +2737,7 @@
 
     if (state.sarkTvClip?.mediaUrl) {
       elements.sarkTvPlayPause.disabled = false;
+      elements.sarkTvNext.disabled = !sarkTvNextPrepared;
       if (!sarkTvNextPrepared) prepareSarkTvNext();
       return;
     }
@@ -2696,8 +2748,22 @@
     elements.sarkTvStatus.textContent = 'TUNING IN';
     setSarkTvPlaceholder('SARK TV', 'Tuning in…');
 
+    try {
+      await loadSarkTvPool();
+    } catch (_) {
+      if (serial !== sarkTvPrepareSerial || state.view !== 'sark-tv') return;
+      elements.sarkTvStatus.textContent = 'OFF AIR';
+      setSarkTvPlaceholder('Couldn’t load the clip catalogue.', 'Open SarkTV again to retry.');
+      return;
+    }
+    if (serial !== sarkTvPrepareSerial || state.view !== 'sark-tv') return;
+    if (!sarkTvClips.length) {
+      elements.sarkTvStatus.textContent = 'OFF AIR';
+      setSarkTvPlaceholder('No clips loaded.', 'The clip catalogue is empty.');
+      return;
+    }
     const clip = await resolveNextPlayableSarkTvClip();
-    if (serial !== sarkTvPrepareSerial) return;
+    if (serial !== sarkTvPrepareSerial || state.view !== 'sark-tv') return;
 
     if (!clip) {
       elements.sarkTvStatus.textContent = 'OFF AIR';
@@ -2737,7 +2803,7 @@
     }
 
     if (!state.sarkTvClip?.mediaUrl) {
-      prepareInitialSarkTvClip();
+      if (state.view === 'sark-tv') prepareInitialSarkTvClip();
       return;
     }
 
@@ -2762,6 +2828,7 @@
     elements.sarkTvStatus.textContent = 'TUNING IN';
     elements.sarkTvNext.disabled = true;
     const clip = await resolveNextPlayableSarkTvClip();
+    if (state.view !== 'sark-tv') return;
     if (!clip) {
       elements.sarkTvStatus.textContent = 'OFF AIR';
       return;
@@ -2777,6 +2844,7 @@
 
     elements.sarkTvStatus.textContent = 'TUNING IN';
     resolveNextPlayableSarkTvClip().then((clip) => {
+      if (state.view !== 'sark-tv') return;
       if (!clip) {
         setSarkTvPlayingUi(false);
         elements.sarkTvStatus.textContent = 'OFF AIR';
@@ -2786,6 +2854,80 @@
       prepareSarkTvNext();
       playCurrentSarkTvClip();
     });
+  }
+
+  function clearClipMedia() {
+    const player = elements.sarkTvPlayer;
+    player.pause();
+    player.removeAttribute('src');
+    player.removeAttribute('poster');
+    player.load();
+    player.hidden = true;
+    state.sarkTvClip = null;
+    state.sarkTvSlug = '';
+    setSarkTvPlayingUi(false);
+    elements.sarkTvPlayPause.disabled = true;
+    elements.sarkTvGame.hidden = true;
+    elements.sarkTvGameLink.hidden = true;
+    elements.sarkTvStreamLink.hidden = true;
+  }
+
+  function updateClipQueueControls(queue) {
+    elements.clipPrevious.disabled = queue.loading || queue.index <= 0;
+    elements.sarkTvNext.disabled = queue.loading || queue.index >= queue.items.length - 1;
+  }
+
+  async function loadQueuedClip(queue, shouldPlay = false) {
+    const item = queue.items[queue.index];
+    queue.loading = true;
+    updateClipQueueControls(queue);
+    clearClipMedia();
+    elements.sarkTvClipTitle.textContent = item.title || 'Clip player';
+    elements.sarkTvStatus.textContent = 'LOADING CLIP';
+    setSarkTvPlaceholder('Loading clip…', '');
+    window.SARKIVE_NAV.commit(null, '', window.SARKIVE_ARCHIVE.clipHref(item.id, queue.kind, queue.id));
+    try {
+      const clip = await resolveSarkTvClip(item.id);
+      if (clipQueue !== queue || state.view !== 'clip') return;
+      installSarkTvClip({ ...clip, title: clip.title || item.title });
+      document.title = 'The Sarkive | ' + elements.sarkTvClipTitle.textContent;
+      if (shouldPlay) playCurrentSarkTvClip();
+    } catch (_) {
+      if (clipQueue !== queue || state.view !== 'clip') return;
+      elements.sarkTvStatus.textContent = 'CLIP UNAVAILABLE';
+      setSarkTvPlaceholder('Clip unavailable', 'Try another clip in this list.');
+    } finally {
+      queue.loading = false;
+      if (clipQueue === queue && state.view === 'clip') updateClipQueueControls(queue);
+    }
+  }
+
+  async function openClipQueue(selection) {
+    const queue = { ...selection, items: [{ id: selection.slug }], index: 0, loading: true };
+    clipQueue = queue;
+    updateClipQueueControls(queue);
+    clearClipMedia();
+    elements.sarkTvClipTitle.textContent = 'Clip player';
+    setSarkTvPlaceholder('Loading clip…', '');
+    try {
+      const items = await window.SARKIVE_ARCHIVE.clipList(queue.kind, queue.id);
+      const index = items.findIndex(item => item.id === queue.slug);
+      if (index >= 0) {
+        queue.items = items;
+        queue.index = index;
+      }
+    } catch (_) {
+      // A shared clip link can still play after the source list changes.
+    }
+    if (clipQueue === queue && state.view === 'clip') await loadQueuedClip(queue);
+  }
+
+  function stepClipQueue(direction, shouldPlay = state.sarkTvPlaying) {
+    if (!clipQueue || clipQueue.loading || state.view !== 'clip') return;
+    const index = clipQueue.index + direction;
+    if (index < 0 || index >= clipQueue.items.length) return;
+    clipQueue.index = index;
+    loadQueuedClip(clipQueue, shouldPlay);
   }
 
   function pauseSarkTvForPageChange() {
@@ -3447,8 +3589,10 @@
     const track = document.createElement('div');
     track.className = `archive-shelf-track archive-shelf-track--${category.cardStyle === 'landscape' ? 'landscape' : 'home'}`;
     const orderedRecords = category.loadRecords ? [] : recordsForCategory(category, 'home');
-    const records = rotateHomeShelfLead(orderedRecords, usedLeadIds).slice(0, category.homeLimit);
-    if (records[0]) usedLeadIds?.add(records[0].id);
+    const isNewReleases = category.id === 'new-releases';
+    const records = (isNewReleases ? orderedRecords : rotateHomeShelfLead(orderedRecords, usedLeadIds))
+      .slice(0, category.homeLimit);
+    if (records[0] && !isNewReleases) usedLeadIds?.add(records[0].id);
     const cardStyle = category.cardStyle === 'landscape' ? 'landscape' : 'poster';
     track.replaceChildren(...records.map((record) => createDiscoveryCard(homeShelfRecord(record), cardStyle)));
 
@@ -4146,10 +4290,6 @@
     scrollPageToTop();
   }
 
-  function returnToVodIndex() {
-    window.SARKIVE_NAV.back();
-  }
-
   function toggleVodPlayback() {
     if (!state.vodPlayerReady || !state.vodPlayer) return;
     const playerState = state.vodPlayer.getPlayerState();
@@ -4338,9 +4478,10 @@
     updateSiteMenu();
   }
 
-  function showSarkTvPage() {
-    state.view = 'sark-tv';
-    state.pageId = 'sark-tv';
+  function showSarkTvPage(selection = null) {
+    const fromClipQueue = Boolean(clipQueue);
+    state.view = selection ? 'clip' : 'sark-tv';
+    state.pageId = selection ? (selection.kind === 'dates' ? 'streams' : 'games') : 'sark-tv';
     state.navOverlayOpen = false;
     pausePlayerForPageChange();
     hideDiscoveryPages();
@@ -4357,15 +4498,30 @@
     elements.comingSoonPage.hidden = true;
     elements.palsPage.hidden = true;
     elements.sarkTvPage.hidden = false;
+    elements.sarkTvPage.setAttribute('aria-label', selection ? 'Clip player' : 'SarkTV');
+    elements.sarkTvPage.classList.toggle('is-clip-player', Boolean(selection));
+    elements.clipPrevious.hidden = !selection;
+    elements.clipAutoplay.hidden = !selection;
 
-    elements.sarkTvCount.textContent = sarkTvClips.length
-      ? `${sarkTvClips.length.toLocaleString()} clips in rotation`
-      : 'No clips loaded';
-    elements.sarkTvStatus.textContent = state.sarkTvClip ? 'READY' : 'CLIP ARCHIVE READY';
-    prepareInitialSarkTvClip();
-
-    document.title = 'The Sarkive | SarkTV';
-    window.SARKIVE_NAV.commit(null, '', '#page=sark-tv');
+    if (selection) {
+      sarkTvPrepareSerial++;
+      elements.clipAutoplay.setAttribute('aria-pressed', 'false');
+      document.title = 'The Sarkive | Clip player';
+      window.SARKIVE_NAV.commit(null, '', window.SARKIVE_ARCHIVE.clipHref(selection.slug, selection.kind, selection.id));
+      if (!window.SARKIVE_NAV.returning) window.scrollTo(0, 0);
+      openClipQueue(selection);
+    } else {
+      clipQueue = null;
+      if (fromClipQueue) {
+        clearClipMedia();
+        elements.sarkTvClipTitle.textContent = 'SarkTV';
+        if (sarkTvRotationClip) installSarkTvClip(sarkTvRotationClip);
+      }
+      elements.sarkTvStatus.textContent = state.sarkTvClip ? 'READY' : 'CLIP ARCHIVE READY';
+      prepareInitialSarkTvClip();
+      document.title = 'The Sarkive | SarkTV';
+      window.SARKIVE_NAV.commit(null, '', '#page=sark-tv');
+    }
     updateSiteMenu();
   }
 
@@ -4627,7 +4783,6 @@
 
   function configureWatchModeUi() {
     const backroomsMode = state.contentType === 'backrooms';
-    if (elements.backroomsWatchBack) elements.backroomsWatchBack.hidden = true;
     closeChapterMenu();
     document.querySelector('#game-chapters-toggle').hidden = backroomsMode;
     document.querySelector('#game-chapter-position').hidden = backroomsMode;
@@ -4989,17 +5144,6 @@
     selectEntry(entryId, chapterId, 0, shouldPlay, 'backrooms');
   }
 
-  function returnToBackroomsArchive() {
-    const returnHash = state.backroomsWatchContext?.returnHash || '#page=backrooms';
-    const params = new URLSearchParams(String(returnHash).replace(/^#/, ''));
-    window.SARKIVE_NAV.commit(null, '', returnHash);
-    showBackroomsPage({
-      date: String(params.get('date') || '').trim(),
-      query: String(params.get('q') || '').trim(),
-      index: params.get('index') === '1'
-    });
-  }
-
   window.SARKIVE_OPEN_BACKROOMS_WATCH = payload => selectBackroomsWatch(payload, true);
 
   function selectEntry(entryId, chapterId = null, segmentIndex = 0, shouldPlay = false, contentType = null) {
@@ -5303,15 +5447,6 @@
     showHomePage();
   });
 
-  elements.categoryBack.addEventListener('click', () => {
-    state.navOverlayOpen = false;
-    if (state.view === 'tag') {
-      showCategoriesPage();
-    } else {
-      showHomePage();
-    }
-  });
-
   elements.navScrim.addEventListener('click', closeNavigationOverlay);
 
   document.addEventListener('keydown', (event) => {
@@ -5392,11 +5527,6 @@
   elements.chapterPanel.addEventListener('close', () => chapterMenuToggle.setAttribute('aria-expanded', 'false'));
   window.addEventListener('popstate', closeChapterMenu);
   window.addEventListener('hashchange', closeChapterMenu);
-  document.querySelector('#game-watch-back').addEventListener('click', () => {
-    closeChapterMenu();
-    if (state.contentType === 'backrooms') elements.backroomsWatchBack.click();
-    else window.SARKIVE_NAV.back();
-  });
   new MutationObserver(() => {
     const label = elements.playPauseLabel.textContent;
     elements.playPause.setAttribute('aria-label', label);
@@ -5474,7 +5604,15 @@
     selectNextSarkRadioTrack(true);
   });
   elements.sarkTvPlayPause.addEventListener('click', toggleSarkTvPlayback);
-  elements.sarkTvNext.addEventListener('click', stepSarkTv);
+  elements.sarkTvNext.addEventListener('click', () => {
+    if (state.view === 'clip') stepClipQueue(1);
+    else if (state.view === 'sark-tv') stepSarkTv();
+  });
+  elements.clipPrevious.addEventListener('click', () => stepClipQueue(-1));
+  elements.clipAutoplay.addEventListener('click', () => {
+    const enabled = elements.clipAutoplay.getAttribute('aria-pressed') === 'true';
+    elements.clipAutoplay.setAttribute('aria-pressed', String(!enabled));
+  });
   elements.sarkTvPlayer.addEventListener('play', () => {
     setSarkTvPlayingUi(true);
     elements.sarkTvStatus.textContent = 'NOW PLAYING';
@@ -5489,11 +5627,23 @@
     elements.sarkTvStatus.textContent = 'PAUSED';
   });
   elements.sarkTvPlayer.addEventListener('ended', () => {
-    setSarkTvPlayingUi(true);
-    advanceSarkTvAfterEnd();
+    if (state.view === 'clip') {
+      setSarkTvPlayingUi(false);
+      if (elements.clipAutoplay.getAttribute('aria-pressed') === 'true') stepClipQueue(1, true);
+    } else if (state.view === 'sark-tv') {
+      setSarkTvPlayingUi(true);
+      advanceSarkTvAfterEnd();
+    }
   });
   elements.sarkTvPlayer.addEventListener('error', () => {
-    if (sarkTvSwitching) return;
+    if (sarkTvSwitching || !state.sarkTvClip) return;
+    if (state.view === 'clip') {
+      clearClipMedia();
+      elements.sarkTvStatus.textContent = 'CLIP UNAVAILABLE';
+      setSarkTvPlaceholder('Clip unavailable', 'Try another clip in this list.');
+      return;
+    }
+    if (state.view !== 'sark-tv') return;
     console.warn('SarkTV media error; skipping clip', state.sarkTvSlug);
     advanceSarkTvAfterEnd();
   });
@@ -5509,7 +5659,6 @@
     seekMulticam(Number(elements.multicamSeek.value), state.isPlaying);
     window.setTimeout(() => { multicamRuntime.seeking = false; }, 350);
   });
-  elements.backroomsWatchBack?.addEventListener('click', returnToBackroomsArchive);
   elements.previousChapter.addEventListener('click', () => stepChapter(-1));
   elements.nextChapter.addEventListener('click', () => stepChapter(1));
 
@@ -5555,7 +5704,6 @@
     const pick = pool[Math.floor(Math.random() * pool.length)];
     openVodFromIndex(pick, '', true);
   });
-  elements.vodBack?.addEventListener('click', returnToVodIndex);
   elements.vodPlayPause?.addEventListener('click', toggleVodPlayback);
   elements.vodCopySelect?.addEventListener('change', () => {
     if (!state.vodCurrent) return;
@@ -5617,6 +5765,8 @@
     showMarblesScoresPage();
   } else if (initial.view === 'sark-tv') {
     showSarkTvPage();
+  } else if (initial.view === 'clip') {
+    showSarkTvPage(initial.selection);
   } else if (initial.view === 'sark-radio') {
     showSarkRadioPage();
   } else if (initial.view === 'vod-index') {

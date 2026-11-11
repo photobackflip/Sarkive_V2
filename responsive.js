@@ -69,7 +69,6 @@
   function cleanup() {
     close(false);
     current?.removeReset?.();
-    current?.removeGroups?.();
     current?.removeShelves?.();
     page.querySelectorAll('.rr-stream-tags').forEach(group => {
       const head = group.querySelector('.rr-tags-heading');
@@ -84,7 +83,7 @@
     page.querySelectorAll('.search-filter-button').forEach(n => n.setAttribute('aria-expanded', 'false'));
     page.querySelectorAll('.archive-filter-shell').forEach(n => n.classList.remove('is-open'));
     page.querySelectorAll('.rr-description-short').forEach(n => n.classList.remove('rr-description-short'));
-    page.querySelectorAll('.rr-dialog,.rr-tools,.rr-campaign-picker,.rr-description-toggle,.rr-category-jump,.rr-year-section,.rr-chapter-meta').forEach(n => n.remove());
+    page.querySelectorAll('.rr-dialog,.rr-tools,.rr-description-toggle,.rr-category-jump,.rr-year-section,.rr-chapter-meta').forEach(n => n.remove());
     page.querySelectorAll('.rr-month-active').forEach(n => n.classList.remove('rr-month-active'));
     page.classList.remove('rr-mobile', 'rr-browse', 'rr-game', 'rr-date');
     current = null;
@@ -145,10 +144,6 @@
         move(row.querySelector('.archive-chapter-runtime'), meta);
         move(row.querySelector('.archive-chapter-dates'), meta);
       });
-      const picker = page.querySelector('.rr-campaign-picker');
-      const selected = page.querySelector('[data-tab][aria-selected=true]');
-      if (picker && selected) picker.textContent = selected.textContent.trim() + ' ▾';
-      if (picker) picker.hidden = page.querySelector('#archive-view-streams')?.getAttribute('aria-selected') === 'true' || page.querySelectorAll('[data-tab]').length < 2;
     }
   }
   function mount(kind) {
@@ -239,14 +234,6 @@
       }
     } else if (kind === 'game') {
       page.classList.add('rr-game');
-      const campaigns = page.querySelector('.archive-campaigns');
-      const picker = make('button', 'rr-campaign-picker'); picker.type = 'button'; picker.setAttribute('aria-haspopup', 'dialog');
-      campaigns.before(picker);
-      const groups = dialog('Choose a chapter group', 'groups'); move(campaigns, groups.body);
-      picker.onclick = () => open(groups.node, picker);
-      const selectGroup = event => {if (event.target.closest('[data-tab]')) {sync(); close();}};
-      campaigns.addEventListener('click', selectGroup);
-      current.removeGroups = () => campaigns.removeEventListener('click', selectGroup);
       const hero = page.querySelector('.archive-game-hero');
       const description = page.querySelector('.archive-description');
       move(description, hero);
@@ -295,13 +282,17 @@
         wrapper.replaceWith(track);
       });
     });
-    // Budget image sizes against the actual header, labels and viewport height.
-    // Keep natural page scrolling available when supplementary details are opened.
+    // Fit the original stream content. Clips extend below it in the normal page flow.
+    const clips = page.querySelector('.archive-date-clips');
+    const lastPrimarySection = clips?.previousElementSibling;
     const fit = () => {
       const tracks = [...page.querySelectorAll('.rr-shelf-track')];
       tracks.forEach(track => track.style.removeProperty('--rr-card-width'));
       for (let pass = 0; pass < 5; pass++) {
-        const bottom = page.getBoundingClientRect().bottom + window.scrollY;
+        const clipSpace = lastPrimarySection
+          ? clips.getBoundingClientRect().bottom - lastPrimarySection.getBoundingClientRect().bottom
+          : 0;
+        const bottom = page.getBoundingClientRect().bottom + window.scrollY - clipSpace;
         const shellBottom = parseFloat(getComputedStyle(page.parentElement).paddingBottom) || 0;
         const excess = bottom + shellBottom + 8 - innerHeight;
         if (excess <= 1) break;

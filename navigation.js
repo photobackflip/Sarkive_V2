@@ -8,6 +8,7 @@
   const esc=value=>String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function key(hash) {
     const p=params(hash), page=p.get('page');
+    if(page==='clip') return 'clip:'+p.get('from')+':'+p.get('id');
     if(page==='backrooms-watch') return 'backrooms-watch:'+p.get('game');
     if(p.has('game') || p.has('podcast')) {
       const kind=p.has('game')?'game':'podcast';
@@ -21,18 +22,18 @@
     if(p.has('tag')) return 'tag:'+p.get('tag');
     return page || 'home';
   }
-  function label(hash) {
-    const p=params(hash), k=key(hash);
-    if(k.startsWith('stream:')) return new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'}).format(new Date(p.get('date')+'T12:00:00Z'));
-    if(k.startsWith('game:')) return window.SARKIVE_CATALOGUE?.games.find(g=>g.id===p.get('game'))?.title || 'Game';
-    if(k==='games') return 'Games';
-    if(k==='search') return 'Search results';
-    if(p.has('tag')) return p.get('tag');
-    if(p.has('category')) return p.get('category').replace(/-/g,' ');
-    return ({home:'Home',games:'Games',streams:'Streams',categories:'Categories',backrooms:'Backrooms','marbles-scores':'Marbles scores','sark-links':'Sark links',pals:'Pals',about:'About',shop:'Shop'})[k] || 'Previous page';
-  }
   function fallback() {
     const p=params(location.hash);
+    if(p.get('page')==='clip') {
+      const id=encodeURIComponent(p.get('id') || '');
+      if(p.get('from')==='dates' && id) return '#page=stream&date='+id;
+      if(p.get('from')==='entities' && id) return '#game='+id+'&tab=clips';
+      return '#page=sark-tv';
+    }
+    if(p.get('page')==='backrooms-watch') {
+      return window.SARKIVE_BACKROOMS_UI?.watchPayload(p.get('game') || '', p.get('appearance') || '')?.returnHash || '#page=backrooms';
+    }
+    if(p.has('podcast') && (p.has('watch') || p.has('chapter'))) return '#podcast='+encodeURIComponent(p.get('podcast'));
     if(p.has('vod')) {
       const vod=window.SARKIVE_VOD_INDEX_DATA?.vods.find(v=>v.id===p.get('vod'));
       return vod?.date?'#page=stream&date='+vod.date:'#page=streams';
@@ -49,7 +50,7 @@
     const old=state(), changed=key(location.hash)!==key(target.hash);
     const base={...(history.state || {}),...(data || {})};
     if(changed && !returning) {
-      const source={href:location.hash || '#home',label:label(location.hash),scroll:window.scrollY};
+      const source={href:location.hash || '#home',scroll:window.scrollY};
       replace({...base,[field]:{...old,scroll:window.scrollY}},'',location.href);
       push({...base,[field]:{previous:source,scroll:0}},title,target.href);
     } else {
@@ -59,25 +60,24 @@
     requestAnimationFrame(()=>{if(ticket===renderTicket) mount();});
   }
   function bar(actions='') {
-    const previous=state()?.previous, destination=previous?.href || fallback();
-    const compact = /^(game:|stream:)/.test(key(location.hash));
-    const content = compact
-      ? '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg><span>BACK</span>'
-      : `<span aria-hidden="true">‹</span><span>Back to ${esc(previous?.label || label(destination))}</span>`;
-    return `<div class="site-page-navigation"><a href="${esc(destination)}" class="site-back-link${compact?' discovery-back-button site-compact-back':''}" data-site-back>${content}</a>${actions}</div>`;
+    const destination=state()?.previous?.href || fallback();
+    return `<div class="site-page-navigation"><a href="${esc(destination)}" class="site-back-link discovery-back-button site-compact-back" data-site-back><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg><span>BACK</span></a>${actions}</div>`;
   }
+  const returnNavigation=document.querySelector('#site-return-navigation');
+  const marblesNavigation=document.querySelector('#marbles-return-navigation');
+  const sectionsWithoutReturn=new Set(['home-page','sark-radio-page','archive-page','marbles-scores-page','sark-links-page','pals-page','shop-page','about-page','podcast-page','nerd-poker-page']);
   function mount() {
     const section=[...document.querySelectorAll('main.content > section')].find(s=>!s.hidden);
-    if(!section || ['home-page','sark-tv-page','sark-radio-page','archive-page','marbles-scores-page','sark-links-page','pals-page','shop-page','about-page','podcast-page','nerd-poker-page'].includes(section.id)) return;
-    section.querySelector(':scope > .site-page-navigation')?.remove();
-    if(['vod-watch-page','watch-page'].includes(section.id)) {
-      const button=section.querySelector('#vod-back, #game-watch-back');
-      const description='Back to '+(state()?.previous?.label || label(fallback()));
-      button?.setAttribute('title',description);
-      button?.setAttribute('aria-label',description);
-      return;
+    const show=section && !sectionsWithoutReturn.has(section.id)
+      && (section.id!=='sark-tv-page' || params(location.hash).get('page')==='clip');
+    returnNavigation.hidden=!show;
+    marblesNavigation.hidden=section?.id!=='marbles-scores-page';
+    if(show) {
+      const destination=state()?.previous?.href || fallback();
+      if(returnNavigation.querySelector('[data-site-back]')?.getAttribute('href')!==destination) {
+        returnNavigation.innerHTML=bar();
+      }
     }
-    section.insertAdjacentHTML('afterbegin',bar());
   }
   function back() {
     if(state()?.previous) history.back();
