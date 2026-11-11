@@ -2647,8 +2647,10 @@
     elements.sarkTvPlaceholder.innerHTML = `<strong>${title}</strong><span>${message}</span>`;
   }
 
-  async function resolveSarkTvClip(slug) {
-    const response = await fetch(`/api/twitch-clip?slug=${encodeURIComponent(slug)}`, {
+  async function resolveSarkTvClip(slug, codec = '') {
+    const params = new URLSearchParams({ slug });
+    if (codec) params.set('codec', codec);
+    const response = await fetch(`/api/twitch-clip?${params}`, {
       cache: 'no-store'
     });
     if (!response.ok) {
@@ -2887,9 +2889,13 @@
     setSarkTvPlaceholder('Loading clip…', '');
     window.SARKIVE_NAV.commit(null, '', window.SARKIVE_ARCHIVE.clipHref(item.id, queue.kind, queue.id));
     try {
-      const clip = await resolveSarkTvClip(item.id);
+      const clip = await resolveSarkTvClip(item.id, 'avc');
       if (clipQueue !== queue || state.view !== 'clip') return;
-      installSarkTvClip({ ...clip, title: clip.title || item.title });
+      installSarkTvClip({
+        ...clip,
+        title: clip.title || item.title,
+        thumbnailUrl: clip.thumbnailUrl || item.thumbnail
+      });
       document.title = 'The Sarkive | ' + elements.sarkTvClipTitle.textContent;
       if (shouldPlay) playCurrentSarkTvClip();
     } catch (_) {

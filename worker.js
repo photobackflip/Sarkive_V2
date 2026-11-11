@@ -1,6 +1,7 @@
 const TWITCH_GQL_URL = 'https://gql.twitch.tv/gql';
 const TWITCH_CLIENT_ID = 'ue6666qo983tsx6so1t0vnawi233wa';
 const SHARE_CLIP_RENDER_STATUS_HASH = '0a02bb974443b576f5579aab0fef1d4b7f44e58a8a256f0c5adfead0db70640f';
+const CLIP_ACCESS_TOKEN_HASH = 'c5ca7c4143e42f257b91b97b37fbb19206460f42f564a02095bb504fd0a31af8';
 const SLUG_RE = /^[A-Za-z0-9_-]{1,200}$/;
 
 function jsonResponse(status, payload) {
@@ -82,14 +83,14 @@ function extractClipPayload(slug, gqlPayload) {
   };
 }
 
-async function resolveTwitchClip(slug) {
+async function resolveTwitchClip(slug, useAvc) {
   const body = [{
-    operationName: 'ShareClipRenderStatus',
-    variables: { slug },
+    operationName: useAvc ? 'VideoAccessToken_Clip' : 'ShareClipRenderStatus',
+    variables: useAvc ? { slug, platform: 'web', supportedCodecs: ['AVC'] } : { slug },
     extensions: {
       persistedQuery: {
         version: 1,
-        sha256Hash: SHARE_CLIP_RENDER_STATUS_HASH
+        sha256Hash: useAvc ? CLIP_ACCESS_TOKEN_HASH : SHARE_CLIP_RENDER_STATUS_HASH
       }
     }
   }];
@@ -143,7 +144,7 @@ export default {
       }
 
       try {
-        const clip = await resolveTwitchClip(slug);
+        const clip = await resolveTwitchClip(slug, url.searchParams.get('codec') === 'avc');
         return jsonResponse(200, clip);
       } catch (error) {
         console.error(`Twitch resolver error for ${slug}:`, error);
