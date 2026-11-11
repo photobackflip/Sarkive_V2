@@ -99,7 +99,11 @@
       if (categories) categories.done.textContent = `Show ${show}`;
       const input = page.querySelector(kind === 'games' ? '#archive-game-filter' : '#archive-filter');
       const facetCount = Number(page.querySelector('.search-filter-badge')?.textContent || 0);
-      const extra = kind === 'streams' ? Number(!!page.querySelector('[data-guest][aria-pressed=true]')?.dataset.guest) + Number(!!page.querySelector('#archive-stream-type')?.value) : Number(!!page.querySelector('.game-title-alphabet [aria-pressed=true]')?.dataset.letter);
+      const extra = kind === 'streams'
+        ? Number(!!page.querySelector('[data-guest][aria-pressed=true]')?.dataset.guest)
+          + Number(!!page.querySelector('#archive-stream-type')?.value)
+          + Number(!!page.querySelector('#archive-golden-kappa[aria-pressed=true]'))
+        : Number(!!page.querySelector('.game-title-alphabet [aria-pressed=true]')?.dataset.letter);
       const active = Number(!!input?.value) + facetCount + extra;
       searchButton.textContent = active ? `Search & filter · ${active}` : 'Search & filter';
       clear.hidden = !active;
@@ -174,6 +178,7 @@
         if (kind === 'streams') {
           current.tagsExpanded = false;
           const tagInput = toolbar.querySelector('.archive-tag-search input'); if (tagInput) tagInput.value = '';
+          page.querySelector('#archive-golden-kappa[aria-pressed=true]')?.click();
           toolbar.querySelector('[data-guest=""]').click();
           const type = toolbar.querySelector('#archive-stream-type'); type.value = ''; type.dispatchEvent(new Event('change', {bubbles: true}));
           page.querySelector('#archive-years [data-year]:not([data-year=""])').click();
@@ -185,6 +190,7 @@
       // This listener lives on the retained toolbar; remove it when restoring desktop.
       current.removeReset = () => reset.removeEventListener('click', resetMobile, true);
       const searchButton = button('Search & filter', search, bar);
+      if (kind === 'streams') move(toolbar.querySelector('#archive-golden-kappa'), bar);
       const clear = make('button', 'rr-clear', 'Clear'); clear.type = 'button'; clear.hidden = true;
       clear.onclick = () => page.querySelector(kind === 'games' ? '#archive-game-reset' : '#archive-reset').click();
       bar.append(clear);

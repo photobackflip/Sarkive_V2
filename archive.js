@@ -7,7 +7,8 @@
   let bridge, ticket = 0, indexesPromise;
   const cache = new Map();
   const search=window.SARKIVE_SEARCH;
-  const filters = {query:'', guest:'', type:'', year:'', scope:'default', mode:'footage', facets:search.blank()};
+  const goldenKappaTrains=new Map(Object.entries(window.SARKIVE_GOLDEN_KAPPA_TRAINS));
+  const filters = {query:'', guest:'', type:'', year:'', scope:'default', mode:'footage', goldenKappa:false, facets:search.blank()};
   const gameFilters={query:'',letter:'',sort:'az',facets:search.blank()};
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const number = n => Number(n || 0).toLocaleString();
@@ -55,10 +56,11 @@
     if (d.vodCount) return 'other';
     return CLIPS_ENABLED && d.clipCount ? 'clips' : 'unavailable';
   }
-  function matches(d) {
+  function matchesStreamFilters(d) {
     return search.query(d,filters.query) &&
       (!filters.guest || d.people.some(p => p.id===filters.guest)) &&
-      (!filters.type || (d.streamTypes || []).includes(filters.type)) && search.matches(d,filters.facets);
+      (!filters.type || (d.streamTypes || []).includes(filters.type)) &&
+      (!filters.goldenKappa || goldenKappaTrains.has(d.date));
   }
   function streamDateLink(d) {
     return link(d.href,`${dateBadge(d.date)}${image(d.thumbnail,'archive-date-thumb')}<span class="archive-date-copy"><strong>${esc(d.title || d.dateLabel)}</strong><small>${d.broadcastCount?`${d.broadcastCount} broadcast${d.broadcastCount===1?'':'s'} · `:''}${d.vodCount} VOD${d.vodCount===1?'':'s'}${CLIPS_ENABLED && d.clipCount?` · ${d.clipCount} clips`:''}</small><span class="archive-chips">${chips(d.people)}</span></span>`,'archive-date-main');
@@ -83,6 +85,17 @@
     });
   }
   window.addEventListener('resize',()=>page.querySelectorAll('.archive-date-games').forEach(syncDateGameArrows),{passive:true});
+  function goldenKappaStats() {
+    const byYear=new Map();
+    let total=0;
+    for (const [day,count] of goldenKappaTrains) {
+      const year=day.slice(0,4);
+      byYear.set(year,(byYear.get(year) || 0)+count);
+      total+=count;
+    }
+    const yearStats=[...byYear].sort(([a],[b])=>a.localeCompare(b)).map(([year,count])=>`<span><b>${number(count)}</b> in ${esc(year)}</span>`).join('');
+    return `<div id="archive-golden-kappa-stats" class="archive-stats archive-golden-kappa-stats" role="group" aria-label="Golden Kappa Train statistics"${filters.goldenKappa?'':' hidden'}><span><b>${number(total)}</b> confirmed scam trains</span><span><b>${number(goldenKappaTrains.size)}</b> streams with a scam train</span>${yearStats}</div>`;
+  }
   async function streams(initialDate='') {
     if (initialDate) return date(initialDate);
     const current=begin('streams','#page=streams');
@@ -93,10 +106,19 @@
       const people=[...new Map(dates.flatMap(d=>d.people || []).map(p=>[p.id,p])).values()].sort((a,b)=>a.name.localeCompare(b.name));
       document.title='The Sarkive | Streams';
       page.innerHTML=`<header class="archive-heading"><p class="archive-eyebrow">THE SARKIVE · BROADCAST ARCHIVE</p><h1>STREAMS</h1><p>Find a stream by date, game, guest or the kind of night it was.</p><div class="archive-stats"><span><b>${number(dates.reduce((n,d)=>n+d.broadcastCount,0))}</b> broadcasts</span><span><b>${years.at(-1)}–${years[0]}</b> on record</span><span><b>${number(dates.filter(d=>d.vodCount).length)}</b> dates with footage</span></div></header>
-      <div class="archive-filters archive-stream-toolbar"><label class="archive-search"><span class="visually-hidden">Filter by game, title or guest</span><input id="archive-filter" type="search" placeholder="Filter by game, title or guest…" value="${esc(filters.query)}"></label><details id="archive-guest" class="archive-guest-picker"><summary aria-label="Guest"><span id="archive-guest-label">${esc(people.find(p=>p.id===filters.guest)?.name || 'Any guest')}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></summary><div class="archive-guest-panel"><label><span class="visually-hidden">Find a guest</span><input id="archive-guest-search" type="search" placeholder="Find a guest…" autocomplete="off"></label><div class="archive-guest-options" aria-label="Choose a guest">${[{id:'',name:'Any guest'},...people].map(p=>`<button type="button" data-guest="${esc(p.id)}" aria-pressed="${p.id===filters.guest}">${esc(p.name)}</button>`).join('')}</div><p id="archive-guest-empty" role="status" hidden>No guests match.</p></div></details><label><span class="visually-hidden">Stream type</span><select id="archive-stream-type"><option value="">Any stream</option>${['Co-op','Solo play','With guests','Backrooms','VR','VR coasters','IRL'].filter(t=>dates.some(d=>(d.streamTypes || []).includes(t))).map(t=>`<option value="${esc(t)}" ${t===filters.type?'selected':''}>${esc(t)}</option>`).join('')}</select></label>${search.shell('stream-facets','FILTER STREAMS')}<button class="archive-button" id="archive-reset">Reset</button></div>
+      <div class="archive-filters archive-stream-toolbar"><label class="archive-search"><span class="visually-hidden">Filter by game, title or guest</span><input id="archive-filter" type="search" placeholder="Filter by game, title or guest…" value="${esc(filters.query)}"></label><button type="button" id="archive-golden-kappa" class="archive-golden-kappa" aria-label="Golden Kappa" title="Golden Kappa" aria-pressed="${filters.goldenKappa}" aria-controls="archive-calendar archive-date-results"><img src="assets/img/golden-kappa.png" width="22" height="29" alt=""></button><details id="archive-guest" class="archive-guest-picker"><summary aria-label="Guest"><span id="archive-guest-label">${esc(people.find(p=>p.id===filters.guest)?.name || 'Any guest')}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></summary><div class="archive-guest-panel"><label><span class="visually-hidden">Find a guest</span><input id="archive-guest-search" type="search" placeholder="Find a guest…" autocomplete="off"></label><div class="archive-guest-options" aria-label="Choose a guest">${[{id:'',name:'Any guest'},...people].map(p=>`<button type="button" data-guest="${esc(p.id)}" aria-pressed="${p.id===filters.guest}">${esc(p.name)}</button>`).join('')}</div><p id="archive-guest-empty" role="status" hidden>No guests match.</p></div></details><label><span class="visually-hidden">Stream type</span><select id="archive-stream-type"><option value="">Any stream</option>${['Co-op','Solo play','With guests','Backrooms','VR','VR coasters','IRL'].filter(t=>dates.some(d=>(d.streamTypes || []).includes(t))).map(t=>`<option value="${esc(t)}" ${t===filters.type?'selected':''}>${esc(t)}</option>`).join('')}</select></label>${search.shell('stream-facets','FILTER STREAMS')}<button class="archive-button" id="archive-reset">Reset</button></div>
+      ${goldenKappaStats()}
       <div class="archive-calendar-shell"><div class="archive-calendar-top"><h2 id="archive-calendar-year" class="visually-hidden"></h2><div id="archive-years" class="archive-tabs" aria-label="Year"><button data-year="" aria-pressed="false">All years</button>${years.map(y=>`<button data-year="${y}" aria-pressed="${y===filters.year}">${y} <small>${dates.filter(d=>d.date.startsWith(y)).length}</small></button>`).join('')}</div><div class="archive-tabs archive-mode"><button data-mode="footage" aria-pressed="${filters.mode==='footage'}">Footage</button><button data-mode="length" aria-pressed="${filters.mode==='length'}">Length</button></div></div><div id="archive-calendar" class="archive-calendar-years"></div><div class="archive-legend"><span class="full">Full VOD</span><span class="partial">Partial / split</span><span class="other">Other footage</span>${CLIPS_ENABLED?'<span class="clips">Clips only</span>':''}<span class="unavailable">${CLIPS_ENABLED?'No VOD or clips':'No VOD'}</span></div></div><div class="archive-section-heading"><h2 id="archive-results-title">Dates</h2><p id="archive-result-count" role="status"></p></div><div id="archive-date-results"></div>`;
       const draw=()=>{drawStreams(dates);refreshFacets();window.SARKIVE_RESPONSIVE.sync();};
       page.querySelector('#archive-filter').oninput=e=>{filters.query=e.target.value;draw();};
+      const goldenKappaButton=page.querySelector('#archive-golden-kappa');
+      const goldenKappaSummary=page.querySelector('#archive-golden-kappa-stats');
+      goldenKappaButton.onclick=()=>{
+        filters.goldenKappa=!filters.goldenKappa;
+        goldenKappaButton.setAttribute('aria-pressed',String(filters.goldenKappa));
+        goldenKappaSummary.hidden=!filters.goldenKappa;
+        draw();
+      };
       const guestPicker=page.querySelector('#archive-guest'),guestInput=page.querySelector('#archive-guest-search');
       const filterGuests=()=>{const query=search.normalize(guestInput.value);let visible=0;guestPicker.querySelectorAll('[data-guest]').forEach(b=>{b.hidden=!!query&&!search.normalize(b.textContent).includes(query);if(!b.hidden)visible++;});page.querySelector('#archive-guest-empty').hidden=!!visible;};
       guestInput.oninput=filterGuests;
@@ -105,8 +127,8 @@
       guestPicker.onkeydown=e=>{if(e.key==='Escape'){e.preventDefault();guestPicker.open=false;guestPicker.querySelector('summary').focus();}else if(e.key==='ArrowDown'&&e.target===guestInput){e.preventDefault();[...guestPicker.querySelectorAll('[data-guest]')].find(b=>!b.hidden)?.focus();}};
       page.querySelector('#archive-stream-type').onchange=e=>{filters.type=e.target.value;draw();};
       const panel=search.bindShell(page,'stream-facets',()=>{filters.facets=search.blank();draw();});
-      const refreshFacets=()=>{search.controls(panel.body,dates.filter(d=>search.query(d,filters.query)&&(!filters.guest||d.people.some(p=>p.id===filters.guest))&&(!filters.type||(d.streamTypes||[]).includes(filters.type))),filters.facets,draw,{year:false,guest:false,blocks:false});panel.badge(search.count(filters.facets));};
-      page.querySelector('#archive-reset').onclick=()=>{filters.query='';filters.guest='';filters.type='';filters.facets=search.blank();filters.scope='default';streams();};
+      const refreshFacets=()=>{search.controls(panel.body,dates.filter(matchesStreamFilters),filters.facets,draw,{year:false,guest:false,blocks:false});panel.badge(search.count(filters.facets));};
+      page.querySelector('#archive-reset').onclick=()=>{filters.query='';filters.guest='';filters.type='';filters.goldenKappa=false;filters.facets=search.blank();filters.scope='default';streams();};
       page.querySelectorAll('[data-year]').forEach(b=>b.onclick=()=>{filters.scope=b.dataset.year;if(b.dataset.year)filters.year=b.dataset.year;draw();});
       page.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{filters.mode=b.dataset.mode;draw();});
       draw();
@@ -115,7 +137,7 @@
   }
   function drawStreams(dates) {
     const all=new Map(dates.map(d=>[d.date,d]));
-    const filtered=dates.filter(matches), found=new Set(filtered.map(d=>d.date));
+    const filtered=dates.filter(d=>matchesStreamFilters(d) && search.matches(d,filters.facets)), found=new Set(filtered.map(d=>d.date));
     const active=!!(filters.query || filters.guest || filters.type || search.count(filters.facets));
     const scopedYear=filters.scope==='default'?(active?'':filters.year):filters.scope;
     const results=filtered.filter(d=>!scopedYear||d.date.startsWith(scopedYear));
@@ -150,10 +172,16 @@
       }).join('');
       calendar.dataset.renderKey=renderKey;
     }
-    calendar.querySelectorAll('.archive-day.recorded').forEach(cell=>cell.classList.toggle('dim',!found.has(cell.dataset.date)));
-    page.querySelector('#archive-results-title').textContent=scopedYear?`${scopedYear} dates`:'Matching dates';
+    calendar.querySelectorAll('.archive-day.recorded').forEach(cell=>{
+      const matched=found.has(cell.dataset.date);
+      cell.classList.toggle('dim',!matched);
+      cell.classList.toggle('is-golden-kappa',filters.goldenKappa && matched);
+    });
+    page.querySelector('#archive-results-title').textContent=filters.goldenKappa
+      ? `${scopedYear ? scopedYear+' ' : ''}Golden Kappa dates`
+      : scopedYear?`${scopedYear} dates`:'Matching dates';
     page.querySelector('#archive-result-count').textContent=`${number(results.length)} date${results.length===1?'':'s'}`;
-    page.querySelector('#archive-date-results').innerHTML=results.length?results.map(d=>`<article class="archive-date-row">${streamDateLink(d)}${dateGames(d)}</article>`).join(''):'<p class="archive-empty">No dates match these filters.</p>';
+    page.querySelector('#archive-date-results').innerHTML=results.length?results.map(d=>`<article class="archive-date-row${filters.goldenKappa?' is-golden-kappa':''}">${streamDateLink(d)}${dateGames(d)}</article>`).join(''):'<p class="archive-empty">No dates match these filters.</p>';
     bindDateGameShelves();
     window.SARKIVE_RESPONSIVE.sync();
   }
